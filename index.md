@@ -31,7 +31,7 @@ Looking for software to order products straight to your door? Or perhaps you're 
   - Search or Sort for Item
   - Browse Selling History
   - Edit User Listed Product
-### Support or Contact
+### Contact us
 
 Have a question? Shoot us an email at ***themarketplace.csi@gmail.com*** and we’ll get back to you as soon as possible!
 
