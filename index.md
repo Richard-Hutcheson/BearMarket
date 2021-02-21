@@ -12,7 +12,7 @@ Looking for software to order products straight to your door? Or perhaps you're 
 <button type="button">The Marketplace Download</button> 
 </a> 
 </div>
-<div align = "center">
+
 ### The Marketplace Team
 
 - Richard Hutcheson (Time Invested: *N/A*):
@@ -31,7 +31,6 @@ Looking for software to order products straight to your door? Or perhaps you're 
   - Search or Sort for Item
   - Browse Selling History
   - Edit User Listed Product
-</div>
 ### Support or Contact
 
 Have a question? Shoot us an email at ***themarketplace.csi@gmail.com*** and we’ll get back to you as soon as possible!
