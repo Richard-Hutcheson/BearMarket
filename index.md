@@ -1,37 +1,7 @@
-## Welcome to our Marketplace!
+## Welcome to The Marketplace!
 
-You can use the [editor on GitHub](https://github.com/Richard-Hutch/Marketplace-System/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Richard-Hutch/Marketplace-System/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Looking for software to order products straight to your door? Or perhaps you're looking to sell a product of your own, The Marketplace is the application for you! With just a few clicks you can browse from a wide variety of hundreds of high-quality products and have the ones you're looking for sent right to your home. With verified reviews and ratings on each product, you'll know exactly what you're getting with every purchase. Don't wait, create an account today and join us at The Marketplace!
 
 ### Support or Contact
 
-Have a question? Shoot us an email at <insert email here> and we’ll get back to you as soon as possible!
+Have a question? Shoot us an email at themarketplace.csi@gmail.com and we’ll get back to you as soon as possible!
