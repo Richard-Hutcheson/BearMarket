@@ -11,7 +11,7 @@ Looking for software to order products straight to your door? Or perhaps you're 
 <a href="https://richard-hutch.github.io/Marketplace-System/test_photo.jpg" download="test_photo"> 
 <button type="button">The Marketplace Download</button> 
 </a> 
-</div>
+
 
 ### The Marketplace Team
 
@@ -35,3 +35,5 @@ Looking for software to order products straight to your door? Or perhaps you're 
 ### Support or Contact
 
 Have a question? Shoot us an email at ***themarketplace.csi@gmail.com*** and we’ll get back to you as soon as possible!
+
+</div>
