@@ -6,12 +6,13 @@ Looking for software to order products straight to your door? Or perhaps you're 
 <form method="get" action="https://richard-hutch.github.io/Marketplace-System/test_photo.jpg">
    <button type="submit">The Marketplace Download</button>
 </form> -->
-
+<aside id = sidebar>
 <div align = "center">
 <a href="https://richard-hutch.github.io/Marketplace-System/test_photo.jpg" download="test_photo"> 
 <button type="button">The Marketplace Download</button> 
 </a> 
 </div>
+</aside>
 
 ### The Marketplace Team
 
