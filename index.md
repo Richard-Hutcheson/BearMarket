@@ -7,9 +7,11 @@ Looking for software to order products straight to your door? Or perhaps you're 
    <button type="submit">The Marketplace Download</button>
 </form> -->
 
+<div align = "center">
 <a href="https://richard-hutch.github.io/Marketplace-System/test_photo.jpg" download="test_photo"> 
 <button type="button">The Marketplace Download</button> 
 </a> 
+</div>
 
 ### The Marketplace Team
 
