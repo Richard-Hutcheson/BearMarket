@@ -2,3 +2,8 @@
 ---
 
 @import "{{ site.theme }}";
+
+#main-content {
+  float: left;
+  width: 690px;
+}
