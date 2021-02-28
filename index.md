@@ -13,7 +13,7 @@ Looking for software to order products straight to your door? Or perhaps you're 
       <tr>
          <th><a href="https://richard-hutch.github.io/BearMarket/test_photo.jpg" download="test_photo"> <button type="button">Bear Market Download</button> </a>
          </th>
-         <th><a href="https://richard-hutch.github.io/BearMarket/issues">Issue Tracking Link</a>
+         <th><a href="https://github.com/Richard-Hutch/BearMarket/pulse">Issue Tracking Link</a>
          </th>
          <th><a href="https://github.com/Richard-Hutch/BearMarket/pulse">Repo Analytics Link</a>
          </th>
