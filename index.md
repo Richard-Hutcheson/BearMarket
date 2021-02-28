@@ -11,13 +11,13 @@ Looking for software to order products straight to your door? Or perhaps you're 
 <div align = "center">
    <table style = "width:100%">
       <tr>
-         <th><a href="https://richard-hutch.github.io/BearMarket/test_photo.jpg" download="test_photo"> <button type="button">The Marketplace Download</button> </a>
+         <th><a href="https://richard-hutch.github.io/BearMarket/test_photo.jpg" download="test_photo"> <button type="button">Bear Market Download</button> </a>
          </th>
-         <th><a href = "https://github.com/Richard-Hutch/BearMarket/issues">Issue Tracking Link</a>
+         <th><a href = "https://richard-hutch.github.io/BearMarket/issues">Issue Tracking Link</a>
          </th>
-         <th><a href="https://github.com/Richard-Hutch/BearMarket/pulse">Repo Analytics Link</a>
+         <th><a href="https://richard-hutch.github.io/BearMarket/pulse">Repo Analytics Link</a>
          </th>
-         <th><a href="https://github.com/Richard-Hutch/BearMarket/issues" download="test_photo"> <button type="button">Project Iteration 1 PDF</button> </a>
+         <th><a href="https://richard-hutch.github.io/BearMarket/test_photo.jpg" download="test_photo"> <button type="button">Project Iteration 1 PDF</button> </a>
          </th>
       </tr>
    </table>
