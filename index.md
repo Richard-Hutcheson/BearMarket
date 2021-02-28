@@ -13,7 +13,7 @@ Looking for software to order products straight to your door? Or perhaps you're 
       <tr>
          <th><a href="https://richard-hutch.github.io/BearMarket/test_photo.jpg" download="test_photo"> <button type="button">Bear Market Download</button> </a>
          </th>
-         <th><a href = "https://richard-hutch.github.io/BearMarket/issues">Issue Tracking Link</a>
+         <th><a href="https://richard-hutch.github.io/BearMarket/issues">Issue Tracking Link</a>
          </th>
          <th><a href="https://richard-hutch.github.io/BearMarket/pulse">Repo Analytics Link</a>
          </th>
@@ -23,9 +23,11 @@ Looking for software to order products straight to your door? Or perhaps you're 
    </table>
 </div>
 
-### The Marketplace Team
+### The Bear Market Team
 
 - Richard Hutcheson (Time Invested: *N/A*):
+  - Website
+  - Generate Reviews
   - Account/Profile Creation
   - Log-In
   - Browse Product Reviews/Ratings
@@ -34,7 +36,7 @@ Looking for software to order products straight to your door? Or perhaps you're 
   - Create Market Posting
   - Purchase Item
 - Noah Lambaria (Time Invested: *N/A*):
-  - Add/Delete Wish List Item
+  - Featured Items
   - View Product
   - Create Review
 - Austin Blanchard (Time Invested: *N/A*):
