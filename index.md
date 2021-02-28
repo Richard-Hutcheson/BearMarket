@@ -9,9 +9,10 @@ Looking for software to order products straight to your door? Or perhaps you're 
 [Issue Tracking Ticket Page](https://github.com/Richard-Hutch/Marketplace-System/issues)
 
 <div align = "center">
-<a href="https://richard-hutch.github.io/Marketplace-System/test_photo.jpg" download="test_photo"> 
-<button type="button">The Marketplace Download</button> 
-</a> 
+   <a href="https://richard-hutch.github.io/Marketplace-System/test_photo.jpg" download="test_photo"> 
+   <button type="button">The Marketplace Download</button> 
+   </a>
+   <a href = "https://github.com/Richard-Hutch/BearMarket/issues">Issue Tracking Link</a>
 </div>
 
 ### The Marketplace Team
