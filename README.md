@@ -5,7 +5,7 @@
 Marketplace Website: https://richard-hutch.github.io/BearMarket/
 
 Team Members:
-* Richard Hutcheson- team captain
-* Noah Lambaria
-* Johnny Acosta
-* Austin Blanchard
+* Richard Hutcheson- team captain, developer
+* Noah Lambaria- developer
+* Johnny Acosta- developer
+* Austin Blanchard- developer
