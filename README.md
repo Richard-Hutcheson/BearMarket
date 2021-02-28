@@ -1,4 +1,4 @@
-## Marketplace-System
+## Bear Market
 
 *project is a work in progress for CSI 3471, Software Engineering I*
 
