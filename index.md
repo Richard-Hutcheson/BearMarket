@@ -25,21 +25,21 @@ Looking for software to order products straight to your door? Or perhaps you're 
 
 ### The Bear Market Team
 
-- Richard Hutcheson (Time Invested: *27*):
+- Richard Hutcheson (Time Invested: *27* hours):
   - Website
   - Generate Reviews
   - Account/Profile Creation
   - Log-In
   - Browse Product Reviews/Ratings
-- Johnny Acosta (Time Invested: *18.5*):
+- Johnny Acosta (Time Invested: *18.5* hours):
   - Delete Market Posting
   - Create Market Posting
   - Purchase Item
-- Noah Lambaria (Time Invested: *18.5*):
+- Noah Lambaria (Time Invested: *18.5* hours):
   - Featured Items
   - View Product
   - Create Review
-- Austin Blanchard (Time Invested: *18.5*):
+- Austin Blanchard (Time Invested: *18.5* hours):
   - Search or Sort for Item
   - Browse Selling History
   - Edit User Listed Product
