@@ -25,7 +25,7 @@ Looking for software to order products straight to your door? Or perhaps you're 
 
 ### The Bear Market Team
 
-- Richard Hutcheson (Time Invested: *29* hours):
+- Richard Hutcheson (Time Invested: *28* hours):
   - Website
   - Product Table
   - Purchase Item
