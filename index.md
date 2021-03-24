@@ -31,12 +31,12 @@ Looking for software to order products straight to your door? Or perhaps you're 
   - Purchase Item
   - Browse Reviews
   - Menus
-- Noah Lambaria (Time Invested: *21* hours):
+- Noah Lambaria (Time Invested: *19* hours):
   - Create Account
   - Login
   - Edit Account
   - Purchase History
-- Austin Blanchard (Time Invested: *19* hours):
+- Austin Blanchard (Time Invested: *21* hours):
   - Create Market Posting
   - Delete Market Posting
   - Edit Market Posting
