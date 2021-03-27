@@ -30,17 +30,17 @@ Looking for software to order products straight to your door? Or perhaps you're 
   - Product Table
   - Featured Items
   - Menus
-- Noah Lambaria (Time Invested: *19* hours):
+- Noah Lambaria (Time Invested: *21* hours):
   - Create Account
   - Login
   - Edit Account
   - Browse Reviews
-- Austin Blanchard (Time Invested: *21* hours):
+- Austin Blanchard (Time Invested: *23* hours):
   - Create Market Posting
   - Delete Market Posting
   - Edit Market Posting
   - Review Generation
-- Joshua McKone
+- Joshua McKone (Time Invested: *21* hours):
   - Purchase History
   - Item Selling
   - Purchase ITem
