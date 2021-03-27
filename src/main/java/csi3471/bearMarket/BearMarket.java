@@ -25,6 +25,10 @@ public class BearMarket extends JPanel implements ActionListener{
 		
 		add(testPanel, BorderLayout.CENTER);
 	}
+	
+	public void testMethod() {
+	    System.out.println("Here should work.");
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -32,7 +36,7 @@ public class BearMarket extends JPanel implements ActionListener{
 	}
 	
 	//TODO: Set login screen to be startup frame
-	private static void createAndShowGUI() {
+	public static void createAndShowGUI() {
 		JFrame frame = new JFrame("Bear Market");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -47,7 +51,7 @@ public class BearMarket extends JPanel implements ActionListener{
 	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
-			public void run() { createAndShowGUI(); }
+			public void run() { LoginMenu.createAndShowLogin(); }
 		});
 	}
 }
