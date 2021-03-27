@@ -28,19 +28,22 @@ Looking for software to order products straight to your door? Or perhaps you're 
 - Richard Hutcheson (Time Invested: *28* hours):
   - Website
   - Product Table
-  - Purchase Item
-  - Browse Reviews
+  - Featured Items
   - Menus
 - Noah Lambaria (Time Invested: *19* hours):
   - Create Account
   - Login
   - Edit Account
-  - Purchase History
+  - Browse Reviews
 - Austin Blanchard (Time Invested: *21* hours):
   - Create Market Posting
   - Delete Market Posting
   - Edit Market Posting
-  - Currently Selling
+  - Review Generation
+- Joshua McKone
+  - Purchase History
+  - Item Selling
+  - Purchase ITem
 
 ### Contact us
 
