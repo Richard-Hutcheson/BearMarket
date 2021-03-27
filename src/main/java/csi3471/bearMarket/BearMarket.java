@@ -39,7 +39,7 @@ public class BearMarket extends JPanel implements ActionListener{
 		BearMarket test = new BearMarket();
 		//Create Menu Bar
 		frame.setContentPane(test);
-		frame.setPreferredSize(new Dimension(400, 300));
+		frame.setPreferredSize(new Dimension(800, 400));
 		
 		frame.pack();
 		frame.setVisible(true);
