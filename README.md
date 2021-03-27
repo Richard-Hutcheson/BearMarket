@@ -8,4 +8,4 @@ Team Members:
 * Richard Hutcheson- team captain, developer
 * Noah Lambaria- developer
 * Austin Blanchard- developer
-* Joshua McKone - developer
+* Joshua McKone- developer
