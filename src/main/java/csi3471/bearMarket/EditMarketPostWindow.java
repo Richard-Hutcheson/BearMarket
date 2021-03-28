@@ -21,7 +21,7 @@ public class EditMarketPostWindow implements ActionListener {
 
         String productDescrptors[] = {"Product Name: ",
                 "Category: ", "Description: ",
-                "Quantity: ", "Rating: ", "Price: ", "ID: "};
+                "Quantity: ", "Rating: ", "Price: "};
 
         for (int i = 0; i < productDescrptors.length; i++) {
             JLabel tempLabel = new JLabel(productDescrptors[i]);
