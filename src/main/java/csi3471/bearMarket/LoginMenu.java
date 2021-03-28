@@ -1,3 +1,5 @@
+//Created by Noah Lambaria
+
 package csi3471.bearMarket;
 
 import java.awt.*;
@@ -210,71 +212,165 @@ class CreateAccount implements ActionListener {
 	public void createTable(){
 
 
+		JLabel inform = new JLabel("Please Enter your information below...");
+		inform.setHorizontalAlignment(JLabel.CENTER);
+		createFrame.add(inform,BorderLayout.NORTH);
 
 
+		JPanel allInformation = new JPanel();
+
+		//***First/Last Name Section (MAKE A PANEL DEDICATED FOR THAT) ***
+		JPanel firstPanel = new JPanel();
+		firstNameLabel = new JLabel("First Name:");
+		firstNameField = new JFormattedTextField("");
+		firstNameField.setValue("");
+		firstNameField.setColumns(15);
+		firstNameLabel.setLabelFor(firstNameField);
+		firstPanel.add(firstNameLabel);
+		firstPanel.add(Box.createRigidArea(new Dimension(20,25)));
+		firstPanel.add(firstNameField);
+		allInformation.add(firstPanel);
+
+		JPanel lastPanel = new JPanel();
+		lastNameLabel = new JLabel("Last Name:");
+		lastNameField = new JFormattedTextField("");
+		lastNameField.setValue("");
+		lastNameField.setColumns(15);
+		lastNameLabel.setLabelFor(lastNameField);
+		lastPanel.add(lastNameLabel);
+		lastPanel.add(Box.createRigidArea(new Dimension(20,25)));
+		lastPanel.add(lastNameField);
+		allInformation.add(lastPanel);
+
+		//***USER INFORMATION SECTION (MAKE A PANEL DEDICATED FOR THAT)***
 		//Initialize the username:
+		JPanel usernamePanel = new JPanel();
 		usernameLabel = new JLabel("Username:");
 		usernameField = new JFormattedTextField("");
 		usernameField.setValue("");
 		usernameField.setColumns(15);
 		usernameLabel.setLabelFor(usernameField);
+		usernamePanel.add(usernameLabel);
+		usernamePanel.add(Box.createRigidArea(new Dimension(20,25)));
+		usernamePanel.add(usernameField);
+		allInformation.add(usernamePanel);
+
 		//Initialize the password:
+		JPanel passwordPanel = new JPanel();
 		passwordLabel = new JLabel("Password:");
 		passwordField = new JFormattedTextField("");
 		passwordField.setValue("");
 		passwordField.setColumns(15);
 		passwordLabel.setLabelFor(passwordField);
-
+		passwordPanel.add(passwordLabel);
+		passwordPanel.add(Box.createRigidArea(new Dimension(20,25)));
+		passwordPanel.add(passwordField);
+		allInformation.add(passwordPanel);
 
 
 
 		//***ADDRESS SECTION (MAKE A PANEL DEDICATED FOR THAT)***
-
 		//Initialize the shipping address:
+		JPanel shipPanel = new JPanel();
 		shipAddressLabel = new JLabel("Shipping Address:");
 		shipAddressField = new JFormattedTextField("");
 		shipAddressField.setValue("");
 		shipAddressField.setColumns(15);
 		shipAddressLabel.setLabelFor(shipAddressField);
+		shipPanel.add(shipAddressLabel);
+		shipPanel.add(Box.createRigidArea(new Dimension(20,25)));
+		shipPanel.add(shipAddressField);
+		allInformation.add(shipPanel);
+
 		//Initialize the State:
+		JPanel statePanel = new JPanel();
 		stateLabel = new JLabel("State:");
 		stateField = new JFormattedTextField("");
 		stateField.setValue("");
 		stateField.setColumns(15);
 		stateLabel.setLabelFor(stateField);
+		statePanel.add(stateLabel);
+		statePanel.add(Box.createRigidArea(new Dimension(20,25)));
+		statePanel.add(stateField);
+		allInformation.add(statePanel);
+
 		//Initialize the Zip:
-		zipLabel = new JLabel("Zip:");
+		JPanel zipPanel = new JPanel();
+		zipLabel = new JLabel("Zipcode:");
 		zipField = new JFormattedTextField("");
 		zipField.setValue("");
 		zipField.setColumns(15);
 		zipLabel.setLabelFor(zipField);
+		zipPanel.add(zipLabel);
+		zipPanel.add(Box.createRigidArea(new Dimension(20,25)));
+		zipPanel.add(zipField);
+		allInformation.add(zipPanel);
 
 
 
-
-
+		//***CARD INFORMATION SECTION (MAKE A PANEL DEDICATED FOR THAT)***
+		JPanel cardNumberPanel = new JPanel();
 		//Initialize the Credit/Debit Card:
 		cardNumberLabel = new JLabel("Card Number:");
 		cardNumberField = new JFormattedTextField("");
 		cardNumberField.setValue("");
 		cardNumberField.setColumns(15);
 		cardNumberLabel.setLabelFor(cardNumberField);
+		cardNumberPanel.add(cardNumberLabel);
+		cardNumberPanel.add(Box.createRigidArea(new Dimension(20,25)));
+		cardNumberPanel.add(cardNumberField);
+		allInformation.add(cardNumberPanel);
+
 		//Initialize the CVV
+		JPanel cvvPanel = new JPanel();
+		cvvLabel = new JLabel("CVV:");
+		cvvField = new JFormattedTextField("");
+		cvvField.setValue("");
+		cvvField.setColumns(15);
+		cvvLabel.setLabelFor(cvvField);
+		cvvPanel.add(cvvLabel);
+		cvvPanel.add(Box.createRigidArea(new Dimension(20,25)));
+		cvvPanel.add(cvvField);
+		allInformation.add(cvvPanel);
 
 		//Initialize the Card Zip
+		JPanel cardZipPanel = new JPanel();
+		cardZipLabel = new JLabel("Card Zipcode:");
+		cardZipField = new JFormattedTextField("");
+		cardZipField.setValue("");
+		cardZipField.setColumns(15);
+		cardZipLabel.setLabelFor(cardZipField);
+		cardZipPanel.add(cardZipLabel);
+		cardZipPanel.add(Box.createRigidArea(new Dimension(20,25)));
+		cardZipPanel.add(cardZipField);
+		allInformation.add(cardZipPanel);
 
 
 
 
 
+		//Finally, add all of the information above to the frame.
+		createFrame.add(allInformation);
 
+		//Create the back & save button and add it to the frame.
+		JPanel bottomSection = new JPanel();
 
-
-
+		//create backButton
 		backButton = new JButton("Back");
-		backButton.setPreferredSize(new Dimension(100,20));
+		backButton.setPreferredSize(new Dimension(100,25));
 		backButton.addActionListener(this);
-		createFrame.add(backButton, BorderLayout.WEST);
+		//create saveButton
+		saveButton = new JButton("Create");
+		saveButton.setPreferredSize(new Dimension(100,25));
+		saveButton.addActionListener(this);
+
+		//add both buttons to "bottom section" panel
+		bottomSection.add(backButton);
+		//creates a "filler" white space between both buttons, which is pretty cool :)
+		bottomSection.add(Box.createRigidArea(new Dimension(130,0)));
+		bottomSection.add(saveButton);
+
+		createFrame.add(bottomSection,BorderLayout.SOUTH);
 	}
 	public void actionPerformed(ActionEvent e) {
 
