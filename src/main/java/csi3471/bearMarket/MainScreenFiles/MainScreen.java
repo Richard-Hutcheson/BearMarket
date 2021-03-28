@@ -1,4 +1,4 @@
-package csi3471.bearMarket;
+package csi3471.bearMarket.MainScreenFiles;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

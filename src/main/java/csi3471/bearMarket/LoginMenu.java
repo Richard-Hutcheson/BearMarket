@@ -1,5 +1,7 @@
 package csi3471.bearMarket;
 
+import csi3471.bearMarket.MainScreenFiles.MainScreen;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.*;
@@ -32,7 +34,7 @@ public class LoginMenu extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		
 	    if(e.getSource() == testButton) {
-	        BearMarket.createAndShowGUI();
+	        MainScreen.createAndShowLogin();
 	        loginScreen.dispose();
 	    }
 	}
