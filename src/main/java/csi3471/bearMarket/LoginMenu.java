@@ -19,7 +19,7 @@ public class LoginMenu extends JPanel implements ActionListener{
 	public LoginMenu() {
 	    super(new BorderLayout());
 
-	    testButton = new JButton("Test");
+	    testButton = new JButton("LOGIN SCREEN");
 	    testButton.addActionListener(this);
 
 	    JPanel testPanel = new JPanel(new BorderLayout());
