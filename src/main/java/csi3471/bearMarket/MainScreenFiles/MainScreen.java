@@ -3,18 +3,25 @@ package csi3471.bearMarket.MainScreenFiles;
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainScreen extends JPanel implements ActionListener {
     private static JFrame frame;
-    private JMenu editAccount = new JMenu("Edit Account");
+    private JMenu editAccount;
     private JMenu purchaseHistory;
     private JMenu currentlySelling;
     private JMenu createPosting;
     private JMenu exit;
+    protected static JTable table;
+    protected static TableModel tableModel;
+    protected static JScrollPane scrollPane;
+
     MainScreen(){
+        super(new FlowLayout());
+
         //MENUBAR
         JMenuBar menuBar = new JMenuBar();
         editAccount = new JMenu("Edit Account");
@@ -54,8 +61,11 @@ public class MainScreen extends JPanel implements ActionListener {
         menuBar.add(createPosting);
         menuBar.add(space4);
         menuBar.add(exit);
-        
         frame.setJMenuBar(menuBar);
+        tableModel = new ProductTableModel();
+        ProductTable.createTable(); //set up table and scroll pane
+
+        add(scrollPane);
     }
 
     @Override

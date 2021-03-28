@@ -72,7 +72,7 @@ public class LoginMenu extends JPanel implements ActionListener{
 		loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		createButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		//creates a separator between username/password and buttons and add buttons to panel
+		//creates a separator between username/password and buttons, and add buttons to panel
 		clePanel.add(Box.createRigidArea(new Dimension(20, BUTTON_HEIGHT / 2)));
 		clePanel.add(loginButton);
 		clePanel.add(Box.createRigidArea(new Dimension(20, BUTTON_HEIGHT / 3)));
@@ -256,8 +256,6 @@ class CreateAccount implements ActionListener {
 		passwordPanel.add(passwordField);
 		allInformation.add(passwordPanel);
 
-
-
 		//***ADDRESS SECTION (MAKE A PANEL DEDICATED FOR THAT)***
 		//Initialize the shipping address:
 		JPanel shipPanel = new JPanel();
@@ -295,8 +293,6 @@ class CreateAccount implements ActionListener {
 		zipPanel.add(zipField);
 		allInformation.add(zipPanel);
 
-
-
 		//***CARD INFORMATION SECTION (MAKE A PANEL DEDICATED FOR THAT)***
 		JPanel cardNumberPanel = new JPanel();
 		//Initialize the Credit/Debit Card:
@@ -333,10 +329,6 @@ class CreateAccount implements ActionListener {
 		cardZipPanel.add(Box.createRigidArea(new Dimension(20,25)));
 		cardZipPanel.add(cardZipField);
 		allInformation.add(cardZipPanel);
-
-
-
-
 
 		//Finally, add all of the information above to the frame.
 		createFrame.add(allInformation);
