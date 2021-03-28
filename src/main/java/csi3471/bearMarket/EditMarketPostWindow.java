@@ -19,12 +19,12 @@ public class EditMarketPostWindow implements ActionListener {
 
         GridBagConstraints c = new GridBagConstraints();
 
-        String productDescrptors[] = {"Product Name: ",
+        String productDescriptors[] = {"Product Name: ",
                 "Category: ", "Description: ",
                 "Quantity: ", "Rating: ", "Price: "};
 
-        for (int i = 0; i < productDescrptors.length; i++) {
-            JLabel tempLabel = new JLabel(productDescrptors[i]);
+        for (int i = 0; i < productDescriptors.length; i++) {
+            JLabel tempLabel = new JLabel(productDescriptors[i]);
             c.gridx = 0;
             c.gridy = i;
             frame.add(tempLabel, c);
