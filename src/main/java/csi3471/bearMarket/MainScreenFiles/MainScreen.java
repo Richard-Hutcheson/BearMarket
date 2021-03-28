@@ -17,20 +17,11 @@ public class MainScreen extends JPanel implements ActionListener {
     MainScreen(){
         //MENUBAR
         JMenuBar menuBar = new JMenuBar();
-        JMenu editAccount = new JMenu("Edit Account");
-        JMenu purchaseHistory = new JMenu("Purchase History");
-        JMenu currentlySelling = new JMenu("Currently Selling");
-        JMenu createPosting = new JMenu("Create Posting");
-        JMenu exit = new JMenu("Exit");
-        //SEPARATORS
-        JMenu space1 = new JMenu("    ");
-        space1.setEnabled(false);
-        JMenu space2 = new JMenu("    ");
-        space2.setEnabled(false);
-        JMenu space3 = new JMenu("    ");
-        space3.setEnabled(false);
-        JMenu space4 = new JMenu("    ");
-        space4.setEnabled(false);
+        editAccount = new JMenu("Edit Account");
+        purchaseHistory = new JMenu("Purchase History");
+        currentlySelling = new JMenu("Currently Selling");
+        createPosting = new JMenu("Create Posting");
+        exit = new JMenu("Exit");
         exit.addMenuListener(new MenuListener() {
             @Override
             public void menuSelected(MenuEvent e) {
@@ -44,6 +35,16 @@ public class MainScreen extends JPanel implements ActionListener {
             @Override
             public void menuCanceled(MenuEvent e) {}
         });
+        //SEPARATORS
+        JMenu space1 = new JMenu("    ");
+        space1.setEnabled(false);
+        JMenu space2 = new JMenu("    ");
+        space2.setEnabled(false);
+        JMenu space3 = new JMenu("    ");
+        space3.setEnabled(false);
+        JMenu space4 = new JMenu("    ");
+        space4.setEnabled(false);
+
         menuBar.add(editAccount);
         menuBar.add(space1);
         menuBar.add(purchaseHistory);
@@ -53,17 +54,15 @@ public class MainScreen extends JPanel implements ActionListener {
         menuBar.add(createPosting);
         menuBar.add(space4);
         menuBar.add(exit);
-
         
         frame.setJMenuBar(menuBar);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
-    public static void createAndShowLogin(){
+    public static void createAndShowGUI(){
         frame = new JFrame("BearMarket: Main Screen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(1280, 720));
