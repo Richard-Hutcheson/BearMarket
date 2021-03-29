@@ -9,7 +9,6 @@ public class DeletePostWindow implements ActionListener {
 
     JFrame frame;
 
-
     public DeletePostWindow() {
         frame = new JFrame();
         frame.setPreferredSize(new Dimension(400, 150));
