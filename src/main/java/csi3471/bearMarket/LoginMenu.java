@@ -46,11 +46,21 @@ public class LoginMenu extends JPanel implements ActionListener{
 	    passwordLabel.setLabelFor(passwordField);
 
 		//create a grid panel for username and pass word fields and labels
-	    JPanel upPanel = new JPanel(new GridLayout(2,2));
-		upPanel.add(usernameLabel);
-		upPanel.add(usernameField);
-		upPanel.add(passwordLabel);
-		upPanel.add(passwordField);
+	    JPanel upPanel = new JPanel(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		upPanel.add(usernameLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		upPanel.add(usernameField,gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		upPanel.add(passwordLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		upPanel.add(passwordField,gbc);
 		//
 		JPanel bodyPanel = new JPanel();
 		bodyPanel.add(upPanel, BorderLayout.CENTER);
@@ -85,17 +95,25 @@ public class LoginMenu extends JPanel implements ActionListener{
 	    add(bodyPanel);
 	    //add(createAndExit, BorderLayout.SOUTH);
 	    setBackground(Color.GREEN.darker().darker());
+
+
+	    //Creates credit label, providing users with developers names
+		JLabel south = new JLabel("Made by: Noah Lambaria, Austin Blanchard, Joshua McKone, Richard Hutcheson");
+		south.setBackground(Color.GREEN.darker().darker());
+		south.setPreferredSize(new Dimension(100,50));
+		south.setHorizontalAlignment(JLabel.CENTER);
+		south.setForeground(Color.YELLOW.darker());
+		south.setFont(new Font("Serif", Font.BOLD, 15));
+		add(south, BorderLayout.SOUTH);
 	}
 
 	//Login and register button handling
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
 
 	    if(e.getSource() == loginButton) {
 
 	    	//Have an if condition that says if the account is valid
-			//then BearMarket.createAndShowGUI, else do nothing OR notify
+			//then MainScreen.createAndShowGUI, else do nothing OR notify
 			//user that the login is invalid
 	        MainScreen.createAndShowGUI();
 	        loginScreen.dispose();
@@ -123,58 +141,15 @@ public class LoginMenu extends JPanel implements ActionListener{
     }
 }
 
+//Possibly will be removed, because only need to access 1 account at a time.
 class LoginDatabase{
 	ArrayList<Account> accounts;
-	
-	public LoginDatabase() {
-        accounts = new ArrayList<>();
-    }
-	
-	public void addAccount(Account account) {
-	    accounts.add(account);
+	public LoginDatabase() { accounts = new ArrayList<>(); }
+	public void addAccount(Account account) { accounts.add(account); }
+	public void readAccounts(){
+		//Implement reading capabilities from a csv file to load the accounts
 	}
 }
-
-class Account{
-	String username, password;
-	String firstName, lastName, shippingAddress, state, zip, cardNumber;
-	String cvv, cardZip;
-
-	public String getPassword() { return password; }
-	public String getUsername() { return username; }
-	public void setPassword(String password) { this.password = password; }
-	public void setUsername(String username) { this.username = username; }
-	public String getFirstName() { return firstName; }
-	public void setFirstName(String firstName) { this.firstName = firstName; }
-	public String getLastName() { return lastName; }
-	public void setLastName(String lastName) { this.lastName = lastName; }
-	public String getShippingAddress() { return shippingAddress; }
-	public void setShippingAddress(String shippingAddress) { this.shippingAddress = shippingAddress; }
-	public String getState() { return state; }
-	public void setState(String state) { this.state = state; }
-	public String getZip() { return zip; }
-	public void setZip(String zip) { this.zip = zip; }
-	public String getCardNumber() { return cardNumber; }
-	public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
-	public String getCvv() { return cvv; }
-	public void setCvv(String cvv) { this.cvv = cvv; }
-	public String getCardZip() { return cardZip; }
-	public void setCardZip(String cardZip) { this.cardZip = cardZip; }
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Account account = (Account) o;
-		return Objects.equals(username, account.username) && Objects.equals(password, account.password);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(username, password);
-	}
-}
-
 class CreateAccount implements ActionListener {
 	//Initialize variables within CreateAccount Class
 	static JFrame createFrame;
@@ -198,137 +173,151 @@ class CreateAccount implements ActionListener {
 		createFrame.setLocationRelativeTo(null); //centers screen, must be after .pack
 	}
 
+	//Creates the table
 	public void createTable(){
-
-
+		//Label to inform the user to enter the information
 		JLabel inform = new JLabel("Please Enter your information below...");
 		inform.setHorizontalAlignment(JLabel.CENTER);
 		createFrame.add(inform,BorderLayout.NORTH);
 
+		//create panel that will have each parameter the user can enter.
+		JPanel allInformation = new JPanel(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 
-		JPanel allInformation = new JPanel();
-
-		//***First/Last Name Section (MAKE A PANEL DEDICATED FOR THAT) ***
-		JPanel firstPanel = new JPanel();
+		//***First/Last Name Initialization
 		firstNameLabel = new JLabel("First Name:");
 		firstNameField = new JFormattedTextField("");
 		firstNameField.setValue("");
 		firstNameField.setColumns(15);
 		firstNameLabel.setLabelFor(firstNameField);
-		firstPanel.add(firstNameLabel);
-		firstPanel.add(Box.createRigidArea(new Dimension(20,25)));
-		firstPanel.add(firstNameField);
-		allInformation.add(firstPanel);
-
-		JPanel lastPanel = new JPanel();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		allInformation.add(firstNameLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		allInformation.add(firstNameField,gbc);
 		lastNameLabel = new JLabel("Last Name:");
 		lastNameField = new JFormattedTextField("");
 		lastNameField.setValue("");
 		lastNameField.setColumns(15);
 		lastNameLabel.setLabelFor(lastNameField);
-		lastPanel.add(lastNameLabel);
-		lastPanel.add(Box.createRigidArea(new Dimension(20,25)));
-		lastPanel.add(lastNameField);
-		allInformation.add(lastPanel);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		allInformation.add(lastNameLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		allInformation.add(lastNameField,gbc);
 
-		//***USER INFORMATION SECTION (MAKE A PANEL DEDICATED FOR THAT)***
 		//Initialize the username:
-		JPanel usernamePanel = new JPanel();
 		usernameLabel = new JLabel("Username:");
 		usernameField = new JFormattedTextField("");
 		usernameField.setValue("");
 		usernameField.setColumns(15);
 		usernameLabel.setLabelFor(usernameField);
-		usernamePanel.add(usernameLabel);
-		usernamePanel.add(Box.createRigidArea(new Dimension(20,25)));
-		usernamePanel.add(usernameField);
-		allInformation.add(usernamePanel);
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		allInformation.add(usernameLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		allInformation.add(usernameField,gbc);
 
 		//Initialize the password:
-		JPanel passwordPanel = new JPanel();
 		passwordLabel = new JLabel("Password:");
 		passwordField = new JFormattedTextField("");
 		passwordField.setValue("");
 		passwordField.setColumns(15);
 		passwordLabel.setLabelFor(passwordField);
-		passwordPanel.add(passwordLabel);
-		passwordPanel.add(Box.createRigidArea(new Dimension(20,25)));
-		passwordPanel.add(passwordField);
-		allInformation.add(passwordPanel);
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		allInformation.add(passwordLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		allInformation.add(passwordField,gbc);
 
-		//***ADDRESS SECTION (MAKE A PANEL DEDICATED FOR THAT)***
+
 		//Initialize the shipping address:
-		JPanel shipPanel = new JPanel();
 		shipAddressLabel = new JLabel("Shipping Address:");
 		shipAddressField = new JFormattedTextField("");
 		shipAddressField.setValue("");
 		shipAddressField.setColumns(15);
 		shipAddressLabel.setLabelFor(shipAddressField);
-		shipPanel.add(shipAddressLabel);
-		shipPanel.add(Box.createRigidArea(new Dimension(20,25)));
-		shipPanel.add(shipAddressField);
-		allInformation.add(shipPanel);
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		allInformation.add(shipAddressLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		allInformation.add(shipAddressField,gbc);
 
 		//Initialize the State:
-		JPanel statePanel = new JPanel();
 		stateLabel = new JLabel("State:");
 		stateField = new JFormattedTextField("");
 		stateField.setValue("");
 		stateField.setColumns(15);
 		stateLabel.setLabelFor(stateField);
-		statePanel.add(stateLabel);
-		statePanel.add(Box.createRigidArea(new Dimension(20,25)));
-		statePanel.add(stateField);
-		allInformation.add(statePanel);
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		allInformation.add(stateLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 5;
+		allInformation.add(stateField,gbc);
+
 
 		//Initialize the Zip:
-		JPanel zipPanel = new JPanel();
 		zipLabel = new JLabel("Zipcode:");
 		zipField = new JFormattedTextField("");
 		zipField.setValue("");
 		zipField.setColumns(15);
 		zipLabel.setLabelFor(zipField);
-		zipPanel.add(zipLabel);
-		zipPanel.add(Box.createRigidArea(new Dimension(20,25)));
-		zipPanel.add(zipField);
-		allInformation.add(zipPanel);
 
-		//***CARD INFORMATION SECTION (MAKE A PANEL DEDICATED FOR THAT)***
-		JPanel cardNumberPanel = new JPanel();
+		gbc.gridx = 0;
+		gbc.gridy = 6;
+		allInformation.add(zipLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 6;
+		allInformation.add(zipField,gbc);
+
+
 		//Initialize the Credit/Debit Card:
 		cardNumberLabel = new JLabel("Card Number:");
 		cardNumberField = new JFormattedTextField("");
 		cardNumberField.setValue("");
 		cardNumberField.setColumns(15);
 		cardNumberLabel.setLabelFor(cardNumberField);
-		cardNumberPanel.add(cardNumberLabel);
-		cardNumberPanel.add(Box.createRigidArea(new Dimension(20,25)));
-		cardNumberPanel.add(cardNumberField);
-		allInformation.add(cardNumberPanel);
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		allInformation.add(cardNumberLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 7;
+		allInformation.add(cardNumberField,gbc);
+
 
 		//Initialize the CVV
-		JPanel cvvPanel = new JPanel();
 		cvvLabel = new JLabel("CVV:");
 		cvvField = new JFormattedTextField("");
 		cvvField.setValue("");
 		cvvField.setColumns(15);
 		cvvLabel.setLabelFor(cvvField);
-		cvvPanel.add(cvvLabel);
-		cvvPanel.add(Box.createRigidArea(new Dimension(20,25)));
-		cvvPanel.add(cvvField);
-		allInformation.add(cvvPanel);
+		gbc.gridx = 0;
+		gbc.gridy = 8;
+		allInformation.add(cvvLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 8;
+		allInformation.add(cvvField,gbc);
 
 		//Initialize the Card Zip
-		JPanel cardZipPanel = new JPanel();
 		cardZipLabel = new JLabel("Card Zipcode:");
 		cardZipField = new JFormattedTextField("");
 		cardZipField.setValue("");
 		cardZipField.setColumns(15);
 		cardZipLabel.setLabelFor(cardZipField);
-		cardZipPanel.add(cardZipLabel);
-		cardZipPanel.add(Box.createRigidArea(new Dimension(20,25)));
-		cardZipPanel.add(cardZipField);
-		allInformation.add(cardZipPanel);
+
+		gbc.gridx = 0;
+		gbc.gridy = 9;
+		allInformation.add(cardZipLabel,gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 9;
+		allInformation.add(cardZipField,gbc);
 
 		//Finally, add all of the information above to the frame.
 		createFrame.add(allInformation);
@@ -361,6 +350,10 @@ class CreateAccount implements ActionListener {
 			//Save information to an account, then add the
 			//account to the database.
 			Account a = new Account();
+
+
+
+
 		}
 	}
 }
