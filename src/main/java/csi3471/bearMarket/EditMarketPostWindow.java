@@ -1,59 +1,36 @@
 package csi3471.bearMarket;
 
 import javax.swing.*;
-import javax.swing.event.ListDataListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class EditMarketPostWindow implements ActionListener {
+public class EditMarketPostWindow extends CreateMarketPostWindow {
 
-    JFrame frame;
+    private Product editProduct;
 
-    public EditMarketPostWindow() {
-        frame = new JFrame();
-        frame.setPreferredSize(new Dimension(400, 200));
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLayout(new GridBagLayout());
+    public static void createEditPostWindow(Product edit) {
+        createMarketPostFrame = new JFrame();
+        createMarketPostFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        GridBagConstraints c = new GridBagConstraints();
+        EditMarketPostWindow mainPanel = new EditMarketPostWindow(edit);
 
-        String productDescriptors[] = {"Product Name: ",
-                "Category: ", "Description: ",
-                "Quantity: ", "Rating: ", "Price: "};
+        createMarketPostFrame.setPreferredSize(new Dimension(400, 200));
+        createMarketPostFrame.setContentPane(mainPanel);
 
-        for (int i = 0; i < productDescriptors.length; i++) {
-            JLabel tempLabel = new JLabel(productDescriptors[i]);
-            c.gridx = 0;
-            c.gridy = i;
-            frame.add(tempLabel, c);
-
-            if (i == 1) {
-                Object categories[] = {"Health", "Kitchen", "Tools", "Entertainment", "Sports",
-                        "Home", "Clothing", "Electronics", "Education", "Music"};
-                JComboBox comboBox = new JComboBox(categories);
-                c.gridx = 1;
-                c.gridy = i;
-                comboBox.setPreferredSize(new Dimension(150, 25));
-                comboBox.addActionListener(this);
-                frame.add(comboBox, c);
-            }
-            else {
-                JTextField tempTextField = new JTextField();
-                c.gridx = 1;
-                c.gridy = i;
-                tempTextField.setPreferredSize(new Dimension(150, 20));
-                frame.add(tempTextField, c);
-            }
-
-        }
-
-        frame.pack();
+        createMarketPostFrame.pack();
+        createMarketPostFrame.setVisible(true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public EditMarketPostWindow(Product edit) {
+        super();
+        editProduct = edit;
+
+        // pre-fill all the text boxes
+        tempTextField[0].setText(editProduct.getProductName());
+        tempTextField[2].setText(editProduct.getDescription());
+        tempTextField[3].setText(Integer.toString(editProduct.getQuantity()));
+        tempTextField[4].setText(Double.toString(editProduct.getRating()));
+        tempTextField[5].setText("$" + String.format(Double.toString(editProduct.getPrice()), ".2f"));
 
     }
+
 }
