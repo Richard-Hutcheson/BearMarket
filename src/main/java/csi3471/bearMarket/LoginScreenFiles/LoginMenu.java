@@ -2,13 +2,12 @@
 
 package csi3471.bearMarket.LoginScreenFiles;
 
-import csi3471.bearMarket.Account;
+import csi3471.bearMarket.AccountFiles.CreateAccount;
+import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.MainScreenFiles.MainScreen;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.net.URL;
-import java.util.ArrayList;
 
 import javax.swing.*;
 
