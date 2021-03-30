@@ -60,6 +60,11 @@ public class ProductTable extends MainScreen{
                     default -> null;
                 };
             }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
         };
 
 
@@ -69,6 +74,7 @@ public class ProductTable extends MainScreen{
         table.setDefaultRenderer(JButton.class, new JTableButtonRenderer(tableRenderer));
         table.addMouseListener(new JTableButtonMouseListener(table));
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.setAutoCreateRowSorter(true);
         table.getColumnModel().getColumn(0).setPreferredWidth(200);
         table.getColumnModel().getColumn(5).setPreferredWidth(85);
 
