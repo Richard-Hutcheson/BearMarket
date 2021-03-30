@@ -1,4 +1,4 @@
-package csi3471.bearMarket;
+package csi3471.bearMarket.UserMarketPosting;
 
 import javax.swing.*;
 import java.awt.*;

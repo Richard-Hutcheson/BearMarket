@@ -1,7 +1,6 @@
-package csi3471.bearMarket;
+package csi3471.bearMarket.UserMarketPosting;
 
 import javax.swing.*;
-import javax.swing.event.ListDataListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
