@@ -24,11 +24,14 @@ public class CreateAccount implements ActionListener {
     JFormattedTextField firstNameField, lastNameField, shipAddressField;
     JFormattedTextField stateField, zipField, cardNumberField, cvvField, cardZipField;
     JFormattedTextField usernameField, passwordField;
+    JPanel allInformation;
+    GridBagConstraints gbc;
+    JLabel userNameTakenError;
 
     public CreateAccount(){
         //Create a new frame that will ask the user to input information
         createFrame = new JFrame();
-        createFrame.setPreferredSize(new Dimension(400,500));
+        createFrame.setPreferredSize(new Dimension(700,500));
         createFrame.setVisible(true);
         //Calls function which adds the button
         createTable();
@@ -40,12 +43,13 @@ public class CreateAccount implements ActionListener {
     public void createTable(){
         //Label to inform the user to enter the information
         JLabel inform = new JLabel("Please Enter your information below...");
+        inform.setFont(new Font("Serif", Font.BOLD, 20));
         inform.setHorizontalAlignment(JLabel.CENTER);
         createFrame.add(inform,BorderLayout.NORTH);
 
         //create panel that will have each parameter the user can enter.
-        JPanel allInformation = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+        allInformation = new JPanel(new GridBagLayout());
+        gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         //***First/Last Name Initialization
@@ -207,22 +211,20 @@ public class CreateAccount implements ActionListener {
         if(e.getSource() == backButton) { createFrame.dispose(); }
         else if(e.getSource() == saveButton){
 
-            JLabel informationEmptyError = new JLabel("Missing information, please fill out all information");
-            JLabel userNameTakenError = new JLabel("Username taken, try another username");
+
+            userNameTakenError = new JLabel("  Username taken, try another username");
             userNameTakenError.setVisible(false);
-            informationEmptyError.setVisible(false);
 
 
             //Save information to an account, then add the
-            //account to the database.
-
+            //account to the files
             try {
 
                 //reads the account list information to verify the username has not been taken
                 BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/java/csi3471/bearMarket/AccountFiles/accountList.csv")));
                 String line = null;
                 Account a = null;
-                Boolean userNameTaken = false;
+                Boolean userNameTaken = false, emptyString = false;
 
                 //Skip the first line as it says "username, password", which is the format of the csv file
                 reader.readLine();
@@ -234,13 +236,122 @@ public class CreateAccount implements ActionListener {
                     }
                 }
 
-                if (userNameTaken) {
-                    userNameTakenError.setVisible(true);
-                    userNameTakenError.setPreferredSize(new Dimension(200,200));
-                    createFrame.add(userNameTakenError, BorderLayout.SOUTH);
-                    System.out.println("USERNAME TAKEN!");
+                //Format: username,password,firstName,lastName,address,state,zip,cardNumber,cvv,cardZip
+
+                //Output errors depending on empty fields
+                JLabel informationEmptyError1 = new JLabel("Missing Username, please fill out all information");
+                informationEmptyError1.setVisible(false);
+                JLabel informationEmptyError2 = new JLabel("Missing Password, please fill out all information");
+                informationEmptyError2.setVisible(false);
+                JLabel informationEmptyError3 = new JLabel("Missing First Name, please fill out all information");
+                informationEmptyError3.setVisible(false);
+                JLabel informationEmptyError4 = new JLabel("Missing Last Name, please fill out all information");
+                informationEmptyError4.setVisible(false);
+                JLabel informationEmptyError5 = new JLabel("Missing Address, please fill out all information");
+                informationEmptyError5.setVisible(false);
+                JLabel informationEmptyError6 = new JLabel("Missing State, please fill out all information");
+                informationEmptyError6.setVisible(false);
+                JLabel informationEmptyError7 = new JLabel("Missing Zip, please fill out all information");
+                informationEmptyError7.setVisible(false);
+                JLabel informationEmptyError8 = new JLabel("Missing Card Number, please fill out all information");
+                informationEmptyError8.setVisible(false);
+                JLabel informationEmptyError9 = new JLabel("Missing CVV, please fill out all information");
+                informationEmptyError9.setVisible(false);
+                JLabel informationEmptyError10 = new JLabel("Missing Card Zip, please fill out all information");
+                informationEmptyError10.setVisible(false);
+                if(usernameField.getText().equals("")){
+                    printEmptyError(2,informationEmptyError1);
+                    emptyString = true;
                 }else{
-                    System.out.println("USERNAME NOT TAKEN");
+                    informationEmptyError1.setVisible(false);
+                }
+                if(passwordField.getText().equals("")){
+                    printEmptyError(3,informationEmptyError2);
+                    emptyString = true;
+                }else{
+                    informationEmptyError2.setVisible(false);
+                }
+                if(firstNameField.getText().equals("")){
+                    printEmptyError(0,informationEmptyError3);
+                    emptyString = true;
+                }else{
+                    System.out.println("HAS STUFFF");
+                    createFrame.remove(allInformation);
+                    informationEmptyError3.setVisible(false);
+                    allInformation.remove(informationEmptyError3);
+                    createFrame.add(allInformation);
+                    createFrame.revalidate();
+                    createFrame.repaint();
+                }
+                if(lastNameField.getText().equals("")){
+                    printEmptyError(1,informationEmptyError4);
+                    emptyString = true;
+                }else{
+                    informationEmptyError4.setVisible(false);
+                }
+                if(shipAddressField.getText().equals("")){
+                    printEmptyError(4,informationEmptyError5);
+                    emptyString = true;
+                }else{
+                    informationEmptyError5.setVisible(false);
+                }
+                if(stateField.getText().equals("")){
+                    printEmptyError(5,informationEmptyError6);
+                    emptyString = true;
+                }else{
+                    informationEmptyError6.setVisible(false);
+                }
+                if(zipField.getText().equals("")){
+                    printEmptyError(6,informationEmptyError7);
+                    emptyString = true;
+                }else{
+                    informationEmptyError7.setVisible(false);
+                }
+                if(cardNumberField.getText().equals("")){
+                    printEmptyError(7,informationEmptyError8);
+                    emptyString = true;
+                }else{
+                    informationEmptyError8.setVisible(false);
+                }
+                if(cvvField.getText().equals("")){
+                    printEmptyError(8,informationEmptyError9);
+                    emptyString = true;
+                }else{
+                    informationEmptyError9.setVisible(false);
+                }
+                if(cardZipField.getText().equals("")){
+                    printEmptyError(9,informationEmptyError10);
+                    emptyString = true;
+                }else{
+                    informationEmptyError10.setVisible(false);
+                }
+
+
+
+                if (userNameTaken) {
+                    createFrame.remove(allInformation);
+                    userNameTakenError.setVisible(true);
+                    userNameTakenError.setForeground(Color.RED);
+                    userNameTakenError.setHorizontalAlignment(JLabel.CENTER);
+                    userNameTakenError.setFont(new Font("Serif", Font.PLAIN, 15));
+                    gbc.gridx = 2;
+                    gbc.gridy = 2;
+                    allInformation.add(userNameTakenError,gbc);
+                    createFrame.add(allInformation);
+
+                    //Reupdate the frame
+                    createFrame.revalidate();
+                    createFrame.repaint();
+
+
+                    System.out.println("USERNAME TAKEN!");
+                }else if(!emptyString && !userNameTaken){
+
+                    //If no empty string, and username hasn't been taken,
+                    //Now create the account
+
+
+                    System.out.println("USERNAME NOT TAKEN AND NO EMPTY VALUES");
                     //Initialize a new account with the data
                     Account createdAccount = new Account((String)usernameField.getText(),(String)passwordField.getText(),
                             (String)firstNameField.getText(),(String)lastNameField.getText(),(String)shipAddressField.getText(),
@@ -296,5 +407,21 @@ public class CreateAccount implements ActionListener {
                 ioException.printStackTrace();
             }
         }
+    }
+    //Used to print error that empty text filter
+    public void printEmptyError(int y, JLabel theLabel){
+        createFrame.remove(allInformation);
+        theLabel.setVisible(true);
+        theLabel.setForeground(Color.RED);
+        theLabel.setHorizontalAlignment(JLabel.CENTER);
+        theLabel.setFont(new Font("Serif", Font.PLAIN, 15));
+        gbc.gridx = 2;
+        gbc.gridy = y;
+        allInformation.add(theLabel,gbc);
+        createFrame.add(allInformation);
+
+        //Reupdate the frame
+        createFrame.revalidate();
+        createFrame.repaint();
     }
 }

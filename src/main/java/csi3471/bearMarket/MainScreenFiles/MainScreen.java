@@ -1,5 +1,6 @@
 package csi3471.bearMarket.MainScreenFiles;
 
+import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.CurrentlySellingWindow;
 
 import javax.swing.*;
@@ -27,6 +28,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener {
         //MENUBAR
         JMenuBar menuBar = new JMenuBar();
         editAccount = new JMenu("Edit Account");
+        editAccount.addMenuListener(this);
         purchaseHistory = new JMenu("Purchase History");
         currentlySelling = new JMenu("Currently Selling");
         currentlySelling.addMenuListener(this);
@@ -61,6 +63,9 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == editAccount){
+            System.out.println("HI");
+        }
 
     }
     public static void createAndShowGUI(){
@@ -80,9 +85,13 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener {
             int dialogResult = JOptionPane.showConfirmDialog(null, "Exit Application?", "Exit", JOptionPane.YES_NO_OPTION);
             //user selects 'yes' option to exit application
             if (dialogResult == JOptionPane.YES_OPTION){ frame.dispose(); }
+
         }
         if (e.getSource() == currentlySelling){
             new CurrentlySellingWindow();
+        }
+        if(e.getSource() == editAccount){
+            new EditAccount();
         }
     }
 
