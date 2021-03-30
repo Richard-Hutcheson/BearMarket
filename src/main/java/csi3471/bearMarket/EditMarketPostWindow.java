@@ -46,9 +46,7 @@ public class EditMarketPostWindow implements ActionListener {
                 tempTextField.setPreferredSize(new Dimension(150, 20));
                 frame.add(tempTextField, c);
             }
-
         }
-
         frame.pack();
     }
 

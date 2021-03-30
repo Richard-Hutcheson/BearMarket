@@ -1,5 +1,7 @@
 package csi3471.bearMarket.MainScreenFiles;
 
+import csi3471.bearMarket.CurrentlySellingWindow;
+
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
@@ -8,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainScreen extends JPanel implements ActionListener {
+public class MainScreen extends JPanel implements ActionListener, MenuListener {
     private static JFrame frame;
     private JMenu editAccount;
     private JMenu purchaseHistory;
@@ -27,21 +29,10 @@ public class MainScreen extends JPanel implements ActionListener {
         editAccount = new JMenu("Edit Account");
         purchaseHistory = new JMenu("Purchase History");
         currentlySelling = new JMenu("Currently Selling");
+        currentlySelling.addMenuListener(this);
         createPosting = new JMenu("Create Posting");
         exit = new JMenu("Exit");
-        exit.addMenuListener(new MenuListener() {
-            @Override
-            public void menuSelected(MenuEvent e) {
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Exit Application?", "Exit", JOptionPane.YES_NO_OPTION);
-                //user selects 'yes' option to exit application
-                if (dialogResult == JOptionPane.YES_OPTION){ frame.dispose(); }
-            }
-            @Override
-            public void menuDeselected(MenuEvent e) {}
-
-            @Override
-            public void menuCanceled(MenuEvent e) {}
-        });
+        exit.addMenuListener(this);
         //SEPARATORS
         JMenu space1 = new JMenu("    ");
         space1.setEnabled(false);
@@ -81,5 +72,27 @@ public class MainScreen extends JPanel implements ActionListener {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    @Override
+    public void menuSelected(MenuEvent e) {
+        if (e.getSource() == exit){
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Exit Application?", "Exit", JOptionPane.YES_NO_OPTION);
+            //user selects 'yes' option to exit application
+            if (dialogResult == JOptionPane.YES_OPTION){ frame.dispose(); }
+        }
+        if (e.getSource() == currentlySelling){
+            new CurrentlySellingWindow();
+        }
+    }
+
+    @Override
+    public void menuDeselected(MenuEvent e) {
+
+    }
+
+    @Override
+    public void menuCanceled(MenuEvent e) {
+
     }
 }
