@@ -1,12 +1,19 @@
-package csi3471.bearMarket;
+package csi3471.bearMarket.ProductFiles;
 
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class Product {
+public class Product implements ActionListener {
 
     private String productName, category, description;
     private int quantity, ID;
     private double rating, price;
+    private JButton descButton, purchaseButton, reviewsButton;
 
     public Product() {
         productName = "";
@@ -23,12 +30,34 @@ public class Product {
      */
     public Product(String[] a) {
         productName = a[0];
+        //System.out.print( productName + ", ");
         category = a[1];
+        //System.out.print( category + ", ");
+
         description = a[2];
+        //System.out.print( description + ", ");
+
         quantity = Integer.parseInt(a[3]);
+        //System.out.print( quantity + ", ");
+
         rating = Double.parseDouble(a[4]);
-        price = Double.parseDouble(a[5]);
+        //System.out.print( rating + ", ");
+        String tempPrice= a[5].substring(1, a[5].length() - 1); //remove dollar sign
+        tempPrice = tempPrice.replace(".", ""); //remove '.'
+        tempPrice = tempPrice.replace(",", ""); //remove ','
+        price = Double.parseDouble(tempPrice);
+        //System.out.print( price + ", ");
+
         ID = Integer.parseInt(a[6]);
+        //System.out.println( ID);
+
+
+        descButton = new JButton("Description");
+        descButton.addActionListener(this);
+        purchaseButton = new JButton("Purchase");
+        purchaseButton.addActionListener(this);
+        reviewsButton = new JButton("Reviews");
+        reviewsButton.addActionListener(this);
     }
 
     public String getProductName() { return productName; }
@@ -46,6 +75,24 @@ public class Product {
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
 
+    public JButton getPurchase(){return purchaseButton;}
+    public JButton getDescButton(){return descButton;}
+    public JButton getReviewsButton(){return reviewsButton;}
+
+
+    public Object[] returnObjects(){
+        return new Object[] {productName, category, quantity, rating, price, descButton, purchaseButton, reviewsButton};
+    }
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productName='" + productName + '\'' +
+                ", ID=" + ID +
+                '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -56,6 +103,39 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(productName, category, description, quantity, ID, rating, price);
+        return Objects.hash(productName, category, quantity, rating, price, descButton, purchaseButton, reviewsButton);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == descButton){
+            final int WIDTH = 400, HEIGHT = 200;
+            JPanel panel = new JPanel();
+            panel.setBorder(new TitledBorder(new EtchedBorder(), "Product Description"));
+
+            JDialog dialog = new JDialog(new JFrame(), "");
+            JTextArea textArea = new JTextArea(30, 24);
+            textArea.setEditable(false);
+
+            textArea.append(description + "\n");
+            textArea.setLineWrap(true);
+            textArea.setWrapStyleWord(true);
+            //textArea.setText(description);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+
+            panel.add(scrollPane);
+            dialog.add(panel);
+            dialog.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+            dialog.pack();// try to arrange window so that it fits preferred size
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        }
+        if (e.getSource() == purchaseButton){
+
+        }
+        if (e.getSource() == reviewsButton){
+
+        }
     }
 }

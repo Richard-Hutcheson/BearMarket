@@ -4,9 +4,11 @@ package csi3471.bearMarket.LoginScreenFiles;
 
 import csi3471.bearMarket.Account;
 import csi3471.bearMarket.MainScreenFiles.MainScreen;
+import csi3471.bearMarket.ProductFiles.ReadProductFile;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -28,9 +30,6 @@ public class LoginMenu extends JPanel implements ActionListener{
 
 
 
-
-
-
 		/*
 		ImageIcon icon = createImageIcon("src/main/java/csi3471/bearMarket/LoginScreenFiles/bear.gif",
 				"a pretty but meaningless splat");
@@ -41,7 +40,6 @@ public class LoginMenu extends JPanel implements ActionListener{
 		loginScreen.getContentPane().add(img);
 		*/
 
-
 		//Creates the "Bear Market" Title at the top of the login-screen.
 		JLabel bearMarketLabel = new JLabel("Bear Market");
 		bearMarketLabel.setForeground(Color.YELLOW.darker());
@@ -51,13 +49,13 @@ public class LoginMenu extends JPanel implements ActionListener{
 		add(bearMarketLabel, BorderLayout.NORTH);
 
 		//Initialize the username:
-	    usernameLabel = new JLabel("Username:");
+	    usernameLabel = new JLabel("Username:   ");
 	    usernameField = new JFormattedTextField("");
 		usernameField.setValue("");
 		usernameField.setColumns(15);
 	    usernameLabel.setLabelFor(usernameField);
 	    //Initialize the password:
-	    passwordLabel = new JLabel("Password:");
+	    passwordLabel = new JLabel("Password:   ");
 	    passwordField = new JPasswordField("");
 	    //passwordField.setValue("");
 	    passwordField.setColumns(15);
@@ -158,8 +156,11 @@ public class LoginMenu extends JPanel implements ActionListener{
 	}
 
 	//Builds the GUI for the frame
-	public static void createAndShowLogin() {
-        loginScreen = new JFrame("Bear Market Login");
+	public static void createAndShowLogin(){
+
+
+
+		loginScreen = new JFrame("Bear Market Login");
         loginScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         LoginMenu loginMenu = new LoginMenu();

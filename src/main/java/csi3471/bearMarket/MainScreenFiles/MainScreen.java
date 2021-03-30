@@ -1,36 +1,42 @@
 package csi3471.bearMarket.MainScreenFiles;
 
 import csi3471.bearMarket.CurrentlySellingWindow;
+import csi3471.bearMarket.ProductFiles.Product;
 
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainScreen extends JPanel implements ActionListener, MenuListener {
-    private static JFrame frame;
+    protected static JFrame frame;
     private JMenu editAccount;
     private JMenu purchaseHistory;
     private JMenu currentlySelling;
     private JMenu createPosting;
     private JMenu exit;
     protected static JTable table;
-    protected static TableModel tableModel;
+    protected static DefaultTableModel tableModel;
     protected static JScrollPane scrollPane;
 
+
     MainScreen(){
-        super(new FlowLayout());
+        //super();
 
         //MENUBAR
         JMenuBar menuBar = new JMenuBar();
         editAccount = new JMenu("Edit Account");
+        editAccount.addMenuListener(this);
         purchaseHistory = new JMenu("Purchase History");
+        purchaseHistory.addMenuListener(this);
         currentlySelling = new JMenu("Currently Selling");
         currentlySelling.addMenuListener(this);
         createPosting = new JMenu("Create Posting");
+        createPosting.addMenuListener(this);
         exit = new JMenu("Exit");
         exit.addMenuListener(this);
         //SEPARATORS
@@ -53,10 +59,16 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener {
         menuBar.add(space4);
         menuBar.add(exit);
         frame.setJMenuBar(menuBar);
-        tableModel = new ProductTableModel();
+
+        JPanel tablePanel = new JPanel(new BorderLayout());
+
+        //PRODUCT TABLE
         ProductTable.createTable(); //set up table and scroll pane
 
-        add(scrollPane);
+        tablePanel.add(scrollPane);
+        //tablePanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 30, 50));
+
+        add(tablePanel);
     }
 
     @Override
@@ -79,10 +91,19 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener {
         if (e.getSource() == exit){
             int dialogResult = JOptionPane.showConfirmDialog(null, "Exit Application?", "Exit", JOptionPane.YES_NO_OPTION);
             //user selects 'yes' option to exit application
-            if (dialogResult == JOptionPane.YES_OPTION){ frame.dispose(); }
+            if (dialogResult == JOptionPane.YES_OPTION){ frame.dispose();}
         }
         if (e.getSource() == currentlySelling){
             new CurrentlySellingWindow();
+        }
+        if (e.getSource() == editAccount){
+            System.out.println("edit account");
+        }
+        if (e.getSource() == purchaseHistory){
+            System.out.println("purchase history");
+        }
+        if (e.getSource() == createPosting){
+            System.out.println("create posting");
         }
     }
 
