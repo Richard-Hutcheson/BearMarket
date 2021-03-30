@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 class CreateAccount implements ActionListener {
     //Initialize variables within CreateAccount Class
@@ -206,7 +207,6 @@ class CreateAccount implements ActionListener {
             //Save information to an account, then add the
             //account to the database.
             Account a = new Account();
-
         }
     }
 }
