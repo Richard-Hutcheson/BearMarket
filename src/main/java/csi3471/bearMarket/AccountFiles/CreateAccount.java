@@ -1,16 +1,19 @@
 //Created by: Noah Lambaria
 
-package csi3471.bearMarket.LoginScreenFiles;
-
-import csi3471.bearMarket.Account;
+package csi3471.bearMarket.AccountFiles;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Objects;
 
-class CreateAccount implements ActionListener {
+public class CreateAccount implements ActionListener {
     //Initialize variables within CreateAccount Class
     static JFrame createFrame;
     JLabel firstNameLabel, lastNameLabel, shipAddressLabel;
@@ -201,12 +204,97 @@ class CreateAccount implements ActionListener {
     }
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == backButton) {
-            createFrame.dispose();
-        }else if(e.getSource() == saveButton){
+        if(e.getSource() == backButton) { createFrame.dispose(); }
+        else if(e.getSource() == saveButton){
+
+            JLabel informationEmptyError = new JLabel("Missing information, please fill out all information");
+            JLabel userNameTakenError = new JLabel("Username taken, try another username");
+            userNameTakenError.setVisible(false);
+            informationEmptyError.setVisible(false);
+
+
             //Save information to an account, then add the
             //account to the database.
-            Account a = new Account();
+
+            try {
+
+                //reads the account list information to verify the username has not been taken
+                BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/java/csi3471/bearMarket/AccountFiles/accountList.csv")));
+                String line = null;
+                Account a = null;
+                Boolean userNameTaken = false;
+
+                //Skip the first line as it says "username, password", which is the format of the csv file
+                reader.readLine();
+
+                while ((line = reader.readLine()) != null) {
+                    String[] split = line.split(",");
+                    if (split[0].equals((String) usernameField.getText())) {
+                        userNameTaken = true;
+                    }
+                }
+
+                if (userNameTaken) {
+                    userNameTakenError.setVisible(true);
+                    userNameTakenError.setPreferredSize(new Dimension(200,200));
+                    createFrame.add(userNameTakenError, BorderLayout.SOUTH);
+                    System.out.println("USERNAME TAKEN!");
+                }else{
+                    System.out.println("USERNAME NOT TAKEN");
+                    //Initialize a new account with the data
+                    Account createdAccount = new Account((String)usernameField.getText(),(String)passwordField.getText(),
+                            (String)firstNameField.getText(),(String)lastNameField.getText(),(String)shipAddressField.getText(),
+                            (String)stateField.getText(),(String)zipField.getText(),(String)cardNumberField.getText(),
+                            (String)cvvField.getText(),(String)cardZipField.getText());
+
+
+                    //Format: username,password,firstName,lastName,address,state,zip,cardNumber,cvv,cardZip
+                    //Create file and directory where the account info will be written to
+                    String fileName = createdAccount.username+".csv";
+                    File directory = new File("users");
+                    File actualFile = new File(directory, fileName);
+
+                    //Write information to accounts own file
+                    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(actualFile)));
+                    out.write(createdAccount.getUsername().getBytes(StandardCharsets.UTF_8));
+                    out.write(",".getBytes(StandardCharsets.UTF_8));
+                    out.write(createdAccount.getPassword().getBytes(StandardCharsets.UTF_8));
+                    out.write(",".getBytes(StandardCharsets.UTF_8));
+                    out.write(createdAccount.getFirstName().getBytes(StandardCharsets.UTF_8));
+                    out.write(",".getBytes(StandardCharsets.UTF_8));
+                    out.write(createdAccount.getLastName().getBytes(StandardCharsets.UTF_8));
+                    out.write(",".getBytes(StandardCharsets.UTF_8));
+                    out.write(createdAccount.getShippingAddress().getBytes(StandardCharsets.UTF_8));
+                    out.write(",".getBytes(StandardCharsets.UTF_8));
+                    out.write(createdAccount.getState().getBytes(StandardCharsets.UTF_8));
+                    out.write(",".getBytes(StandardCharsets.UTF_8));
+                    out.write(createdAccount.getZip().getBytes(StandardCharsets.UTF_8));
+                    out.write(",".getBytes(StandardCharsets.UTF_8));
+                    out.write(createdAccount.getCardNumber().getBytes(StandardCharsets.UTF_8));
+                    out.write(",".getBytes(StandardCharsets.UTF_8));
+                    out.write(createdAccount.getCvv().getBytes(StandardCharsets.UTF_8));
+                    out.write(",".getBytes(StandardCharsets.UTF_8));
+                    out.write(createdAccount.getCardZip().getBytes(StandardCharsets.UTF_8));
+
+                    try {
+                        //This writes to the accountList.csv file, updating the "master" username database
+                        String newLine = "\n" + createdAccount.getUsername() + "," + createdAccount.getPassword();
+                        Files.write(Paths.get("src/main/java/csi3471/bearMarket/AccountFiles/accountList.csv"), newLine.getBytes(), StandardOpenOption.APPEND);
+                    }catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    //Close the files and dispose of the frame.
+                    out.close();
+                    reader.close();
+                    createFrame.dispose();
+                }
+
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
     }
 }
