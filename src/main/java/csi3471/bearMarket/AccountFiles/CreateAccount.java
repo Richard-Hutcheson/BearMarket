@@ -390,14 +390,11 @@ public class CreateAccount implements ActionListener {
                     createFrame.revalidate();
                     createFrame.repaint();
 
-
-                    System.out.println("USERNAME TAKEN!");
                 }else if(!emptyString && !userNameTaken){
 
                     //If no empty string, and username hasn't been taken,
                     //Now create the account
 
-                    System.out.println("USERNAME NOT TAKEN AND NO EMPTY VALUES");
                     //Initialize a new account with the data
                     Account createdAccount = new Account((String)usernameField.getText(),(String)passwordField.getText(),
                             (String)firstNameField.getText(),(String)lastNameField.getText(),(String)shipAddressField.getText(),
@@ -476,7 +473,6 @@ public class CreateAccount implements ActionListener {
     }
 
     public void removeEmptyError(int y, JLabel theLabel){
-        System.out.println("NOT EMPTY");
         createFrame.remove(allInformation);
         //theLabel.setVisible(false);
         //gbc.gridx = 2;
