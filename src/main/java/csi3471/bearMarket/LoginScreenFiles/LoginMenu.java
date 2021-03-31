@@ -143,16 +143,21 @@ public class LoginMenu extends JPanel implements ActionListener{
 
 	    if(e.getSource() == loginButton) {
 
+	    	Boolean checker = false;
 	    	//Have an if condition that says if the account is valid
 			//then MainScreen.createAndShowGUI, else do nothing OR notify
 			//user that the login is invalid
-	        MainScreen.createAndShowGUI();
-	        loginScreen.dispose();
+
+			LoginButton verify = new LoginButton(checker);
+
+	        //if(checker) {
+				MainScreen.createAndShowGUI();
+				loginScreen.dispose();
+			//}
 	    }else if(e.getSource() == exitButton){
 			loginScreen.dispose();
 		}else if(e.getSource() == createButton){
 	    	CreateAccount create = new CreateAccount();
-
 		}
 	}
 
