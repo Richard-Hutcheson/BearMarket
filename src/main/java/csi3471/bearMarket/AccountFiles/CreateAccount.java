@@ -240,24 +240,16 @@ public class CreateAccount implements ActionListener {
 
                 //Output errors depending on empty fields
                 JLabel informationEmptyError1 = new JLabel("Missing Username, please fill out all information");
-                //informationEmptyError1.setVisible(false);
                 JLabel informationEmptyError2 = new JLabel("Missing Password, please fill out all information");
-                //informationEmptyError2.setVisible(false);
                 JLabel informationEmptyError3 = new JLabel("Missing First Name, please fill out all information");
-                //informationEmptyError3.setVisible(false);
                 JLabel informationEmptyError4 = new JLabel("Missing Last Name, please fill out all information");
-                //informationEmptyError4.setVisible(false);
                 JLabel informationEmptyError5 = new JLabel("Missing Address, please fill out all information");
-                //informationEmptyError5.setVisible(false);
                 JLabel informationEmptyError6 = new JLabel("Missing State, please fill out all information");
-                //informationEmptyError6.setVisible(false);
                 JLabel informationEmptyError7 = new JLabel("Missing Zip, please fill out all information");
-                //informationEmptyError7.setVisible(false);
                 JLabel informationEmptyError8 = new JLabel("Missing Card Number, please fill out all information");
-                //informationEmptyError8.setVisible(false);
                 JLabel informationEmptyError9 = new JLabel("Missing CVV, please fill out all information");
-                //informationEmptyError9.setVisible(false);
                 JLabel informationEmptyError10 = new JLabel("Missing Card Zip, please fill out all information");
+
                 //informationEmptyError10.setVisible(false);
                 if(usernameField.getText().equals("")){
                     //also verify that the username hasnt been taken, as that takes priority
@@ -265,79 +257,67 @@ public class CreateAccount implements ActionListener {
                         printEmptyError(2, informationEmptyError1);
                         emptyString = true;
                     }
-                }else{
-                    informationEmptyError1.setVisible(false);
-                    removeEmptyError(2,informationEmptyError1);
-                }
+                }else{ removeEmptyError(2,informationEmptyError1); }
+
+
                 if(passwordField.getText().equals("")){
                     printEmptyError(3,informationEmptyError2);
                     emptyString = true;
-                }else{
-                    informationEmptyError2.setVisible(false);
-                    removeEmptyError(3,informationEmptyError2);
-                }
+                }else{ removeEmptyError(3,informationEmptyError2); }
+
+
                 if(firstNameField.getText().equals("")){
                     printEmptyError(0,informationEmptyError3);
                     emptyString = true;
-                }else{
-                    //System.out.println("HAS STUFFF");
-                    informationEmptyError3.setVisible(false);
-                    removeEmptyError(0,informationEmptyError3);
-                }
+                }else{ removeEmptyError(0,informationEmptyError3); }
+
+
                 if(lastNameField.getText().equals("")){
                     printEmptyError(1,informationEmptyError4);
                     emptyString = true;
-                }else{
-                    informationEmptyError4.setVisible(false);
-                    removeEmptyError(1,informationEmptyError4);
-                }
+                }else{ removeEmptyError(1,informationEmptyError4); }
+
+
                 if(shipAddressField.getText().equals("")){
                     printEmptyError(4,informationEmptyError5);
                     emptyString = true;
-                }else{
-                    informationEmptyError5.setVisible(false);
-                    removeEmptyError(4,informationEmptyError5);
-                }
+                }else{ removeEmptyError(4,informationEmptyError5); }
+
+
                 if(stateField.getText().equals("")){
                     printEmptyError(5,informationEmptyError6);
                     emptyString = true;
-                }else{
-                    informationEmptyError6.setVisible(false);
-                    removeEmptyError(5,informationEmptyError6);
-                }
+                }else{ removeEmptyError(5,informationEmptyError6); }
+
+
                 if(zipField.getText().equals("")){
                     printEmptyError(6,informationEmptyError7);
                     emptyString = true;
-                }else{
-                    informationEmptyError7.setVisible(false);
-                    removeEmptyError(6,informationEmptyError7);
-                }
+                }else{ removeEmptyError(6,informationEmptyError7); }
+
+
                 if(cardNumberField.getText().equals("")){
                     printEmptyError(7,informationEmptyError8);
                     emptyString = true;
-                }else{
-                    informationEmptyError8.setVisible(false);
-                    removeEmptyError(7,informationEmptyError8);
-                }
+                }else{ removeEmptyError(7,informationEmptyError8); }
+
+
                 if(cvvField.getText().equals("")){
                     printEmptyError(8,informationEmptyError9);
                     emptyString = true;
-                }else{
-                    informationEmptyError9.setVisible(false);
-                    removeEmptyError(8,informationEmptyError9);
-                }
+                }else{ removeEmptyError(8,informationEmptyError9); }
+
                 if(cardZipField.getText().equals("")){
                     printEmptyError(9,informationEmptyError10);
                     emptyString = true;
-                }else{
-                    informationEmptyError10.setVisible(false);
-                    removeEmptyError(9,informationEmptyError10);
-                }
+                }else{ removeEmptyError(9,informationEmptyError10); }
 
 
 
 
 
+
+                //If the user name has been taken, infrom the user of it
                 if (userNameTaken) {
                     createFrame.remove(allInformation);
                     userNameTakenError.setVisible(true);
@@ -359,7 +339,6 @@ public class CreateAccount implements ActionListener {
 
                     //If no empty string, and username hasn't been taken,
                     //Now create the account
-
 
                     System.out.println("USERNAME NOT TAKEN AND NO EMPTY VALUES");
                     //Initialize a new account with the data
@@ -421,6 +400,8 @@ public class CreateAccount implements ActionListener {
     //Used to print error that empty text filter
     public void printEmptyError(int y, JLabel theLabel){
         createFrame.remove(allInformation);
+
+        theLabel.setOpaque(true);
         theLabel.setVisible(true);
         theLabel.setForeground(Color.RED);
         theLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -438,12 +419,20 @@ public class CreateAccount implements ActionListener {
     }
 
     public void removeEmptyError(int y, JLabel theLabel){
+        System.out.println("NOT EMPTY");
         createFrame.remove(allInformation);
         //theLabel.setVisible(false);
         //gbc.gridx = 2;
         //gbc.gridy = y;
         //allInformation.add(theLabel,gbc);
+
         allInformation.remove(theLabel);
+        //theLabel.setOpaque(false);
+        //theLabel.setText("");
+        //theLabel.setVisible(false);
+        //theLabel.revalidate();
+        //theLabel.repaint();
+        //allInformation.add(theLabel);
         allInformation.revalidate();
         allInformation.repaint();
         createFrame.add(allInformation);
