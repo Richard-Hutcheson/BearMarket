@@ -9,64 +9,120 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class CurrentlySellingWindow implements ActionListener {
+public class CurrentlySellingWindow extends JPanel implements ActionListener {
 
-    JFrame frame;
+    static JFrame frame;
     JTable mainTable;
     JScrollPane mainPane;
+    JButton purchaseHistory, mainMenu;
     TableModel tableModel;
     String[] colNames = {"Product", "Category", "Description", "Quantity", "Rating", "Price"};
 
     public CurrentlySellingWindow() {
-        frame = new JFrame();
-        frame.setVisible(true);
-        frame.setPreferredSize(new Dimension(600,400));
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLayout(new GridBagLayout());
+        //super(new GridBagLayout());
+        super(new GridLayout(3,1));
 
-        GridBagConstraints c = new GridBagConstraints();
+        //GridBagConstraints c = new GridBagConstraints();
 
+        //TODO: Link to account data
         // temporary will fix when file reading is sorted out
-        Object[][] dataValues = new Object[2][8];
+        Object[][] dataValues = {
+                {"testProduct1","testCategory1","testDescription1","testQuantity1","testRating1","testPrice1"},
+                {"testProduct2","testCategory2","testDescription2","testQuantity2","testRating2","testPrice2"},
+                {"testProduct3","testCategory3","testDescription3","testQuantity3","testRating3","testPrice3"},
+                {"testProduct4","testCategory4","testDescription4","testQuantity4","testRating4","testPrice4"}
+        };
 
         // create table and table model
-        tableModel = new DefaultTableModel(dataValues, colNames);
-        mainTable = new JTable(tableModel);
+        //tableModel = new DefaultTableModel(dataValues, colNames);
+        mainTable = new JTable(dataValues, colNames);
 
+        /*
         for (int i = 0; i < mainTable.getColumnCount(); i++) {
             mainTable.getColumnModel().getColumn(i).setWidth(50);
         }
+        */
 
+        //Button Panel
+        //Button to go back to purchase history
+        purchaseHistory = new JButton("View Purchase History");
+        purchaseHistory.addActionListener(this);
+        
+        //Button to go back to main menu
+        mainMenu = new JButton("Back to Main Menu");
+        mainMenu.addActionListener(this);
+        
+        //Panel to house buttons
+        JPanel buttons = new JPanel(new GridLayout(1,2));
+        
+        buttons.add(purchaseHistory);
+        buttons.add(mainMenu);
+        
+        add(buttons);
 
         // create the currently selling label
         JLabel currentlySellingLabel = new JLabel("Currently Selling Items");
         currentlySellingLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        /*
         c.gridx = 0;
         c.gridy = 0;
-        frame.add(currentlySellingLabel, c);
+        */
+        add(currentlySellingLabel);
 
         // create the currently selling items table
-        mainTable.setPreferredSize(new Dimension(600, 300));
+        mainTable.setPreferredScrollableViewportSize(new Dimension(600, 300));
+        mainTable.setFillsViewportHeight(true);
         mainTable.setVisible(true);
-        c.gridx = 0;
-        c.gridy = 1;
+        mainTable.setEnabled(false);
+        mainTable.setRowSelectionAllowed(false);
         mainTable.revalidate();
         mainTable.repaint();
 
         // initialize scroll pane
-        mainPane = new JScrollPane();
-        mainPane.setPreferredSize(new Dimension(600, 300));
+        mainPane = new JScrollPane(mainTable);
+        //mainPane.setPreferredSize(new Dimension(600, 300));
+        /*
         c.gridx = 0;
         c.gridy = 1;
-        mainPane.add(mainTable, c);
+        */
+        //mainPane.add(mainTable);
 
-        frame.add(mainPane, c);
-
-        frame.pack();
+        add(mainPane);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource() == purchaseHistory) {
+            PurchaseHistoryPanel.createAndShowPurchaseHistory();
+            frame.dispose();
+        }
+        
+        if(e.getSource() == mainMenu) {
+            //TODO: Add Implementation to go back to Main Menu
+            frame.dispose();
+        }
+    }
+    
+    public static void createAndShowCurrentlySelling() {
+        frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        CurrentlySellingWindow sellingPanel = new CurrentlySellingWindow();
+        
+        frame.setPreferredSize(new Dimension(600,400));
+        frame.setContentPane(sellingPanel);
+        
+        frame.pack();
+        frame.setVisible(true);
+    }
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            
+            @Override
+            public void run() {
+                createAndShowCurrentlySelling();
+            }
+        });
     }
 }
