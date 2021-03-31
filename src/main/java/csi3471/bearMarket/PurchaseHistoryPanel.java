@@ -86,15 +86,4 @@ public class PurchaseHistoryPanel extends JPanel implements ActionListener {
         purchaseHistoryFrame.pack();
         purchaseHistoryFrame.setVisible(true);
     }
-    
-    //TODO: Remove test main
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            
-            @Override
-            public void run() {
-                createAndShowPurchaseHistory();
-            }
-        });
-    }
 }
