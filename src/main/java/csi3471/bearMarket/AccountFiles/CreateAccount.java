@@ -28,6 +28,11 @@ public class CreateAccount implements ActionListener {
     GridBagConstraints gbc;
     JLabel userNameTakenError;
 
+    JLabel informationEmptyError2,informationEmptyError3,informationEmptyError4,informationEmptyError5,informationEmptyError6;
+    JLabel informationEmptyError7,informationEmptyError8,informationEmptyError9,informationEmptyError10,informationEmptyError1;
+
+
+
     public CreateAccount(){
         //Create a new frame that will ask the user to input information
         createFrame = new JFrame();
@@ -239,16 +244,67 @@ public class CreateAccount implements ActionListener {
                 //Format: username,password,firstName,lastName,address,state,zip,cardNumber,cvv,cardZip
 
                 //Output errors depending on empty fields
-                JLabel informationEmptyError1 = new JLabel("Missing Username, please fill out all information");
-                JLabel informationEmptyError2 = new JLabel("Missing Password, please fill out all information");
-                JLabel informationEmptyError3 = new JLabel("Missing First Name, please fill out all information");
-                JLabel informationEmptyError4 = new JLabel("Missing Last Name, please fill out all information");
-                JLabel informationEmptyError5 = new JLabel("Missing Address, please fill out all information");
-                JLabel informationEmptyError6 = new JLabel("Missing State, please fill out all information");
-                JLabel informationEmptyError7 = new JLabel("Missing Zip, please fill out all information");
-                JLabel informationEmptyError8 = new JLabel("Missing Card Number, please fill out all information");
-                JLabel informationEmptyError9 = new JLabel("Missing CVV, please fill out all information");
-                JLabel informationEmptyError10 = new JLabel("Missing Card Zip, please fill out all information");
+
+
+                Component[] components = allInformation.getComponents();
+                for (Component component : components) {
+                    if (informationEmptyError1 == component) {
+                        allInformation.remove(informationEmptyError1);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }else if(informationEmptyError2 == component){
+                        allInformation.remove(informationEmptyError2);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }else if(informationEmptyError3 == component){
+                        allInformation.remove(informationEmptyError3);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }else if(informationEmptyError4 == component){
+                        allInformation.remove(informationEmptyError4);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }else if(informationEmptyError5 == component){
+                        allInformation.remove(informationEmptyError5);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }else if(informationEmptyError6 == component){
+                        allInformation.remove(informationEmptyError6);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }else if(informationEmptyError7 == component){
+                        allInformation.remove(informationEmptyError7);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }else if(informationEmptyError8 == component){
+                        allInformation.remove(informationEmptyError8);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }else if(informationEmptyError9 == component){
+                        allInformation.remove(informationEmptyError9);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }else if(informationEmptyError10 == component){
+                        allInformation.remove(informationEmptyError10);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }else if(component == userNameTakenError){
+                        allInformation.remove(userNameTakenError);
+                        allInformation.revalidate();
+                        allInformation.repaint();
+                    }
+                }
+
+                informationEmptyError1 = new JLabel("Missing Username, please fill out all information");
+                informationEmptyError2 = new JLabel("Missing Password, please fill out all information");
+                informationEmptyError3 = new JLabel("Missing First Name, please fill out all information");
+                informationEmptyError4 = new JLabel("Missing Last Name, please fill out all information");
+                informationEmptyError5 = new JLabel("Missing Address, please fill out all information");
+                informationEmptyError6 = new JLabel("Missing State, please fill out all information");
+                informationEmptyError7 = new JLabel("Missing Zip, please fill out all information");
+                informationEmptyError8 = new JLabel("Missing Card Number, please fill out all information");
+                informationEmptyError9 = new JLabel("Missing CVV, please fill out all information");
+                informationEmptyError10 = new JLabel("Missing Card Zip, please fill out all information");
 
                 //informationEmptyError10.setVisible(false);
                 if(usernameField.getText().equals("")){
@@ -320,6 +376,7 @@ public class CreateAccount implements ActionListener {
                 //If the user name has been taken, infrom the user of it
                 if (userNameTaken) {
                     createFrame.remove(allInformation);
+                    userNameTakenError.setOpaque(true);
                     userNameTakenError.setVisible(true);
                     userNameTakenError.setForeground(Color.RED);
                     userNameTakenError.setHorizontalAlignment(JLabel.CENTER);
