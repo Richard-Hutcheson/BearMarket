@@ -3,6 +3,7 @@ package csi3471.bearMarket.MainScreenFiles;
 
 import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.CurrentlySellingWindow;
+import csi3471.bearMarket.PurchaseHistoryPanel;
 import csi3471.bearMarket.UserMarketPosting.EditMarketPostWindow;
 
 import javax.swing.*;
@@ -78,13 +79,13 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == currentlySelling){
-            new CurrentlySellingWindow();
+            CurrentlySellingWindow.createAndShowCurrentlySelling();
         }
         if (e.getSource() == editAccount){
             new EditAccount();
         }
         if (e.getSource() == purchaseHistory){
-            System.out.println("purchase history");
+            PurchaseHistoryPanel.createAndShowPurchaseHistory();
         }
         if (e.getSource() == createPosting){
             System.out.println("create posting");

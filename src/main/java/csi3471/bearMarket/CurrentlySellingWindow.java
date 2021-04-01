@@ -105,7 +105,7 @@ public class CurrentlySellingWindow extends JPanel implements ActionListener {
     
     public static void createAndShowCurrentlySelling() {
         frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         CurrentlySellingWindow sellingPanel = new CurrentlySellingWindow();
         

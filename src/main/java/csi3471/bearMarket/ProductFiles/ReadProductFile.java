@@ -12,18 +12,14 @@ import java.util.Vector;
 public class ReadProductFile {
 
     public static void readFile(String file, Vector<Product> productVector){
-        //Map<Integer, Product> map = new HashMap<>();
 
         try{
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
             bufferedReader.readLine(); //waste first line of csv
             String line = "";
             while ((line = bufferedReader.readLine()) != null){
-
                 Product p = new Product(line.split("\t"));
-                //map.put(p.getID(), p);
                 productVector.add(p);
-
             }
 
             bufferedReader.close(); //close file

@@ -76,7 +76,7 @@ public class PurchaseHistoryPanel extends JPanel implements ActionListener {
     //Generate frame and GUI
     public static void createAndShowPurchaseHistory() {
         purchaseHistoryFrame = new JFrame();
-        purchaseHistoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        purchaseHistoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         PurchaseHistoryPanel historyPanel = new PurchaseHistoryPanel();
         

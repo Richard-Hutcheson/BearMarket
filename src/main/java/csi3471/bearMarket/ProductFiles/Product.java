@@ -30,28 +30,15 @@ public class Product implements ActionListener {
      */
     public Product(String[] a) {
         productName = a[0];
-        //System.out.print( productName + ", ");
         category = a[1];
-        //System.out.print( category + ", ");
-
         description = a[2];
-        //System.out.print( description + ", ");
-
         quantity = Integer.parseInt(a[3]);
-        //System.out.print( quantity + ", ");
-
         rating = Double.parseDouble(a[4]);
-        //System.out.print( rating + ", ");
         String tempPrice= a[5].substring(1, a[5].length() - 1); //remove dollar sign
         tempPrice = tempPrice.replace(".", ""); //remove '.'
         tempPrice = tempPrice.replace(",", ""); //remove ','
         price = Double.parseDouble(tempPrice);
-        //System.out.print( price + ", ");
-
         ID = Integer.parseInt(a[6]);
-        //System.out.println( ID);
-
-
         descButton = new JButton("Description");
         descButton.addActionListener(this);
         purchaseButton = new JButton("Purchase");
@@ -132,10 +119,10 @@ public class Product implements ActionListener {
             dialog.setVisible(true);
         }
         if (e.getSource() == purchaseButton){
-
+            System.out.println("purchase item");
         }
         if (e.getSource() == reviewsButton){
-
+            System.out.println("review item");
         }
     }
 }

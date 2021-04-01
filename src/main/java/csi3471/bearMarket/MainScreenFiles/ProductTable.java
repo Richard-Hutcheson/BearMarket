@@ -67,8 +67,6 @@ public class ProductTable extends MainScreen{
             }
         };
 
-
-
         table = new JTable(tableModel);
         table.getTableHeader().setReorderingAllowed(false); //prevent column reordering
         table.setDefaultRenderer(JButton.class, new JTableButtonRenderer(tableRenderer));
@@ -80,17 +78,6 @@ public class ProductTable extends MainScreen{
 
         //read in product file
         ReadProductFile.readFile("src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv", productVector);
-
-        for (Product p : productVector){
-            System.out.println(p.getID());
-            //tableModel.addRow(p.returnObjects());
-        }
-
-
-//        for (Map.Entry<Integer, Product> m : productMap.entrySet()){
-//            tableModel.addRow(m.getValue().returnObjects());
-//            //System.out.println(m.getValue().toString());
-//        }
 
         scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(900, 400));
