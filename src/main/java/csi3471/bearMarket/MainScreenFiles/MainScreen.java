@@ -3,7 +3,10 @@ package csi3471.bearMarket.MainScreenFiles;
 
 import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.CurrentlySellingWindow;
+import csi3471.bearMarket.Product;
 import csi3471.bearMarket.PurchaseHistoryPanel;
+import csi3471.bearMarket.UserMarketPosting.CreateMarketPostWindow;
+import csi3471.bearMarket.UserMarketPosting.DeletePostWindow;
 import csi3471.bearMarket.UserMarketPosting.EditMarketPostWindow;
 
 import javax.swing.*;
@@ -44,6 +47,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         createPosting.addActionListener(this);
         createPostingItem = new JMenuItem("create a new market post");
         createPosting.addActionListener(this);
+        createPostingItem.addActionListener(this);
 
 
         //SEPARATORS
@@ -87,9 +91,10 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         if (e.getSource() == purchaseHistory){
             PurchaseHistoryPanel.createAndShowPurchaseHistory();
         }
-        if (e.getSource() == createPosting){
-            System.out.println("create posting");
+        if (e.getSource() == createPostingItem){
+            CreateMarketPostWindow.createMarketPost();
         }
+
 
     }
     public static void createAndShowGUI(){
