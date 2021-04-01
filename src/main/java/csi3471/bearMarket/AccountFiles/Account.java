@@ -1,4 +1,4 @@
-package csi3471.bearMarket;
+package csi3471.bearMarket.AccountFiles;
 
 import java.util.Objects;
 
@@ -6,6 +6,19 @@ public class Account {
     String username, password;
     String firstName, lastName, shippingAddress, state, zip, cardNumber;
     String cvv, cardZip;
+
+    public Account(String username, String password, String firstName, String lastName, String shippingAddress, String state, String zip, String cardNumber, String cvv, String cardZip) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.shippingAddress = shippingAddress;
+        this.state = state;
+        this.zip = zip;
+        this.cardNumber = cardNumber;
+        this.cvv = cvv;
+        this.cardZip = cardZip;
+    }
 
     public String getPassword() { return password; }
     public String getUsername() { return username; }
