@@ -1,15 +1,12 @@
-//Created by: Noah Lambaria
-
-package csi3471.bearMarket.LoginScreenFiles;
-
-import csi3471.bearMarket.Account;
+package csi3471.bearMarket.AccountFiles;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class CreateAccount implements ActionListener {
+public class EditAccount implements ActionListener {
+
     //Initialize variables within CreateAccount Class
     static JFrame createFrame;
     JLabel firstNameLabel, lastNameLabel, shipAddressLabel;
@@ -21,7 +18,8 @@ class CreateAccount implements ActionListener {
     JFormattedTextField stateField, zipField, cardNumberField, cvvField, cardZipField;
     JFormattedTextField usernameField, passwordField;
 
-    public CreateAccount(){
+    public EditAccount(){
+
         //Create a new frame that will ask the user to input information
         createFrame = new JFrame();
         createFrame.setPreferredSize(new Dimension(400,500));
@@ -35,7 +33,7 @@ class CreateAccount implements ActionListener {
     //Creates the table
     public void createTable(){
         //Label to inform the user to enter the information
-        JLabel inform = new JLabel("Please Enter your information below...");
+        JLabel inform = new JLabel("Update your personal information");
         inform.setHorizontalAlignment(JLabel.CENTER);
         createFrame.add(inform,BorderLayout.NORTH);
 
@@ -186,7 +184,7 @@ class CreateAccount implements ActionListener {
         backButton.setPreferredSize(new Dimension(100,25));
         backButton.addActionListener(this);
         //create saveButton
-        saveButton = new JButton("Create");
+        saveButton = new JButton("Edit");
         saveButton.setPreferredSize(new Dimension(100,25));
         saveButton.addActionListener(this);
 
@@ -205,8 +203,12 @@ class CreateAccount implements ActionListener {
         }else if(e.getSource() == saveButton){
             //Save information to an account, then add the
             //account to the database.
-            Account a = new Account();
+
 
         }
+    }
+    //Fills in the account info associated with the current account
+    public void fillInAccountInfo(){
+
     }
 }

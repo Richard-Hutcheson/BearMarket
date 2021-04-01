@@ -1,66 +1,95 @@
 package csi3471.bearMarket.MainScreenFiles;
 
+
+import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.CurrentlySellingWindow;
+import csi3471.bearMarket.PurchaseHistoryPanel;
+import csi3471.bearMarket.UserMarketPosting.EditMarketPostWindow;
 
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainScreen extends JPanel implements ActionListener, MenuListener {
-    private static JFrame frame;
-    private JMenu editAccount;
-    private JMenu purchaseHistory;
-    private JMenu currentlySelling;
-    private JMenu createPosting;
-    private JMenu exit;
+public class MainScreen extends JPanel implements ActionListener, MenuListener{
+    protected static JFrame frame;
+    private JMenu accountMenu, createPostingMenu, exit;
+    private JMenuItem editAccount, createPostingItem, purchaseHistory, currentlySelling, createPosting;
+
     protected static JTable table;
-    protected static TableModel tableModel;
+    protected static DefaultTableModel tableModel;
     protected static JScrollPane scrollPane;
 
+
     MainScreen(){
-        super(new FlowLayout());
+        //super();
 
         //MENUBAR
         JMenuBar menuBar = new JMenuBar();
-        editAccount = new JMenu("Edit Account");
-        purchaseHistory = new JMenu("Purchase History");
-        currentlySelling = new JMenu("Currently Selling");
-        currentlySelling.addMenuListener(this);
-        createPosting = new JMenu("Create Posting");
         exit = new JMenu("Exit");
         exit.addMenuListener(this);
+        accountMenu = new JMenu("Account");
+        createPostingMenu = new JMenu("Create Posting");
+        editAccount = new JMenuItem("Edit Account");
+        editAccount.addActionListener(this);
+        purchaseHistory = new JMenuItem("Purchase History");
+        purchaseHistory.addActionListener(this);
+        currentlySelling = new JMenuItem("Currently Selling");
+        currentlySelling.addActionListener(this);
+        createPosting = new JMenuItem("Create Posting");
+        createPosting.addActionListener(this);
+        createPostingItem = new JMenuItem("create a new market post");
+        createPosting.addActionListener(this);
+
+
         //SEPARATORS
         JMenu space1 = new JMenu("    ");
         space1.setEnabled(false);
         JMenu space2 = new JMenu("    ");
         space2.setEnabled(false);
-        JMenu space3 = new JMenu("    ");
-        space3.setEnabled(false);
-        JMenu space4 = new JMenu("    ");
-        space4.setEnabled(false);
 
-        menuBar.add(editAccount);
+        accountMenu.add(editAccount);
+        accountMenu.add(purchaseHistory);
+        accountMenu.add(currentlySelling);
+        menuBar.add(accountMenu);
         menuBar.add(space1);
-        menuBar.add(purchaseHistory);
+        createPostingMenu.add(createPostingItem);
+        menuBar.add(createPostingMenu);
         menuBar.add(space2);
-        menuBar.add(currentlySelling);
-        menuBar.add(space3);
-        menuBar.add(createPosting);
-        menuBar.add(space4);
         menuBar.add(exit);
         frame.setJMenuBar(menuBar);
-        tableModel = new ProductTableModel();
+
+        JPanel tablePanel = new JPanel(new BorderLayout());
+
+        //PRODUCT TABLE
         ProductTable.createTable(); //set up table and scroll pane
 
-        add(scrollPane);
+        tablePanel.add(scrollPane);
+        //tablePanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 30, 50));
+
+        add(tablePanel);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == currentlySelling){
+            CurrentlySellingWindow.createAndShowCurrentlySelling();
+        }
+        if (e.getSource() == editAccount){
+            new EditAccount();
+        }
+        if (e.getSource() == purchaseHistory){
+            PurchaseHistoryPanel.createAndShowPurchaseHistory();
+        }
+        if (e.getSource() == createPosting){
+            System.out.println("create posting");
+        }
 
     }
     public static void createAndShowGUI(){
@@ -79,10 +108,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener {
         if (e.getSource() == exit){
             int dialogResult = JOptionPane.showConfirmDialog(null, "Exit Application?", "Exit", JOptionPane.YES_NO_OPTION);
             //user selects 'yes' option to exit application
-            if (dialogResult == JOptionPane.YES_OPTION){ frame.dispose(); }
-        }
-        if (e.getSource() == currentlySelling){
-            new CurrentlySellingWindow();
+            if (dialogResult == JOptionPane.YES_OPTION){ frame.dispose();}
         }
     }
 
