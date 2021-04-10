@@ -1,6 +1,4 @@
 package csi3471.bearMarket.MainScreenFiles;
-
-
 import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.CurrentlySellingWindow;
 import csi3471.bearMarket.PurchaseHistoryPanel;
@@ -17,8 +15,8 @@ import java.awt.event.ActionListener;
 
 public class MainScreen extends JPanel implements ActionListener, MenuListener{
     protected static JFrame frame;
-    private JMenu accountMenu, createPostingMenu, exit;
-    private JMenuItem editAccount, createPostingItem, purchaseHistory, currentlySelling, createPosting;
+    final private JMenu accountMenu, createPostingMenu, exit;
+    final private JMenuItem editAccount, createPostingItem, purchaseHistory, currentlySelling, createPosting;
 
     protected static JTable table;
     protected static DefaultTableModel tableModel;
