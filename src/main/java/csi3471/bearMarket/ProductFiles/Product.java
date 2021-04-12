@@ -1,11 +1,15 @@
 package csi3471.bearMarket.ProductFiles;
 
+import csi3471.bearMarket.ProductReview.Review;
+import csi3471.bearMarket.ProductReview.ReviewDialog;
+
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Product implements ActionListener {
@@ -14,6 +18,7 @@ public class Product implements ActionListener {
     private int quantity, ID;
     private double rating, price;
     private JButton descButton, purchaseButton, reviewsButton;
+    private ArrayList<Review> reviews = new ArrayList<Review>();
 
     public Product() {
         productName = "";
@@ -71,7 +76,6 @@ public class Product implements ActionListener {
         return new Object[] {productName, category, quantity, rating, price, descButton, purchaseButton, reviewsButton};
     }
 
-
     @Override
     public String toString() {
         return "Product{" +
@@ -121,8 +125,18 @@ public class Product implements ActionListener {
         if (e.getSource() == purchaseButton){
             System.out.println("purchase item");
         }
+        //create Review Dialog
         if (e.getSource() == reviewsButton){
-            System.out.println("review item");
+            ReviewDialog reviewDialog = new ReviewDialog();
+            reviewDialog.createDialog(this);
         }
+    }
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(ArrayList<Review> reviews) {
+        this.reviews = reviews;
     }
 }

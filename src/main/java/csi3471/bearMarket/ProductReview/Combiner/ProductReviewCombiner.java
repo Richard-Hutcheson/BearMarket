@@ -1,4 +1,4 @@
-package csi3471.bearMarket.ProductReview;
+package csi3471.bearMarket.ProductReview.Combiner;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class ProductReviewCombiner {
     public static void main(String[] args) throws IOException {
         //REVIEWS
-        File reviewsFile = new File("src/main/java/csi3471/bearMarket/ProductReview/reviews.txt");
+        File reviewsFile = new File("src/main/java/csi3471/bearMarket/ProductReview/Combiner/reviews.txt");
         File productsFile = new File("src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv");
-        File usernames = new File("src/main/java/csi3471/bearMarket/ProductReview/usernames.txt");
+        File usernames = new File("src/main/java/csi3471/bearMarket/ProductReview/Combiner/usernames.txt");
         File productReviews = new File("src/main/java/csi3471/bearMarket/ProductReview/productReviews.txt");
         ArrayList<String> reviews = new ArrayList<>();
         ArrayList<String> usernameList = new ArrayList<>();

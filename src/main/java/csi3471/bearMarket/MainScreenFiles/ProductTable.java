@@ -3,6 +3,7 @@ package csi3471.bearMarket.MainScreenFiles;
 import com.sun.tools.javac.Main;
 import csi3471.bearMarket.ProductFiles.Product;
 import csi3471.bearMarket.ProductFiles.ReadProductFile;
+import csi3471.bearMarket.ProductReview.ReadReviews;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -15,7 +16,7 @@ import java.util.Map;
 import java.util.Vector;
 
 public class ProductTable extends MainScreen{
-    //public static Map<Integer, Product> productMap = new HashMap<>();
+    public static Map<Integer, Product> productMap = new HashMap<>();
     public static Vector<Product> productVector = new Vector<>();
     private static TableCellRenderer tableRenderer;
     public static void createTable(){
@@ -77,7 +78,9 @@ public class ProductTable extends MainScreen{
         table.getColumnModel().getColumn(5).setPreferredWidth(85);
 
         //read in product file
-        ReadProductFile.readFile("src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv", productVector);
+        final String file = "src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv";
+        ReadProductFile.readFile(file, productVector, productMap);
+        ReadReviews.readInReviews(productMap);
 
         scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(900, 400));
