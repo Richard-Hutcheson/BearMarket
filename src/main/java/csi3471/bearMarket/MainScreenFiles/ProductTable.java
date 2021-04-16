@@ -76,6 +76,7 @@ public class ProductTable extends MainScreen{
         table.setAutoCreateRowSorter(true);
         table.getColumnModel().getColumn(0).setPreferredWidth(200);
         table.getColumnModel().getColumn(5).setPreferredWidth(85);
+        //table.setGridColor(Color.ORANGE);
 
         //read in product file
         final String file = "src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv";

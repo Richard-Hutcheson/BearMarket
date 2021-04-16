@@ -8,6 +8,10 @@ import csi3471.bearMarket.UserMarketPosting.DeletePostWindow;
 import csi3471.bearMarket.UserMarketPosting.EditMarketPostWindow;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +24,9 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
     protected static JFrame frame;
     final private JMenu accountMenu, createPostingMenu, exit;
     final private JMenuItem editAccount, createPostingItem, purchaseHistory, currentlySelling, createPosting;
+    final private JButton filterButton = new JButton("Filter");
+    final private JTextField filterTF = new JTextField();
+    final private Color LIGHT_ORANGE = new Color(255, 219, 77);
 
     protected static JTable table;
     protected static DefaultTableModel tableModel;
@@ -27,7 +34,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
 
 
     MainScreen(){
-        //super();
+        super(new BorderLayout());
 
         //MENUBAR
         JMenuBar menuBar = new JMenuBar();
@@ -47,13 +54,11 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         createPosting.addActionListener(this);
         createPostingItem.addActionListener(this);
 
-
         //SEPARATORS
         JMenu space1 = new JMenu("    ");
         space1.setEnabled(false);
         JMenu space2 = new JMenu("    ");
         space2.setEnabled(false);
-
         accountMenu.add(editAccount);
         accountMenu.add(purchaseHistory);
         accountMenu.add(currentlySelling);
@@ -63,18 +68,48 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         menuBar.add(createPostingMenu);
         menuBar.add(space2);
         menuBar.add(exit);
+        menuBar.setBackground(LIGHT_ORANGE);
         frame.setJMenuBar(menuBar);
 
-        JPanel tablePanel = new JPanel(new BorderLayout());
+        //FEATURED ITEMS
+        JPanel topCenterPanel = new JPanel();
+        BoxLayout boxLayout2 = new BoxLayout(topCenterPanel, BoxLayout.Y_AXIS);
+        topCenterPanel.setLayout(boxLayout2);
+        topCenterPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "FEATURED ITEMS-WORK IN PROGRESS", TitledBorder.CENTER, TitledBorder.TOP));
+        JPanel featuredItemsPanel = new JPanel();
+        JButton fItem1 = new JButton("ITEM1");
+        JButton fItem2 = new JButton("ITEM2");
+        JButton fItem3 = new JButton("ITEM3");
+
+        featuredItemsPanel.add(fItem1);
+        featuredItemsPanel.add(fItem2);
+        featuredItemsPanel.add(fItem3);
+        topCenterPanel.add(featuredItemsPanel);
+        JPanel centerPanel = new JPanel();
+        BoxLayout boxLayout = new BoxLayout(centerPanel, BoxLayout.Y_AXIS);
+        centerPanel.setLayout(boxLayout);
+        centerPanel.add(topCenterPanel);
 
         //PRODUCT TABLE
+        JPanel tablePanel = new JPanel(new BorderLayout());
         ProductTable.createTable(); //set up table and scroll pane
-
         tablePanel.add(scrollPane);
+        tablePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "PRODUCTS", TitledBorder.CENTER, TitledBorder.TOP));
         //tablePanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 30, 50));
+        centerPanel.add(tablePanel);
 
-        add(tablePanel);
+        add(centerPanel, BorderLayout.CENTER);
 
+        //WEST AND EAST BORDER COLORS
+        JLabel westLabel = new JLabel("");
+        westLabel.setPreferredSize(new Dimension(150, 720));
+        JLabel eastLabel = new JLabel("");
+        eastLabel.setPreferredSize(new Dimension(150, 720));
+        this.setBackground(Color.GREEN.darker().darker());
+        add(westLabel, BorderLayout.WEST);
+        add(eastLabel, BorderLayout.EAST);
+        Border border = new LineBorder(LIGHT_ORANGE, 3, true);
+        setBorder(border);
     }
 
     @Override
