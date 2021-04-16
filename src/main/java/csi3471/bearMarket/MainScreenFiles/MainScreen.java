@@ -30,13 +30,10 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
     private JLabel filterLabel;
     private JTextField filterTF;
     final private Color LIGHT_ORANGE = new Color(255, 219, 77);
-
     protected static JTable table;
     protected static DefaultTableModel tableModel;
     protected static JScrollPane scrollPane;
-
     private TableRowSorter sorter;
-
 
     MainScreen(){
         super(new BorderLayout());
@@ -128,8 +125,8 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
 
         //PRODUCT FILTER
         JPanel filterPanel = new JPanel();
-        JLabel filterLabel = new JLabel("SEARCH: ");
-        JTextField filterTF = new JTextField(20);
+        filterLabel = new JLabel("SEARCH: ");
+        filterTF = new JTextField(20);
         sorter = new TableRowSorter<>(tableModel);
         table.setRowSorter(sorter);
         filterTF.getDocument().addDocumentListener(new DocumentListener() {

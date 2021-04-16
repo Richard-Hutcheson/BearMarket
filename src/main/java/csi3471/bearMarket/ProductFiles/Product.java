@@ -100,8 +100,10 @@ public class Product implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == descButton){
-            final int WIDTH = 400, HEIGHT = 200;
+            final int WIDTH = 325, HEIGHT = 325;
             JPanel panel = new JPanel();
+            BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+            panel.setLayout(boxLayout);
             panel.setBorder(new TitledBorder(new EtchedBorder(), "Product Description"));
 
             JDialog dialog = new JDialog(new JFrame(), "");
@@ -114,8 +116,22 @@ public class Product implements ActionListener {
             //textArea.setText(description);
             JScrollPane scrollPane = new JScrollPane(textArea);
             scrollPane.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+            JPanel textPanel = new JPanel();
+            textPanel.add(scrollPane);
+            panel.add(textPanel);
 
-            panel.add(scrollPane);
+            //BACK BUTTON
+            JPanel backPanel = new JPanel();
+            JButton backButton = new JButton("BACK");
+            //backButton.setPreferredSize(new Dimension(200, 30));
+            backButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dialog.dispose();
+                }
+            });
+            backPanel.add(backButton);
+            panel.add(backPanel);
             dialog.add(panel);
             dialog.setPreferredSize(new Dimension(WIDTH, HEIGHT));
             dialog.pack();// try to arrange window so that it fits preferred size
