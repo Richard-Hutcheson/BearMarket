@@ -80,11 +80,34 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         JPanel topCenterPanel = new JPanel();
         BoxLayout boxLayout2 = new BoxLayout(topCenterPanel, BoxLayout.Y_AXIS);
         topCenterPanel.setLayout(boxLayout2);
-        topCenterPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "FEATURED ITEMS-WORK IN PROGRESS", TitledBorder.CENTER, TitledBorder.TOP));
+        topCenterPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "FEATURED ITEMS", TitledBorder.CENTER, TitledBorder.TOP));
         JPanel featuredItemsPanel = new JPanel();
-        JButton fItem1 = new JButton("ITEM1");
-        JButton fItem2 = new JButton("ITEM2");
-        JButton fItem3 = new JButton("ITEM3");
+        JButton fItem1 = new JButton("WORK");
+        fItem1.setPreferredSize(new Dimension(150, 50));
+        fItem1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("featured item 1");
+            }
+        });
+        JButton fItem2 = new JButton("IN");
+        fItem2.setPreferredSize(new Dimension(150, 50));
+        fItem2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("featured item 2");
+
+            }
+        });
+        JButton fItem3 = new JButton("PROGRESS");
+        fItem3.setPreferredSize(new Dimension(150, 50));
+        fItem3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("featured item 3");
+
+            }
+        });
 
         featuredItemsPanel.add(fItem1);
         featuredItemsPanel.add(fItem2);
@@ -128,13 +151,13 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
                 if (str.length() == 0) {
                     sorter.setRowFilter(null);
                 } else {
-                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + str)); //case in-sensitive regex
                 }
             }
         });
-
         filterPanel.add(filterLabel);
         filterPanel.add(filterTF);
+        filterPanel.setBorder(new LineBorder(LIGHT_ORANGE, 3, true));
         centerPanel.add(filterPanel);
 
         //ADD CENTER PANEL
