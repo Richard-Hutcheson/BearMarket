@@ -12,10 +12,13 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,13 +27,15 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
     protected static JFrame frame;
     final private JMenu accountMenu, createPostingMenu, exit;
     final private JMenuItem editAccount, createPostingItem, purchaseHistory, currentlySelling, createPosting;
-    final private JButton filterButton = new JButton("Filter");
-    final private JTextField filterTF = new JTextField();
+    private JLabel filterLabel;
+    private JTextField filterTF;
     final private Color LIGHT_ORANGE = new Color(255, 219, 77);
 
     protected static JTable table;
     protected static DefaultTableModel tableModel;
     protected static JScrollPane scrollPane;
+
+    private TableRowSorter sorter;
 
 
     MainScreen(){
@@ -98,6 +103,41 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         //tablePanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 30, 50));
         centerPanel.add(tablePanel);
 
+        //PRODUCT FILTER
+        JPanel filterPanel = new JPanel();
+        JLabel filterLabel = new JLabel("SEARCH: ");
+        JTextField filterTF = new JTextField(20);
+        sorter = new TableRowSorter<>(tableModel);
+        table.setRowSorter(sorter);
+        filterTF.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search(filterTF.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search(filterTF.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search(filterTF.getText());
+            }
+            public void search(String str) {
+                if (str.length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                }
+            }
+        });
+
+        filterPanel.add(filterLabel);
+        filterPanel.add(filterTF);
+        centerPanel.add(filterPanel);
+
+        //ADD CENTER PANEL
         add(centerPanel, BorderLayout.CENTER);
 
         //WEST AND EAST BORDER COLORS
