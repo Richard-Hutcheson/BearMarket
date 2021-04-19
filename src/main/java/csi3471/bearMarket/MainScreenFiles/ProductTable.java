@@ -4,6 +4,9 @@ import com.sun.tools.javac.Main;
 import csi3471.bearMarket.ProductFiles.Product;
 import csi3471.bearMarket.ProductFiles.ReadProductFile;
 
+import csi3471.bearMarket.ProductReview.ReadReviews;
+
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +18,8 @@ import java.util.Map;
 import java.util.Vector;
 
 public class ProductTable extends MainScreen{
-    //public static Map<Integer, Product> productMap = new HashMap<>();
+
+    public static Map<Integer, Product> productMap = new HashMap<>();
     public static Vector<Product> productVector = new Vector<>();
     private static TableCellRenderer tableRenderer;
     public static void createTable(){
@@ -76,47 +80,16 @@ public class ProductTable extends MainScreen{
         table.getColumnModel().getColumn(0).setPreferredWidth(200);
         table.getColumnModel().getColumn(5).setPreferredWidth(85);
 
+        //table.setGridColor(Color.ORANGE);
+
         //read in product file
-        ReadProductFile.readFile("src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv", productVector);
+        final String file = "src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv";
+        ReadProductFile.readFile(file, productVector, productMap);
+        ReadReviews.readInReviews(productMap);
+
 
         scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(900, 400));
     }
 }
-//class ProductTableModel extends AbstractTableModel {
-//
-//    private String[] columnNames = {"Product Name", "Category", "Quantity", "Rating", "Price", "Description", "Purchase", "Reviews"};
-//
-//    @Override
-//    public Class<?> getColumnClass(int columnIndex) {
-//        return switch(columnIndex){
-//            case 2 -> Integer.class;
-//            case 3, 4 -> Float.class;
-//            default -> String.class;
-//        };
-//    }
-//
-//    @Override
-//    public int getRowCount() {
-//        return ;
-//    }
-//
-//    @Override
-//    public int getColumnCount() {
-//        return columnNames.length;
-//    }
-//
-//    @Override
-//    public String getColumnName(int column) {
-//        return columnNames[column];
-//    }
-//
-//    @Override
-//    public Object getValueAt(int rowIndex, int columnIndex) {
-//        return null;
-//    }
-//
-//    public void addRow(Product product){
-//
-//    }
-//}
+

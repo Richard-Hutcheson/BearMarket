@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class CreateMarketPostWindow extends JPanel implements ActionListener {
 
@@ -12,6 +13,8 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
     protected JComboBox comboBox;
     protected JTextField tempTextField[];
     protected String[] productDescriptors = {"Product Name: ", "Category: ", "Description: ", "Quantity: ", "Rating: ", "Price: "};
+    protected JButton confirmChanges, cancelChanges;
+    private File userFile;
 
     public static void createMarketPost() {
         createMarketPostFrame = new JFrame();
@@ -19,7 +22,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
 
         CreateMarketPostWindow mainPanel = new CreateMarketPostWindow();
 
-        createMarketPostFrame.setPreferredSize(new Dimension(400, 200));
+        createMarketPostFrame.setPreferredSize(new Dimension(500, 250));
         createMarketPostFrame.setContentPane(mainPanel);
 
         createMarketPostFrame.pack();
@@ -32,8 +35,9 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
         GridBagConstraints c = new GridBagConstraints();
         tempLabel = new JLabel[productDescriptors.length];
         tempTextField = new JTextField[productDescriptors.length];
+        int i;
 
-        for (int i = 0; i < productDescriptors.length; i++) {
+        for (i = 0; i < productDescriptors.length; i++) {
             tempLabel[i] = new JLabel(productDescriptors[i]);
             c.gridx = 0;
             c.gridy = i;
@@ -59,11 +63,31 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
 
         }
 
+        i++;
+
+        confirmChanges = new JButton("Confirm");
+        c.gridx = 0;
+        c.gridy = i;
+        confirmChanges.setPreferredSize(new Dimension(150, 20));
+        add(confirmChanges, c);
+
+        cancelChanges = new JButton("Cancel");
+        c.gridx = 1;
+        c.gridy = i;
+        cancelChanges.setPreferredSize(new Dimension(150, 20));
+        add(cancelChanges, c);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == confirmChanges) {
+            createMarketPostFrame.dispose();
+        }
+        else if (e.getSource() == cancelChanges) {
+            createMarketPostFrame.dispose();
+        }
 
     }
 }

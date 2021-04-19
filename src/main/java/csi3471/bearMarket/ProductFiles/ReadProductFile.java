@@ -11,7 +11,8 @@ import java.util.Vector;
 
 public class ReadProductFile {
 
-    public static void readFile(String file, Vector<Product> productVector){
+    public static void readFile(String file, Vector<Product> productVector, Map<Integer, Product> productMap){
+
 
         try{
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
@@ -19,6 +20,8 @@ public class ReadProductFile {
             String line = "";
             while ((line = bufferedReader.readLine()) != null){
                 Product p = new Product(line.split("\t"));
+
+                productMap.put(p.getID(), p);
                 productVector.add(p);
             }
 
