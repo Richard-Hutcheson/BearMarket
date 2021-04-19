@@ -16,7 +16,7 @@ public class Product implements ActionListener {
 
     private String productName, category, description;
     private int quantity, ID;
-    private double rating, price;
+    private double rating, price, discountPrice;
     private JButton descButton, purchaseButton, reviewsButton;
     private ArrayList<Review> reviews = new ArrayList<Review>();
 
@@ -28,6 +28,7 @@ public class Product implements ActionListener {
         ID = 0;
         rating = 0.0;
         price = 0.0;
+        discountPrice = 0.0;
     }
 
     /*
@@ -52,26 +53,6 @@ public class Product implements ActionListener {
         reviewsButton.addActionListener(this);
     }
 
-    public String getProductName() { return productName; }
-    public void setProductName(String productName) { this.productName = productName; }
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
-    public int getID() { return ID; }
-    public void setID(int ID) { this.ID = ID; }
-    public double getRating() { return rating; }
-    public void setRating(double rating) { this.rating = rating; }
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
-
-    public JButton getPurchase(){return purchaseButton;}
-    public JButton getDescButton(){return descButton;}
-    public JButton getReviewsButton(){return reviewsButton;}
-
-
     public Object[] returnObjects(){
         return new Object[] {productName, category, quantity, rating, price, descButton, purchaseButton, reviewsButton};
     }
@@ -89,16 +70,21 @@ public class Product implements ActionListener {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return quantity == product.quantity && ID == product.ID && Double.compare(product.rating, rating) == 0 && Double.compare(product.price, price) == 0 && productName.equals(product.productName) && category.equals(product.category) && description.equals(product.description);
+        return quantity == product.quantity && ID == product.ID && Double.compare(product.rating, rating) == 0 &&
+                Double.compare(product.price, price) == 0 && productName.equals(product.productName) &&
+                category.equals(product.category) && description.equals(product.description) &&
+                descButton.equals(product.descButton) && purchaseButton.equals(product.purchaseButton) &&
+                reviewsButton.equals(product.reviewsButton) && reviews.equals(product.reviews);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productName, category, quantity, rating, price, descButton, purchaseButton, reviewsButton);
+        return Objects.hash(productName, category, description, quantity, ID, rating, price, descButton, purchaseButton, reviewsButton, reviews);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //USER CLICKED ON DESCRIPTION BUTTON
         if (e.getSource() == descButton){
             final int WIDTH = 325, HEIGHT = 325;
             JPanel panel = new JPanel();
@@ -155,4 +141,24 @@ public class Product implements ActionListener {
     public void setReviews(ArrayList<Review> reviews) {
         this.reviews = reviews;
     }
+    public String getProductName() { return productName; }
+    public void setProductName(String productName) { this.productName = productName; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public int getID() { return ID; }
+    public void setID(int ID) { this.ID = ID; }
+    public double getRating() { return rating; }
+    public void setRating(double rating) { this.rating = rating; }
+    public double getPrice() { return price; }
+    public void setPrice(double price) { this.price = price; }
+    public double getDiscountPrice() { return discountPrice; }
+    public void setDiscountPrice(double discountPrice) { this.discountPrice = discountPrice; }
+
+    public JButton getPurchase(){return purchaseButton;}
+    public JButton getDescButton(){return descButton;}
+    public JButton getReviewsButton(){return reviewsButton;}
 }
