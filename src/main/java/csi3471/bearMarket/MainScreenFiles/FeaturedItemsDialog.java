@@ -110,4 +110,13 @@ public class FeaturedItemsDialog{
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
+    public String getItem1Name(){
+        return item1.getProductName();
+    }
+    public String getItem2Name(){
+        return item2.getProductName();
+    }
+    public String getItem3Name(){
+        return item3.getProductName();
+    }
 }

@@ -88,15 +88,22 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         featuredItemsDialog = new FeaturedItemsDialog(); //RANDOMLY CREATES THREE ITEMS
         JPanel featuredItemsPanel = new JPanel();
         //featured item buttons
-        fItem1 = new JButton("WORK");
+        //                       item 1
+        fItem1 = new JButton(featuredItemsDialog.getItem1Name());
         fItem1.setPreferredSize(new Dimension(150, 50));
         fItem1.addActionListener(this);
-        fItem2 = new JButton("IN");
+        fItem1.setToolTipText(featuredItemsDialog.getItem1Name()); //set tool tip for button
+        //                       item 2
+        fItem2 = new JButton(featuredItemsDialog.getItem2Name());
         fItem2.setPreferredSize(new Dimension(150, 50));
         fItem2.addActionListener(this);
-        fItem3 = new JButton("PROGRESS");
+        fItem2.setToolTipText(featuredItemsDialog.getItem2Name()); //set tool tip for button
+        //                       item 3
+        fItem3 = new JButton(featuredItemsDialog.getItem3Name());
         fItem3.setPreferredSize(new Dimension(150, 50));
         fItem3.addActionListener(this);
+        fItem3.setToolTipText(featuredItemsDialog.getItem3Name()); //set tool tip for button
+
         featuredItemsPanel.add(fItem1);
         featuredItemsPanel.add(fItem2);
         featuredItemsPanel.add(fItem3);
