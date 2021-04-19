@@ -89,12 +89,12 @@ public class Product implements ActionListener {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return quantity == product.quantity && ID == product.ID && Double.compare(product.rating, rating) == 0 && Double.compare(product.price, price) == 0 && productName.equals(product.productName) && category.equals(product.category) && description.equals(product.description);
+        return quantity == product.quantity && ID == product.ID && Double.compare(product.rating, rating) == 0 && Double.compare(product.price, price) == 0 && productName.equals(product.productName) && category.equals(product.category) && description.equals(product.description) && descButton.equals(product.descButton) && purchaseButton.equals(product.purchaseButton) && reviewsButton.equals(product.reviewsButton) && reviews.equals(product.reviews);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productName, category, quantity, rating, price, descButton, purchaseButton, reviewsButton);
+        return Objects.hash(productName, category, description, quantity, ID, rating, price, descButton, purchaseButton, reviewsButton, reviews);
     }
 
     @Override

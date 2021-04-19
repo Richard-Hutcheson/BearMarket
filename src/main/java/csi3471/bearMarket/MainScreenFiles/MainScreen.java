@@ -34,7 +34,8 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
     protected static DefaultTableModel tableModel;
     protected static JScrollPane scrollPane;
     private TableRowSorter sorter;
-
+    private JButton fItem1, fItem2, fItem3;
+    FeaturedItemsDialog featuredItemsDialog;
     MainScreen(){
         super(new BorderLayout());
 
@@ -73,31 +74,17 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         menuBar.setBackground(LIGHT_ORANGE);
         frame.setJMenuBar(menuBar);
 
-        //FEATURED ITEMS
+        //CENTER PANEL and TOP-CENTER PANEL
         JPanel topCenterPanel = new JPanel();
         BoxLayout boxLayout2 = new BoxLayout(topCenterPanel, BoxLayout.Y_AXIS);
         topCenterPanel.setLayout(boxLayout2);
         topCenterPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "FEATURED ITEMS", TitledBorder.CENTER, TitledBorder.TOP));
-        JPanel featuredItemsPanel = new JPanel();
-        //featured item buttons
-        JButton fItem1 = new JButton("WORK");
-        fItem1.setPreferredSize(new Dimension(150, 50));
-        fItem1.addActionListener(this);
-        JButton fItem2 = new JButton("IN");
-        fItem2.setPreferredSize(new Dimension(150, 50));
-        fItem2.addActionListener(this);
-        JButton fItem3 = new JButton("PROGRESS");
-        fItem3.setPreferredSize(new Dimension(150, 50));
-        fItem3.addActionListener(this);
-
-        featuredItemsPanel.add(fItem1);
-        featuredItemsPanel.add(fItem2);
-        featuredItemsPanel.add(fItem3);
-        topCenterPanel.add(featuredItemsPanel);
         JPanel centerPanel = new JPanel();
         BoxLayout boxLayout = new BoxLayout(centerPanel, BoxLayout.Y_AXIS);
         centerPanel.setLayout(boxLayout);
-        centerPanel.add(topCenterPanel);
+
+
+
 
         //PRODUCT TABLE
         JPanel tablePanel = new JPanel(new BorderLayout());
@@ -105,6 +92,26 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         tablePanel.add(scrollPane);
         tablePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "PRODUCTS", TitledBorder.CENTER, TitledBorder.TOP));
         //tablePanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 30, 50));
+
+        //FEATURED ITEMS
+        featuredItemsDialog = new FeaturedItemsDialog(); //RANDOMLY CREATES THREE ITEMS
+        JPanel featuredItemsPanel = new JPanel();
+        //featured item buttons
+        fItem1 = new JButton("WORK");
+        fItem1.setPreferredSize(new Dimension(150, 50));
+        fItem1.addActionListener(this);
+        fItem2 = new JButton("IN");
+        fItem2.setPreferredSize(new Dimension(150, 50));
+        fItem2.addActionListener(this);
+        fItem3 = new JButton("PROGRESS");
+        fItem3.setPreferredSize(new Dimension(150, 50));
+        fItem3.addActionListener(this);
+        featuredItemsPanel.add(fItem1);
+        featuredItemsPanel.add(fItem2);
+        featuredItemsPanel.add(fItem3);
+
+        topCenterPanel.add(featuredItemsPanel);
+        centerPanel.add(topCenterPanel);
         centerPanel.add(tablePanel);
 
         //PRODUCT FILTER
@@ -171,7 +178,15 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         if (e.getSource() == createPostingItem){
             CreateMarketPostWindow.createMarketPost();
         }
-
+        if (e.getSource() == fItem1 ){
+            featuredItemsDialog.createFIDialog(1);
+        }
+        if (e.getSource() == fItem2){
+            featuredItemsDialog.createFIDialog(2);
+        }
+        if (e.getSource() == fItem3){
+            featuredItemsDialog.createFIDialog(3);
+        }
 
     }
     public static void createAndShowGUI(){
