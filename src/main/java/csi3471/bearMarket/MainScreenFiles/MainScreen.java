@@ -79,32 +79,16 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         topCenterPanel.setLayout(boxLayout2);
         topCenterPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "FEATURED ITEMS", TitledBorder.CENTER, TitledBorder.TOP));
         JPanel featuredItemsPanel = new JPanel();
+        //featured item buttons
         JButton fItem1 = new JButton("WORK");
         fItem1.setPreferredSize(new Dimension(150, 50));
-        fItem1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("featured item 1");
-            }
-        });
+        fItem1.addActionListener(this);
         JButton fItem2 = new JButton("IN");
         fItem2.setPreferredSize(new Dimension(150, 50));
-        fItem2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("featured item 2");
-
-            }
-        });
+        fItem2.addActionListener(this);
         JButton fItem3 = new JButton("PROGRESS");
         fItem3.setPreferredSize(new Dimension(150, 50));
-        fItem3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("featured item 3");
-
-            }
-        });
+        fItem3.addActionListener(this);
 
         featuredItemsPanel.add(fItem1);
         featuredItemsPanel.add(fItem2);
