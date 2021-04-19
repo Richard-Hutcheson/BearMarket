@@ -1,15 +1,10 @@
 package csi3471.bearMarket.MainScreenFiles;
 import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.CurrentlySellingWindow;
-import csi3471.bearMarket.Product;
 import csi3471.bearMarket.PurchaseHistoryPanel;
 import csi3471.bearMarket.UserMarketPosting.CreateMarketPostWindow;
-import csi3471.bearMarket.UserMarketPosting.DeletePostWindow;
-import csi3471.bearMarket.UserMarketPosting.EditMarketPostWindow;
-
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
@@ -17,7 +12,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -82,9 +76,6 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         JPanel centerPanel = new JPanel();
         BoxLayout boxLayout = new BoxLayout(centerPanel, BoxLayout.Y_AXIS);
         centerPanel.setLayout(boxLayout);
-
-
-
 
         //PRODUCT TABLE
         JPanel tablePanel = new JPanel(new BorderLayout());

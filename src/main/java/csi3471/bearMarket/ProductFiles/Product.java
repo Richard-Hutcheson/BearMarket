@@ -16,7 +16,7 @@ public class Product implements ActionListener {
 
     private String productName, category, description;
     private int quantity, ID;
-    private double rating, price;
+    private double rating, price, discountPrice;
     private JButton descButton, purchaseButton, reviewsButton;
     private ArrayList<Review> reviews = new ArrayList<Review>();
 
@@ -28,6 +28,7 @@ public class Product implements ActionListener {
         ID = 0;
         rating = 0.0;
         price = 0.0;
+        discountPrice = 0.0;
     }
 
     /*
@@ -66,6 +67,8 @@ public class Product implements ActionListener {
     public void setRating(double rating) { this.rating = rating; }
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
+    public double getDiscountPrice() { return discountPrice; }
+    public void setDiscountPrice(double discountPrice) { this.discountPrice = discountPrice; }
 
     public JButton getPurchase(){return purchaseButton;}
     public JButton getDescButton(){return descButton;}
