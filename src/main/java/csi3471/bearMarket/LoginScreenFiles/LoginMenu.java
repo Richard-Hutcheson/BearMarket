@@ -2,6 +2,7 @@
 
 package csi3471.bearMarket.LoginScreenFiles;
 
+import csi3471.bearMarket.AccountFiles.Account;
 import csi3471.bearMarket.AccountFiles.CreateAccount;
 import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.MainScreenFiles.MainScreen;
@@ -159,7 +160,9 @@ public class LoginMenu extends JPanel implements ActionListener{
 
 			//if login is valid, then create the main page and dispose of the login screen
 	        if(checker.get()) {
-				MainScreen.createAndShowGUI();
+				String thePassword = new String(passwordField.getPassword());
+	        	Account theAccount = new Account(usernameField.getText(),thePassword);
+				MainScreen.createAndShowGUI(theAccount);
 				loginScreen.dispose();
 			}else{
 				//display an error invalid login message

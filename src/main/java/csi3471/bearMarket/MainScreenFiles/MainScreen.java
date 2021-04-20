@@ -1,5 +1,6 @@
 package csi3471.bearMarket.MainScreenFiles;
 
+import csi3471.bearMarket.AccountFiles.Account;
 import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.CurrentlySellingWindow;
 import csi3471.bearMarket.PurchaseHistoryPanel;
@@ -32,6 +33,8 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
     protected static JScrollPane scrollPane;
     private TableRowSorter sorter;
     private JButton fItem1, fItem2, fItem3;
+
+    static Account currentAccount = null;
     FeaturedItemsDialog featuredItemsDialog;
     MainScreen(){
         super(new BorderLayout());
@@ -180,7 +183,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
             CurrentlySellingWindow.createAndShowCurrentlySelling();
         }
         if (e.getSource() == editAccount){
-            new EditAccount();
+            new EditAccount(currentAccount);
         }
         if (e.getSource() == purchaseHistory){
             PurchaseHistoryPanel.createAndShowPurchaseHistory();
@@ -201,7 +204,12 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         }
 
     }
-    public static void createAndShowGUI(){
+    public static void createAndShowGUI(Account account){
+
+        //the account that's logged in currently
+        currentAccount = account;
+
+
         frame = new JFrame("BearMarket: Main Screen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(1280, 720));

@@ -188,6 +188,20 @@ public class CreateAccount implements ActionListener {
         gbc.gridy = 9;
         allInformation.add(cardZipField,gbc);
 
+
+
+
+        JCheckBox tos = new JCheckBox("I agree to the Terms and Conditions");
+        gbc.gridx = 1;
+        gbc.gridy = 10;
+        allInformation.add(tos,gbc);
+
+
+
+
+
+
+
         //Finally, add all of the information above to the frame.
         createFrame.add(allInformation);
 
