@@ -38,18 +38,18 @@ public class LoginButton {
                     if(split[1].equals(thePassword)){
                         //then it is a valid login
 
-                        System.out.println("valid login");
+                        //System.out.println("valid login");
                         checker.set(true);
                     }else{
                         //invalid password
                         checker.set(false);
-                        System.out.println("valid username, invalid password");
+                        //System.out.println("valid username, invalid password");
                     }
                 }
             }
 
             if(!found){
-                System.out.println("Invalid username");
+                //System.out.println("Invalid username");
                 checker.set(false);
             }
 

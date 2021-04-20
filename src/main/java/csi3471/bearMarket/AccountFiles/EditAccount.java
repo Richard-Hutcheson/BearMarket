@@ -47,19 +47,6 @@ public class EditAccount implements ActionListener {
 
 
             //username,password,firstname,lastname,address,state,zip,card number, cvv, card zip
-
-            //Output for testing purposes to ensure account info has been gathered successfully.
-            //System.out.println("Username: " + split[0]);
-            //System.out.println("Password: " + split[1]);
-            //System.out.println("FirstName: " + split[2]);
-            //System.out.println("LastName: " + split[3]);
-            //System.out.println("Address: " + split[4]);
-            //System.out.println("State: " + split[5]);
-            //System.out.println("Zip: " + split[6]);
-            //System.out.println("CardNumber: " + split[7]);
-            //System.out.println("cvv: " + split[8]);
-            //System.out.println("card zip: " + split[9]);
-
             currentAccount.setUsername(split[0]);
             currentAccount.setPassword(split[1]);
             currentAccount.setFirstName(split[2]);
@@ -77,14 +64,7 @@ public class EditAccount implements ActionListener {
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
-
-
-
-
-
-
         //**************************************************************************
-
         //Create a new frame that will ask the user to input information
         createFrame = new JFrame();
         createFrame.setPreferredSize(new Dimension(700,600));
@@ -173,7 +153,6 @@ public class EditAccount implements ActionListener {
         gbc.gridy = 4;
         allInformation.add(stateField,gbc);
 
-
         //Initialize the Zip:
         zipLabel = new JLabel("Zipcode:");
         zipField = new JFormattedTextField("");
@@ -187,7 +166,6 @@ public class EditAccount implements ActionListener {
         gbc.gridy = 5;
         allInformation.add(zipField,gbc);
 
-
         //Initialize the Credit/Debit Card:
         cardNumberLabel = new JLabel("Card Number:");
         cardNumberField = new JFormattedTextField("");
@@ -200,7 +178,6 @@ public class EditAccount implements ActionListener {
         gbc.gridx = 1;
         gbc.gridy = 6;
         allInformation.add(cardNumberField,gbc);
-
 
         //Initialize the CVV
         cvvLabel = new JLabel("CVV:");
@@ -258,8 +235,6 @@ public class EditAccount implements ActionListener {
         }else if(e.getSource() == saveButton){
             //Save information to an account, then update the
             //account information to the database.
-
-
             Boolean emptyString = false;
 
             Component[] components = allInformation.getComponents();
@@ -397,19 +372,6 @@ public class EditAccount implements ActionListener {
                 }
 
                 //Format: username,password,firstName,lastName,address,state,zip,cardNumber,cvv,cardZip
-                /*
-                String s1 = String.valueOf(updatedAccount.getUsername().getBytes(StandardCharsets.UTF_8));
-                String s2 = String.valueOf(updatedAccount.getPassword().getBytes(StandardCharsets.UTF_8));
-                String s3 = String.valueOf(updatedAccount.getFirstName().getBytes(StandardCharsets.UTF_8));
-                String s4 = String.valueOf(updatedAccount.getLastName().getBytes(StandardCharsets.UTF_8));
-                String s5 = String.valueOf(updatedAccount.getShippingAddress().getBytes(StandardCharsets.UTF_8));
-                String s6 = String.valueOf(updatedAccount.getState().getBytes(StandardCharsets.UTF_8));
-                String s7 = String.valueOf(updatedAccount.getZip().getBytes(StandardCharsets.UTF_8));
-                String s8 = String.valueOf(updatedAccount.getCardNumber().getBytes(StandardCharsets.UTF_8));
-                String s9 = String.valueOf(updatedAccount.getCvv().getBytes(StandardCharsets.UTF_8));
-                String s10 = String.valueOf(updatedAccount.getCardZip().getBytes(StandardCharsets.UTF_8));
-
-                 */
                 String s1 = updatedAccount.getUsername();
                 String s2 = updatedAccount.getPassword();
                 String s3 = updatedAccount.getFirstName();
@@ -423,19 +385,15 @@ public class EditAccount implements ActionListener {
                 String comma = ",";
 
 
-                System.out.println(s1);
+                //System.out.println(s1);
                 String total = s1+comma+s2+comma+s3+comma+s4+comma+s5+comma+s6+comma+s7+comma+s8+comma+s9+comma+s10;
-                System.out.println("line: " + total);
-
-
+                //System.out.println("line: " + total);
                 lines.set(0, total);
                 try {
                     Files.write(actualFile.toPath(), lines);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-
-
 
                 String otherLine = currentAccount.getUsername() + comma + currentAccount.getPassword();
                 File accountListFile = new File("src/main/java/csi3471/bearMarket/AccountFiles/accountList.csv");
@@ -455,25 +413,19 @@ public class EditAccount implements ActionListener {
                     }
                     counter++;
                 }
-
-
                 String theNewLine = updatedAccount.getUsername() + comma + updatedAccount.getPassword();
-                System.out.println("LINE IN ACCOUNT INFO: " + officialLine);
-                System.out.println(otherLine);
+                //System.out.println("LINE IN ACCOUNT INFO: " + officialLine);
+                //System.out.println(otherLine);
                 accountListInfo.set(officialLine,theNewLine);
                 try {
                     Files.write(accountListFile.toPath(), accountListInfo);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-
-
-
                 //lastly, close the frame and show a dialog that changes are saved
                 JOptionPane.showMessageDialog(null,"Changes Saved!");
                 createFrame.dispose();
             }
-
         }
     }
     //Fills in the account info associated with the current account
