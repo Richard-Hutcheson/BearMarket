@@ -1,6 +1,7 @@
 package csi3471.bearMarket.ProductFiles;
 
 
+import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.ProductReview.Review;
 import csi3471.bearMarket.ProductReview.ReviewDialog;
 
@@ -43,6 +44,7 @@ public class Product implements ActionListener {
      * String array should contain the order of the line in the CSV.
      */
     public Product(String[] a) {
+        ProgLogger.LOGGER.info("Product constructor called, parsing data and assigning attributes");
         productName = a[0];
         category = a[1];
         description = a[2];

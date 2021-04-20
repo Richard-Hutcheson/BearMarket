@@ -3,6 +3,7 @@ package csi3471.bearMarket.MainScreenFiles;
 import csi3471.bearMarket.AccountFiles.Account;
 import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.CurrentlySellingWindow;
+import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.PurchaseHistoryPanel;
 import csi3471.bearMarket.UserMarketPosting.CreateMarketPostWindow;
 import javax.swing.*;
@@ -38,7 +39,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
     FeaturedItemsDialog featuredItemsDialog;
     MainScreen(){
         super(new BorderLayout());
-
+        ProgLogger.LOGGER.info("Starting main screen dialog");
 
         //MENUBAR
         JMenuBar menuBar = new JMenuBar();
@@ -56,11 +57,10 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         createPosting.addActionListener(this);
         createPostingItem = new JMenuItem("create a new market post");
         createPosting.addActionListener(this);
-
         createPostingItem.addActionListener(this);
 
 
-        //SEPARATORS
+        //MENU BAR SEPARATORS
         JMenu space1 = new JMenu("    ");
         space1.setEnabled(false);
         JMenu space2 = new JMenu("    ");
@@ -78,6 +78,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         menuBar.add(exit);
         menuBar.setBackground(LIGHT_ORANGE);
         frame.setJMenuBar(menuBar);
+        ProgLogger.LOGGER.info("Created Menu Bar");
 
 
         //CENTER PANEL and TOP-CENTER PANEL
@@ -95,7 +96,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         ProductTable.createTable(); //set up table and scroll pane
         tablePanel.add(scrollPane);
         tablePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "PRODUCTS", TitledBorder.CENTER, TitledBorder.TOP));
-        //tablePanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 30, 50));
+        ProgLogger.LOGGER.info("Created Product Table");
 
         //FEATURED ITEMS
         featuredItemsDialog = new FeaturedItemsDialog(); //RANDOMLY CREATES THREE ITEMS
@@ -124,6 +125,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         topCenterPanel.add(featuredItemsPanel);
         centerPanel.add(topCenterPanel);
         centerPanel.add(tablePanel);
+        ProgLogger.LOGGER.info("Created Featured Items Section");
 
         //PRODUCT FILTER
         JPanel filterPanel = new JPanel();
@@ -147,6 +149,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
                 search(filterTF.getText());
             }
             public void search(String str) {
+                ProgLogger.LOGGER.info("Filtering: \"" + str + "\"");
                 if (str.length() == 0) {
                     sorter.setRowFilter(null);
                 } else {
@@ -158,6 +161,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         filterPanel.add(filterTF);
         filterPanel.setBorder(new LineBorder(LIGHT_ORANGE, 3, true));
         centerPanel.add(filterPanel);
+        ProgLogger.LOGGER.info("Created Filter Section");
 
 
         //ADD CENTER PANEL
@@ -173,6 +177,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         add(eastLabel, BorderLayout.EAST);
         Border border = new LineBorder(LIGHT_ORANGE, 3, true);
         setBorder(border);
+        ProgLogger.LOGGER.info("Main Screen Dialog Completed");
 
     }
 
@@ -180,36 +185,40 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == currentlySelling){
+            ProgLogger.LOGGER.info("Currently Selling Dialog Called");
             CurrentlySellingWindow.createAndShowCurrentlySelling();
         }
         if (e.getSource() == editAccount){
+            ProgLogger.LOGGER.info("Edit Account Dialog Called");
             new EditAccount(currentAccount);
         }
         if (e.getSource() == purchaseHistory){
+            ProgLogger.LOGGER.info("Purchase History Dialog Called");
             PurchaseHistoryPanel.createAndShowPurchaseHistory();
         }
-
         if (e.getSource() == createPostingItem){
+            ProgLogger.LOGGER.info("Create MarketPost Dialog Called");
             CreateMarketPostWindow.createMarketPost();
         }
         if (e.getSource() == fItem1 ){
+            ProgLogger.LOGGER.info("Dialog for Featured Item One Called");
             featuredItemsDialog.createFIDialog(1);
         }
         if (e.getSource() == fItem2){
+            ProgLogger.LOGGER.info("Dialog for Featured Item Two Called");
             featuredItemsDialog.createFIDialog(2);
         }
         if (e.getSource() == fItem3){
+            ProgLogger.LOGGER.info("Dialog for Featured Item Three Called");
             featuredItemsDialog.createFIDialog(3);
 
         }
 
     }
     public static void createAndShowGUI(Account account){
-
+        ProgLogger.LOGGER.info("Main Screen dialog called and Account obj passed through");
         //the account that's logged in currently
         currentAccount = account;
-
-
         frame = new JFrame("BearMarket: Main Screen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(1280, 720));
@@ -218,14 +227,19 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        ProgLogger.LOGGER.info("Main Screen GUI Displayed");
     }
 
     @Override
     public void menuSelected(MenuEvent e) {
         if (e.getSource() == exit){
+            ProgLogger.LOGGER.info("Exit Button clicked");
             int dialogResult = JOptionPane.showConfirmDialog(null, "Exit Application?", "Exit", JOptionPane.YES_NO_OPTION);
             //user selects 'yes' option to exit application
-            if (dialogResult == JOptionPane.YES_OPTION){ frame.dispose();}
+            if (dialogResult == JOptionPane.YES_OPTION){
+                ProgLogger.LOGGER.info("User Confirmed Exit Action");
+                frame.dispose();
+            }
         }
     }
 

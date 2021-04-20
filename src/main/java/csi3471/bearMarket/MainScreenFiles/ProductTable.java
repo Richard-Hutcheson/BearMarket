@@ -1,6 +1,7 @@
 package csi3471.bearMarket.MainScreenFiles;
 
 import com.sun.tools.javac.Main;
+import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.ProductFiles.Product;
 import csi3471.bearMarket.ProductFiles.ReadProductFile;
 
@@ -23,6 +24,7 @@ public class ProductTable extends MainScreen{
     public static Vector<Product> productVector = new Vector<>();
     private static TableCellRenderer tableRenderer;
     public static void createTable(){
+        ProgLogger.LOGGER.info("Creating Product Table Function Called");
 
         tableModel = new DefaultTableModel(){
             final private String[] columnNames = {"Product Name", "Category", "Quantity", "Rating (x/10)", "Price ($)", "Description", "Purchase", "Reviews"};
@@ -79,14 +81,14 @@ public class ProductTable extends MainScreen{
         table.setAutoCreateRowSorter(true);
         table.getColumnModel().getColumn(0).setPreferredWidth(200);
         table.getColumnModel().getColumn(5).setPreferredWidth(85);
+        ProgLogger.LOGGER.info("Table and Table Model created");
 
-        //table.setGridColor(Color.ORANGE);
-
+        ProgLogger.LOGGER.info("Reading in Product file");
         //read in product file
         final String file = "src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv";
         ReadProductFile.readFile(file, productVector, productMap);
+        ProgLogger.LOGGER.info("Reading in Product Review File");
         ReadReviews.readInReviews(productMap);
-
 
         scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(900, 400));

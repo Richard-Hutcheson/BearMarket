@@ -1,5 +1,7 @@
 package csi3471.bearMarket.ProductReview;
 
+import csi3471.bearMarket.Logging.ProgLogger;
+
 import java.util.Objects;
 
 public class Review {
@@ -7,6 +9,7 @@ public class Review {
     private String username, description, rating;
 
     public Review(String username, String rating, String desc){
+        ProgLogger.LOGGER.info("Review constructor called and assigning parsed data into attributes");
         this.username = username;
         this.rating = rating;
         this.description = desc;

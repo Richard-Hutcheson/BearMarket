@@ -1,5 +1,6 @@
 package csi3471.bearMarket.ProductReview;
 
+import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.ProductFiles.Product;
 
 import java.io.*;
@@ -9,8 +10,10 @@ import java.util.Map;
 public class ReadReviews {
 
     public static void readInReviews(Map<Integer, Product> productMap){
+        ProgLogger.LOGGER.info("Read Reviews Function Called");
         final String REVIEW_FILE = "src/main/java/csi3471/bearMarket/ProductReview/productReviews.txt";
         try {
+            ProgLogger.LOGGER.info("Trying to read in file");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(REVIEW_FILE), StandardCharsets.UTF_8));
             String line = "";
             //each line is a different product
@@ -20,6 +23,7 @@ public class ReadReviews {
                 //loop through review details for product
                 int t = 1;
                 String tempUsername = "", tempRating = "", tempDesc = "";
+                ProgLogger.LOGGER.info("Parsing Review");
                 for (int i = 1; i < parsedLine.length; ++i){
 
                     switch (t){
@@ -38,11 +42,16 @@ public class ReadReviews {
                             t = 1;
                             break;
                         default:
+                            ProgLogger.LOGGER.warning("switch value in ReadReviews on wrong value. this can result in improper parsing of reviews");
                             System.out.println("Error: switch value in ReadReviews ");
                     }
                 }
             }
+            bufferedReader.close();
+            ProgLogger.LOGGER.info("Finished Reading Review file");
+
         } catch (IOException e) {
+            ProgLogger.LOGGER.severe("IO Exception, error reading in review file");
             e.printStackTrace();
         }
 
