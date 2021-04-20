@@ -22,7 +22,7 @@ public class CreateAccount implements ActionListener {
     JLabel stateLabel, zipLabel, cardNumberLabel, cvvLabel, cardZipLabel;
     JLabel usernameLabel, passwordLabel;
     JButton saveButton, backButton;
-
+    JCheckBox tos;
     JFormattedTextField firstNameField, lastNameField, shipAddressField;
     JFormattedTextField stateField, zipField, cardNumberField, cvvField, cardZipField;
     JFormattedTextField usernameField;
@@ -192,14 +192,20 @@ public class CreateAccount implements ActionListener {
 
 
 
-
-        JCheckBox tos = new JCheckBox("I agree to the Terms and Conditions");
+        saveButton = new JButton("Create");
+        saveButton.setPreferredSize(new Dimension(100,25));
+        saveButton.addActionListener(this);
+        saveButton.setEnabled(false);
+        tos = new JCheckBox("I agree to the Terms and Conditions");
         tos.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
                     TermsOfServiceDialog x = new TermsOfServiceDialog();
                     x.createDialog();
+                    saveButton.setEnabled(true);
+                }else{
+                    saveButton.setEnabled(false);
                 }
             }
         });
@@ -225,9 +231,6 @@ public class CreateAccount implements ActionListener {
         backButton.setPreferredSize(new Dimension(100,25));
         backButton.addActionListener(this);
         //create saveButton
-        saveButton = new JButton("Create");
-        saveButton.setPreferredSize(new Dimension(100,25));
-        saveButton.addActionListener(this);
 
         //add both buttons to "bottom section" panel
         bottomSection.add(backButton);
@@ -393,6 +396,8 @@ public class CreateAccount implements ActionListener {
                     printEmptyError(9,informationEmptyError10);
                     emptyString = true;
                 }else{ removeEmptyError(9,informationEmptyError10); }
+
+
 
 
 
