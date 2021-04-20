@@ -138,7 +138,7 @@ public class EditAccount implements ActionListener {
         //passwordField.setValue(currentAccount.getPassword());
         passwordField.setColumns(15);
         //temporarily turn this off
-        passwordField.setEditable(false);
+        //passwordField.setEditable(false);
         passwordLabel.setLabelFor(passwordField);
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -434,6 +434,40 @@ public class EditAccount implements ActionListener {
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
+
+
+
+                String otherLine = currentAccount.getUsername() + comma + currentAccount.getPassword();
+                File accountListFile = new File("src/main/java/csi3471/bearMarket/AccountFiles/accountList.csv");
+                List<String> accountListInfo = null;
+                try {
+                    accountListInfo = Files.readAllLines(accountListFile.toPath());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+
+                int counter = 0;
+                int officialLine = 0;
+                for(String s : accountListInfo){
+                    if(s.equals(otherLine)){
+                        officialLine = counter;
+                    }
+                    counter++;
+                }
+
+
+                String theNewLine = updatedAccount.getUsername() + comma + updatedAccount.getPassword();
+                System.out.println("LINE IN ACCOUNT INFO: " + officialLine);
+                System.out.println(otherLine);
+                accountListInfo.set(officialLine,theNewLine);
+                try {
+                    Files.write(accountListFile.toPath(), accountListInfo);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+
 
                 //lastly, close the frame and show a dialog that changes are saved
                 JOptionPane.showMessageDialog(null,"Changes Saved!");
