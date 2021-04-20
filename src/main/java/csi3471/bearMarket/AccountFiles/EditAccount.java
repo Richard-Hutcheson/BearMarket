@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.List;
 
 public class EditAccount implements ActionListener {
 
@@ -18,7 +20,7 @@ public class EditAccount implements ActionListener {
     GridBagConstraints gbc;
     JFormattedTextField firstNameField, lastNameField, shipAddressField;
     JFormattedTextField stateField, zipField, cardNumberField, cvvField, cardZipField;
-    JFormattedTextField usernameField, passwordField;
+    JPasswordField passwordField;
     JPanel allInformation;
     JLabel informationEmptyError2,informationEmptyError3,informationEmptyError4,informationEmptyError5,informationEmptyError6;
     JLabel informationEmptyError7,informationEmptyError8,informationEmptyError9,informationEmptyError10,informationEmptyError1;
@@ -69,6 +71,7 @@ public class EditAccount implements ActionListener {
             currentAccount.setCvv(split[8]);
             currentAccount.setCardZip(split[9]);
 
+            userFileReader.close();
         } catch (FileNotFoundException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
         } catch (IOException ioException) {
@@ -107,7 +110,7 @@ public class EditAccount implements ActionListener {
         //***First/Last Name Initialization
         firstNameLabel = new JLabel("First Name:");
         firstNameField = new JFormattedTextField("");
-        firstNameField.setValue("");
+        firstNameField.setValue(currentAccount.getFirstName());
         firstNameField.setColumns(15);
         firstNameLabel.setLabelFor(firstNameField);
         gbc.gridx = 0;
@@ -119,7 +122,7 @@ public class EditAccount implements ActionListener {
 
         lastNameLabel = new JLabel("Last Name:");
         lastNameField = new JFormattedTextField("");
-        lastNameField.setValue("");
+        lastNameField.setValue(currentAccount.getLastName());
         lastNameField.setColumns(15);
         lastNameLabel.setLabelFor(lastNameField);
         gbc.gridx = 0;
@@ -131,9 +134,11 @@ public class EditAccount implements ActionListener {
 
         //Initialize the password:
         passwordLabel = new JLabel("Password:");
-        passwordField = new JFormattedTextField("");
-        passwordField.setValue("");
+        passwordField = new JPasswordField(currentAccount.getPassword());
+        //passwordField.setValue(currentAccount.getPassword());
         passwordField.setColumns(15);
+        //temporarily turn this off
+        passwordField.setEditable(false);
         passwordLabel.setLabelFor(passwordField);
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -145,7 +150,7 @@ public class EditAccount implements ActionListener {
         //Initialize the shipping address:
         shipAddressLabel = new JLabel("Shipping Address:");
         shipAddressField = new JFormattedTextField("");
-        shipAddressField.setValue("");
+        shipAddressField.setValue(currentAccount.getShippingAddress());
         shipAddressField.setColumns(15);
         shipAddressLabel.setLabelFor(shipAddressField);
         gbc.gridx = 0;
@@ -158,7 +163,7 @@ public class EditAccount implements ActionListener {
         //Initialize the State:
         stateLabel = new JLabel("State:");
         stateField = new JFormattedTextField("");
-        stateField.setValue("");
+        stateField.setValue(currentAccount.getState());
         stateField.setColumns(15);
         stateLabel.setLabelFor(stateField);
         gbc.gridx = 0;
@@ -172,7 +177,7 @@ public class EditAccount implements ActionListener {
         //Initialize the Zip:
         zipLabel = new JLabel("Zipcode:");
         zipField = new JFormattedTextField("");
-        zipField.setValue("");
+        zipField.setValue(currentAccount.getZip());
         zipField.setColumns(15);
         zipLabel.setLabelFor(zipField);
         gbc.gridx = 0;
@@ -186,7 +191,7 @@ public class EditAccount implements ActionListener {
         //Initialize the Credit/Debit Card:
         cardNumberLabel = new JLabel("Card Number:");
         cardNumberField = new JFormattedTextField("");
-        cardNumberField.setValue("");
+        cardNumberField.setValue(currentAccount.getCardNumber());
         cardNumberField.setColumns(15);
         cardNumberLabel.setLabelFor(cardNumberField);
         gbc.gridx = 0;
@@ -200,7 +205,7 @@ public class EditAccount implements ActionListener {
         //Initialize the CVV
         cvvLabel = new JLabel("CVV:");
         cvvField = new JFormattedTextField("");
-        cvvField.setValue("");
+        cvvField.setValue(currentAccount.getCvv());
         cvvField.setColumns(15);
         cvvLabel.setLabelFor(cvvField);
         gbc.gridx = 0;
@@ -213,7 +218,7 @@ public class EditAccount implements ActionListener {
         //Initialize the Card Zip
         cardZipLabel = new JLabel("Card Zipcode:");
         cardZipField = new JFormattedTextField("");
-        cardZipField.setValue("");
+        cardZipField.setValue(currentAccount.getCardZip());
         cardZipField.setColumns(15);
         cardZipLabel.setLabelFor(cardZipField);
         gbc.gridx = 0;
@@ -234,7 +239,7 @@ public class EditAccount implements ActionListener {
         backButton.setPreferredSize(new Dimension(100,25));
         backButton.addActionListener(this);
         //create saveButton
-        saveButton = new JButton("Edit");
+        saveButton = new JButton("Save");
         saveButton.setPreferredSize(new Dimension(100,25));
         saveButton.addActionListener(this);
 
@@ -351,11 +356,8 @@ public class EditAccount implements ActionListener {
             }else{ removeEmptyError(8,informationEmptyError10); }
 
 
-            //If all information has been filled in, then update the folder
+            //If all information has been filled in, then update the file with the changes
             if(!emptyString) {
-
-
-
 
                 //first argument in parameter is just the current username logged in
                 Account updatedAccount = new Account(currentAccount.username, (String) passwordField.getText(),
@@ -363,19 +365,80 @@ public class EditAccount implements ActionListener {
                         (String) stateField.getText(), (String) zipField.getText(), (String) cardNumberField.getText(),
                         (String) cvvField.getText(), (String) cardZipField.getText());
 
+                //Output testing to ensure the updatedAccount is working
+                //System.out.println("****************");
+                //System.out.println("Username: " + updatedAccount.getUsername());
+                //System.out.println("Password: " + updatedAccount.getPassword());
+                //System.out.println("FirstName: " + updatedAccount.getFirstName());
+                //System.out.println("LastName: " + updatedAccount.getLastName());
+                //System.out.println("Address: " + updatedAccount.getShippingAddress());
+                //System.out.println("State: " + updatedAccount.getState());
+                //System.out.println("Zip: " + updatedAccount.getZip());
+                //System.out.println("CardNumber: " + updatedAccount.getCardNumber());
+                //System.out.println("cvv: " + updatedAccount.getCvv());
+                //System.out.println("card zip: " + updatedAccount.getCardZip());
+
+                //System.out.println("User logged in: " + currentAccount.getUsername());
+                //System.out.println("Password of user: " + currentAccount.getPassword());
 
 
+                //Format: username,password,firstName,lastName,address,state,zip,cardNumber,cvv,cardZip
+                //Create file and directory where the account info will be written to
+                String fileName = updatedAccount.username+".csv";
+                File directory = new File("users");
+                File actualFile = new File(directory, fileName);
 
 
-                System.out.println("User logged in: " + currentAccount.getUsername());
-                System.out.println("Password of user: " + currentAccount.getPassword());
+                List<String> lines = null;
+                try {
+                    lines = Files.readAllLines(actualFile.toPath());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
 
+                //Format: username,password,firstName,lastName,address,state,zip,cardNumber,cvv,cardZip
+                /*
+                String s1 = String.valueOf(updatedAccount.getUsername().getBytes(StandardCharsets.UTF_8));
+                String s2 = String.valueOf(updatedAccount.getPassword().getBytes(StandardCharsets.UTF_8));
+                String s3 = String.valueOf(updatedAccount.getFirstName().getBytes(StandardCharsets.UTF_8));
+                String s4 = String.valueOf(updatedAccount.getLastName().getBytes(StandardCharsets.UTF_8));
+                String s5 = String.valueOf(updatedAccount.getShippingAddress().getBytes(StandardCharsets.UTF_8));
+                String s6 = String.valueOf(updatedAccount.getState().getBytes(StandardCharsets.UTF_8));
+                String s7 = String.valueOf(updatedAccount.getZip().getBytes(StandardCharsets.UTF_8));
+                String s8 = String.valueOf(updatedAccount.getCardNumber().getBytes(StandardCharsets.UTF_8));
+                String s9 = String.valueOf(updatedAccount.getCvv().getBytes(StandardCharsets.UTF_8));
+                String s10 = String.valueOf(updatedAccount.getCardZip().getBytes(StandardCharsets.UTF_8));
+
+                 */
+                String s1 = updatedAccount.getUsername();
+                String s2 = updatedAccount.getPassword();
+                String s3 = updatedAccount.getFirstName();
+                String s4 = updatedAccount.getLastName();
+                String s5 = updatedAccount.getShippingAddress();
+                String s6 = updatedAccount.getState();
+                String s7 = updatedAccount.getZip();
+                String s8 = updatedAccount.getCardNumber();
+                String s9 = updatedAccount.getCvv();
+                String s10 = updatedAccount.getCardZip();
+                String comma = ",";
+
+
+                System.out.println(s1);
+                String total = s1+comma+s2+comma+s3+comma+s4+comma+s5+comma+s6+comma+s7+comma+s8+comma+s9+comma+s10;
+                System.out.println("line: " + total);
+
+
+                lines.set(0, total);
+                try {
+                    Files.write(actualFile.toPath(), lines);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+                //lastly, close the frame and show a dialog that changes are saved
+                JOptionPane.showMessageDialog(null,"Changes Saved!");
+                createFrame.dispose();
             }
-
-
-
-
-
 
         }
     }
