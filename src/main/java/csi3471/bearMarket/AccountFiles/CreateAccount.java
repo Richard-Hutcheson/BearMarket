@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -192,6 +194,16 @@ public class CreateAccount implements ActionListener {
 
 
         JCheckBox tos = new JCheckBox("I agree to the Terms and Conditions");
+        tos.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED){
+                    TermsOfServiceDialog x = new TermsOfServiceDialog();
+                    x.createDialog();
+                }
+            }
+        });
+
         gbc.gridx = 1;
         gbc.gridy = 10;
         allInformation.add(tos,gbc);
