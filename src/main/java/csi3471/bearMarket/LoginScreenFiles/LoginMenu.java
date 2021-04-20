@@ -9,6 +9,7 @@ import csi3471.bearMarket.ProductFiles.ReadProductFile;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.*;
 
@@ -21,6 +22,10 @@ public class LoginMenu extends JPanel implements ActionListener{
 	JFormattedTextField usernameField;
 	JPasswordField passwordField;
 	final int BUTTON_WIDTH = 200, BUTTON_HEIGHT = 30;
+	JPanel upPanel;
+	JLabel warningMessage = null;
+	GridBagConstraints gbc;
+
 
 	//Builds the login form
 	public LoginMenu() {
@@ -60,8 +65,8 @@ public class LoginMenu extends JPanel implements ActionListener{
 	    passwordLabel.setLabelFor(passwordField);
 
 		//create a grid panel for username and pass word fields and labels
-	    JPanel upPanel = new JPanel(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
+	    upPanel = new JPanel(new GridBagLayout());
+		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -140,17 +145,53 @@ public class LoginMenu extends JPanel implements ActionListener{
 
 	    if(e.getSource() == loginButton) {
 
-	    	Boolean checker = false;
+
+			AtomicBoolean checker = new AtomicBoolean(false);
 	    	//Have an if condition that says if the account is valid
 			//then MainScreen.createAndShowGUI, else do nothing OR notify
 			//user that the login is invalid
 
-			LoginButton verify = new LoginButton(checker);
 
-	        //if(checker) {
+
+
+			LoginButton verify = new LoginButton(checker, usernameField.getText(), passwordField.getPassword());
+
+
+			//if login is valid, then create the main page and dispose of the login screen
+	        if(checker.get()) {
 				MainScreen.createAndShowGUI();
 				loginScreen.dispose();
-			//}
+			}else{
+				//display an error invalid login message
+
+
+				Boolean hasWarning = false;
+
+				for(Component c : upPanel.getComponents()){
+					if(c == warningMessage){
+						hasWarning = true;
+						break;
+					}
+				}
+
+				if(hasWarning) {
+					upPanel.remove(warningMessage);
+				}
+
+				if(warningMessage == null){
+					warningMessage = new JLabel("Username and/or Password is invalid");
+					warningMessage.setForeground(Color.RED);
+				}
+
+
+				gbc.gridx = 1;
+				gbc.gridy = 3;
+				upPanel.add(warningMessage, gbc);
+				upPanel.revalidate();
+				upPanel.repaint();
+
+	        	//add(new JLabel());
+			}
 	    }else if(e.getSource() == exitButton){
 			loginScreen.dispose();
 		}else if(e.getSource() == createButton){
