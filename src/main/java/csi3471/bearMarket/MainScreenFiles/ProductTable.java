@@ -93,5 +93,12 @@ public class ProductTable extends MainScreen{
         scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(900, 400));
     }
+
+    public static void addItem(Product add) {
+        productVector.add(add);
+        productMap.put(add.hashCode(), add);
+
+        tableModel.addRow(add.returnObjects());
+    }
 }
 

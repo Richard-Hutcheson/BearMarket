@@ -35,7 +35,7 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
     private TableRowSorter sorter;
     private JButton fItem1, fItem2, fItem3;
 
-    static Account currentAccount = null;
+    public static Account currentAccount = null;
     FeaturedItemsDialog featuredItemsDialog;
     MainScreen(){
         super(new BorderLayout());
