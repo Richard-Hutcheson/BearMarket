@@ -9,8 +9,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Scanner;
+import java.util.zip.CheckedOutputStream;
 
 import csi3471.bearMarket.Logging.*;
 import csi3471.bearMarket.MainScreenFiles.*;
@@ -27,7 +29,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
     protected JButton confirmChanges, cancelChanges;
     private File userFile;
     private FileOutputStream writePostStream;
-    private Product newProduct;
+    //private Product newProduct;
     private GridBagConstraints c;
 
     public static void createMarketPost() {
@@ -144,21 +146,34 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                 }
 
                 if (!hasEmptyFields) {
-                    newProduct = new Product();
-                    newProduct.setProductName(getStringArray()[0]);
-                    newProduct.setCategory(getStringArray()[1]);
-                    newProduct.setDescription(getStringArray()[2]);
-                    newProduct.setQuantity(Integer.parseInt(getStringArray()[3]));
-                    newProduct.setPrice(Double.parseDouble(getStringArray()[4]));
-                    newProduct.setID(newProduct.hashCode());
+                    Product tempProduct = ProductTable.productVector.get(ProductTable.productVector.size() - 1);
+                    String tempArr[] = new String[7];
+                    tempArr[0] = userInputArray[0]; //product name
+                    tempArr[1] = userInputArray[1]; //category
+                    tempArr[2] = userInputArray[2]; //desc
+                    tempArr[3] = userInputArray[3]; //quantity
+                    tempArr[4] = "5"; //no rating exists for it yet
+                    tempArr[5] = userInputArray[4]; //price
+                    tempArr[6] = String.valueOf(tempProduct.getID() + 1); //get greates id, and increment it
+                    Product newProduct = new Product(tempArr);
+                    //newProduct.setID(999);
+//                    newProduct.setProductName(getStringArray()[0]);
+//                    newProduct.setCategory(getStringArray()[1]);
+//                    newProduct.setDescription(getStringArray()[2]);
+//                    newProduct.setQuantity(Integer.parseInt(getStringArray()[3]));
+//                    newProduct.setPrice(Double.parseDouble(getStringArray()[4]));
+//                    newProduct.setID(newProduct.hashCode());
 
-                    String ID = Integer.toString(newProduct.getID());
-                    System.out.println(ID);
-
-                    writePostStream.write(ID.getBytes());
+                    //String ID = Integer.toString(newProduct.getID());
+                    //System.out.println(ID);
+                    System.out.println(newProduct.toString());
+                    writePostStream.write(Integer.toString(newProduct.getID()).getBytes());
+                    //writePostStream.write(ID.getBytes());
                     writePostStream.write(new byte[]{','});
 
                     ProductTable.addItem(newProduct);
+                }else{
+                    System.out.println("error, has empty fields");
                 }
 
 

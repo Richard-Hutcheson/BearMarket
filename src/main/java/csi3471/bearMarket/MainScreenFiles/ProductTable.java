@@ -95,10 +95,11 @@ public class ProductTable extends MainScreen{
     }
 
     public static void addItem(Product add) {
-        productVector.add(add);
-        productMap.put(add.hashCode(), add);
+        ProgLogger.LOGGER.info("Attempting to add user's product to table");
 
-        tableModel.addRow(add.returnObjects());
+        productVector.add(add);
+        //productMap.put(add.hashCode(), add);
+        //tableModel.addRow(add.returnObjects());
     }
 }
 

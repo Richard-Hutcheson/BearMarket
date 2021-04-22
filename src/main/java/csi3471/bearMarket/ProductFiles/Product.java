@@ -1,6 +1,7 @@
 package csi3471.bearMarket.ProductFiles;
 
 
+import com.sun.source.tree.CompilationUnitTree;
 import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.ProductReview.Review;
 import csi3471.bearMarket.ProductReview.ReviewDialog;
@@ -35,8 +36,13 @@ public class Product implements ActionListener {
         ID = 0;
         rating = 0.0;
         price = 0.0;
-
         discountPrice = 0.0;
+        descButton = new JButton("Description");
+        descButton.addActionListener(this);
+        purchaseButton = new JButton("Purchase");
+        purchaseButton.addActionListener(this);
+        reviewsButton = new JButton("Reviews");
+        reviewsButton.addActionListener(this);
 
     }
 
@@ -50,9 +56,15 @@ public class Product implements ActionListener {
         description = a[2];
         quantity = Integer.parseInt(a[3]);
         rating = Double.parseDouble(a[4]);
-        String tempPrice= a[5].substring(1, a[5].length() - 1); //remove dollar sign
-        tempPrice = tempPrice.replace(".", ""); //remove '.'
-        tempPrice = tempPrice.replace(",", ""); //remove ','
+        String tempPrice;
+        //dollar sign at front
+        if (a[5].charAt(0) ==  '$'){
+            tempPrice= a[5].substring(1, a[5].length() - 1); //remove dollar sign
+            tempPrice = tempPrice.replace(".", ""); //remove '.'
+            tempPrice = tempPrice.replace(",", ""); //remove ','
+        }else{
+            tempPrice = a[5];
+        }
         price = Double.parseDouble(tempPrice);
         ID = Integer.parseInt(a[6]);
         descButton = new JButton("Description");
@@ -63,13 +75,9 @@ public class Product implements ActionListener {
         reviewsButton.addActionListener(this);
     }
 
-
-
     public Object[] returnObjects(){
         return new Object[] {productName, category, quantity, rating, price, descButton, purchaseButton, reviewsButton};
     }
-
-
 
     @Override
     public String toString() {

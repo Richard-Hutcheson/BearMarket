@@ -22,10 +22,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainScreen extends JPanel implements ActionListener, MenuListener{
+public class MainScreen extends JPanel implements ActionListener{
     protected static JFrame frame;
     final private JMenu accountMenu, createPostingMenu, exit;
-    final private JMenuItem editAccount, createPostingItem, purchaseHistory, currentlySelling, createPosting;
+    final private JMenuItem editAccount, createPostingItem, purchaseHistory, currentlySelling, exitItem;
     private JLabel filterLabel;
     private JTextField filterTF;
     final private Color LIGHT_ORANGE = new Color(255, 219, 77);
@@ -43,20 +43,22 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
 
         //MENUBAR
         JMenuBar menuBar = new JMenuBar();
+        //exit
         exit = new JMenu("Exit");
-        exit.addMenuListener(this);
+        exitItem = new JMenuItem("Exit BearMarket");
+        exitItem.addActionListener(this);
+        exit.add(exitItem);
+        //acount items
         accountMenu = new JMenu("Account");
-        createPostingMenu = new JMenu("Create Posting");
         editAccount = new JMenuItem("Edit Account");
         editAccount.addActionListener(this);
         purchaseHistory = new JMenuItem("Purchase History");
         purchaseHistory.addActionListener(this);
         currentlySelling = new JMenuItem("Currently Selling");
         currentlySelling.addActionListener(this);
-        createPosting = new JMenuItem("Create Posting");
-        createPosting.addActionListener(this);
+        //user market posting items
+        createPostingMenu = new JMenu("Create Posting");
         createPostingItem = new JMenuItem("create a new market post");
-        createPosting.addActionListener(this);
         createPostingItem.addActionListener(this);
 
 
@@ -211,9 +213,17 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         if (e.getSource() == fItem3){
             ProgLogger.LOGGER.info("Dialog for Featured Item Three Called");
             featuredItemsDialog.createFIDialog(3);
-
         }
 
+        if (e.getSource() == exitItem){
+            ProgLogger.LOGGER.info("Exit Button clicked");
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Exit Application?", "Exit", JOptionPane.YES_NO_OPTION);
+            //user selects 'yes' option to exit application
+            if (dialogResult == JOptionPane.YES_OPTION){
+                ProgLogger.LOGGER.info("User Confirmed Exit Action");
+                frame.dispose();
+            }
+        }
     }
     public static void createAndShowGUI(Account account){
         ProgLogger.LOGGER.info("Main Screen dialog called and Account obj passed through");
@@ -228,28 +238,5 @@ public class MainScreen extends JPanel implements ActionListener, MenuListener{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         ProgLogger.LOGGER.info("Main Screen GUI Displayed");
-    }
-
-    @Override
-    public void menuSelected(MenuEvent e) {
-        if (e.getSource() == exit){
-            ProgLogger.LOGGER.info("Exit Button clicked");
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Exit Application?", "Exit", JOptionPane.YES_NO_OPTION);
-            //user selects 'yes' option to exit application
-            if (dialogResult == JOptionPane.YES_OPTION){
-                ProgLogger.LOGGER.info("User Confirmed Exit Action");
-                frame.dispose();
-            }
-        }
-    }
-
-    @Override
-    public void menuDeselected(MenuEvent e) {
-
-    }
-
-    @Override
-    public void menuCanceled(MenuEvent e) {
-
     }
 }

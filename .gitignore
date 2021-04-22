@@ -17,3 +17,6 @@ target/
 
 # Extra Files
 README.md
+
+# Log File
+LoggerData.log
