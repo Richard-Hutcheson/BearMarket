@@ -194,6 +194,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                         nonIntErrMsg[0].setForeground(Color.RED);
                         add(nonIntErrMsg[0], c);
                         hasNonIntFields = true;
+                        ProgLogger.LOGGER.info("User inputted invalid quantity field");
                     }
 
                     try {
@@ -207,6 +208,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                         nonIntErrMsg[1].setForeground(Color.RED);
                         add(nonIntErrMsg[1], c);
                         hasNonIntFields = true;
+                        ProgLogger.LOGGER.info("User inputted invalid price field");
                     }
 
                     createMarketPostFrame.revalidate();
@@ -237,10 +239,10 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                                     if (subStrDec.length() < 3) {
                                         if (subStrDec.length() == 2) {
                                             newProduct.setPrice(Double.parseDouble(tempArr[i] + "0"));
-                                            tempArr[i] = "$" + newProduct.getPrice();
+                                            tempArr[i] = "$" + newProduct.getPrice() + "0";
                                         } else if (subStrDec.length() == 1) {
                                             newProduct.setPrice(Double.parseDouble(tempArr[i] + "00"));
-                                            tempArr[i] = "$" + newProduct.getPrice();
+                                            tempArr[i] = "$" + newProduct.getPrice() + "0";
                                         }
                                     } else {
                                         newProduct.setPrice(Double.parseDouble(String.format(tempArr[i], "%.2f")));
@@ -248,8 +250,8 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                                     }
 
                                 } else {
-                                    newProduct.setPrice(Double.parseDouble(tempArr[i] + ".00"));
-                                    tempArr[i] = "$" + newProduct.getPrice();
+                                    newProduct.setPrice(Double.parseDouble(tempArr[i]));
+                                    tempArr[i] = "$" + newProduct.getPrice() + "0";
                                 }
                             }
 
@@ -273,6 +275,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
             }
 
             if (hasEmptyFields) {
+                ProgLogger.LOGGER.info("User inputted invalid field");
                 showErrFields();
             }
             else if (!hasNonIntFields) {
@@ -281,6 +284,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
             }
         }
         else if (e.getSource() == cancelChanges) {
+            ProgLogger.LOGGER.info("Market Post Creation Cancelled");
             createMarketPostFrame.dispose();
         }
 
