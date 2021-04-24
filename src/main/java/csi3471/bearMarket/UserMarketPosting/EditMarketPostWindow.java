@@ -23,6 +23,7 @@ public class EditMarketPostWindow extends CreateMarketPostWindow {
         createMarketPostFrame.setContentPane(mainPanel);
 
         createMarketPostFrame.pack();
+        createMarketPostFrame.setLocationRelativeTo(null);
         createMarketPostFrame.setVisible(true);
     }
 

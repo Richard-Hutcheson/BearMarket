@@ -25,23 +25,24 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
     protected JComboBox comboBox;
     protected JTextField tempTextField[];
     protected String[] productDescriptors = {"Product Name: ", "Category: ", "Description: ", "Quantity: ", "Price: "};
-    private boolean errFields[] = new boolean[]{false, false, false, false, false};
+    private boolean emptyErrFields[] = new boolean[]{false, false, false};
     protected JButton confirmChanges, cancelChanges;
     private File userFile;
     private FileOutputStream writePostStream;
-    //private Product newProduct;
     private GridBagConstraints c;
+    private JLabel[] nonIntErrMsg = new JLabel[2];
 
     public static void createMarketPost() {
-        createMarketPostFrame = new JFrame();
+        createMarketPostFrame = new JFrame("Create Market Posting");
         createMarketPostFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         CreateMarketPostWindow mainPanel = new CreateMarketPostWindow();
 
-        createMarketPostFrame.setPreferredSize(new Dimension(500, 250));
+        createMarketPostFrame.setPreferredSize(new Dimension(600, 300));
         createMarketPostFrame.setContentPane(mainPanel);
 
         createMarketPostFrame.pack();
+        createMarketPostFrame.setLocationRelativeTo(null);
         createMarketPostFrame.setVisible(true);
     }
 
@@ -111,14 +112,38 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
 
     }
 
+    public void showErrFields() {
+        c.gridx = 3;
+        JLabel errMsg[] = new JLabel[emptyErrFields.length];
+        for (int j = 0; j < emptyErrFields.length; j++) {
+            if (errMsg[j] != null) {
+                remove(errMsg[j]);
+            }
+
+            if (emptyErrFields[j]) {
+                errMsg[j] = new JLabel("ERROR: Msg field empty");
+                errMsg[j].setForeground(Color.RED);
+
+                c.gridy = j;
+                add(errMsg[j], c);
+            }
+        }
+
+
+        createMarketPostFrame.revalidate();
+        createMarketPostFrame.repaint();
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
-
 
         if (e.getSource() == confirmChanges) {
 
             Path path = Paths.get("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
             byte[] buffer = null;
+            boolean hasEmptyFields = false;
+            boolean hasNonIntFields = false;
 
             try {
                 buffer = (Files.readAllBytes(path));
@@ -130,22 +155,21 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                 userFile = new File("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
                 writePostStream = new FileOutputStream(userFile, true);
 
-                if (buffer[buffer.length - 1] != ',') {
+                if (buffer[buffer.length - 1] != ',' && buffer[buffer.length - 1] != '\n') {
                     writePostStream.write(new byte[]{'\n'});
                 }
 
                 String userInputArray[] = getStringArray();
 
-                boolean hasEmptyFields = false;
-
-                for (int i = 0; i < userInputArray.length; i++) {
+                for (int i = 0; i < emptyErrFields.length; i++) {
                     if (userInputArray[i].isEmpty()) {
-                        errFields[i] = true;
+                        emptyErrFields[i] = true;
                         hasEmptyFields = true;
                     }
+
                 }
 
-                if (!hasEmptyFields) {
+                if (!hasEmptyFields || !hasNonIntFields) {
                     Product tempProduct = ProductTable.productVector.get(ProductTable.productVector.size() - 1);
                     String tempArr[] = new String[7];
                     tempArr[0] = userInputArray[0]; //product name
@@ -155,71 +179,106 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                     tempArr[4] = "5"; //no rating exists for it yet
                     tempArr[5] = userInputArray[4]; //price
                     tempArr[6] = String.valueOf(tempProduct.getID() + 1); //get greates id, and increment it
-                    Product newProduct = new Product(tempArr);
-                    System.out.println(newProduct.toString());
-                    writePostStream.write(Integer.toString(newProduct.getID()).getBytes());
-                    //writePostStream.write(ID.getBytes());
-                    writePostStream.write(new byte[]{','});
 
-                    ProductTable.addItem(newProduct);
+                    Product newProduct;
 
-                    File productFile = new File("./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv");
-                    FileOutputStream productFileStream = new FileOutputStream(productFile, true);
-
-                    String tsvFormat = "\n";
-                    for (int i = 0; i < tempArr.length; i++) {
-
-                        // price parsing
-                        if (i == 5) {
-                            String subStrDec = tempArr[i];
-
-                            if (subStrDec.contains(".")) {
-                                subStrDec = tempArr[i].substring(tempArr[i].indexOf("."));
-
-                                if (subStrDec.length() < 3) {
-                                    if (subStrDec.length() == 2) {
-                                        tempArr[i] = "$" + tempArr[i] + "0";
-                                    }
-                                    else if (subStrDec.length() == 1) {
-                                        tempArr[i] = "$" + tempArr[i] + "00";
-                                    }
-                                }
-                                else {
-                                    tempArr[i] = "$" + String.format(tempArr[i], "%.2f");
-                                }
-
-                            }
-                            else {
-                                tempArr[i] = "$" + tempArr[i] + ".00";
-                            }
+                    c.gridx = 3;
+                    try {
+                        if (nonIntErrMsg[0] != null) {
+                            remove(nonIntErrMsg[0]);
                         }
-
-                        tsvFormat += (tempArr[i] + "\t");
+                        Integer.parseInt(tempArr[3]);
+                    } catch (NumberFormatException err) {
+                        c.gridy = 3;
+                        nonIntErrMsg[0] = new JLabel("ERROR: Field is not a whole number");
+                        nonIntErrMsg[0].setForeground(Color.RED);
+                        add(nonIntErrMsg[0], c);
+                        hasNonIntFields = true;
                     }
 
                     try {
-                        productFileStream.write(tsvFormat.getBytes(StandardCharsets.UTF_8));
-                        ProgLogger.LOGGER.info("Market Post Successfully Created");
+                        if (nonIntErrMsg[1] != null) {
+                            remove(nonIntErrMsg[1]);
+                        }
+                        Double.parseDouble(tempArr[5]);
+                    } catch (NumberFormatException err) {
+                        c.gridy = 4;
+                        nonIntErrMsg[1] = new JLabel("ERROR: Field is not a number");
+                        nonIntErrMsg[1].setForeground(Color.RED);
+                        add(nonIntErrMsg[1], c);
+                        hasNonIntFields = true;
                     }
-                    catch (IOException ioErr) {
-                        ioErr.printStackTrace();
+
+                    createMarketPostFrame.revalidate();
+                    createMarketPostFrame.repaint();
+
+                    if (!hasNonIntFields) {
+                        newProduct = new Product(tempArr);
+                        System.out.println(newProduct.toString());
+                        writePostStream.write(Integer.toString(newProduct.getID()).getBytes());
+                        //writePostStream.write(ID.getBytes());
+                        writePostStream.write(new byte[]{','});
+
+                        ProductTable.addItem(newProduct);
+
+                        File productFile = new File("./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv");
+                        FileOutputStream productFileStream = new FileOutputStream(productFile, true);
+
+                        String tsvFormat = "\n";
+                        for (int i = 0; i < tempArr.length; i++) {
+
+                            // price parsing
+                            if (i == 5) {
+                                String subStrDec = tempArr[i];
+
+                                if (subStrDec.contains(".")) {
+                                    subStrDec = tempArr[i].substring(tempArr[i].indexOf("."));
+
+                                    if (subStrDec.length() < 3) {
+                                        if (subStrDec.length() == 2) {
+                                            newProduct.setPrice(Double.parseDouble(tempArr[i] + "0"));
+                                            tempArr[i] = "$" + newProduct.getPrice();
+                                        } else if (subStrDec.length() == 1) {
+                                            newProduct.setPrice(Double.parseDouble(tempArr[i] + "00"));
+                                            tempArr[i] = "$" + newProduct.getPrice();
+                                        }
+                                    } else {
+                                        newProduct.setPrice(Double.parseDouble(String.format(tempArr[i], "%.2f")));
+                                        tempArr[i] = "$" + newProduct.getPrice();
+                                    }
+
+                                } else {
+                                    newProduct.setPrice(Double.parseDouble(tempArr[i] + ".00"));
+                                    tempArr[i] = "$" + newProduct.getPrice();
+                                }
+                            }
+
+                            tsvFormat += (tempArr[i] + "\t");
+                        }
+
+                        try {
+                            productFileStream.write(tsvFormat.getBytes(StandardCharsets.UTF_8));
+                        } catch (IOException ioErr) {
+                            ioErr.printStackTrace();
+                        }
+                        productFileStream.close();
                     }
-
-                }
-                else {
-                    System.err.println("error, has empty fields");
                 }
 
-
-
+                writePostStream.close();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
 
-
-            createMarketPostFrame.dispose();
+            if (hasEmptyFields) {
+                showErrFields();
+            }
+            else if (!hasNonIntFields) {
+                ProgLogger.LOGGER.info("Market Post Successfully Created");
+                createMarketPostFrame.dispose();
+            }
         }
         else if (e.getSource() == cancelChanges) {
             createMarketPostFrame.dispose();
