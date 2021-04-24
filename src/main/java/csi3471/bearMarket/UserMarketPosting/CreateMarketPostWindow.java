@@ -156,24 +156,58 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                     tempArr[5] = userInputArray[4]; //price
                     tempArr[6] = String.valueOf(tempProduct.getID() + 1); //get greates id, and increment it
                     Product newProduct = new Product(tempArr);
-                    //newProduct.setID(999);
-//                    newProduct.setProductName(getStringArray()[0]);
-//                    newProduct.setCategory(getStringArray()[1]);
-//                    newProduct.setDescription(getStringArray()[2]);
-//                    newProduct.setQuantity(Integer.parseInt(getStringArray()[3]));
-//                    newProduct.setPrice(Double.parseDouble(getStringArray()[4]));
-//                    newProduct.setID(newProduct.hashCode());
-
-                    //String ID = Integer.toString(newProduct.getID());
-                    //System.out.println(ID);
                     System.out.println(newProduct.toString());
                     writePostStream.write(Integer.toString(newProduct.getID()).getBytes());
                     //writePostStream.write(ID.getBytes());
                     writePostStream.write(new byte[]{','});
 
                     ProductTable.addItem(newProduct);
-                }else{
-                    System.out.println("error, has empty fields");
+
+                    File productFile = new File("./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv");
+                    FileOutputStream productFileStream = new FileOutputStream(productFile, true);
+
+                    String tsvFormat = "\n";
+                    for (int i = 0; i < tempArr.length; i++) {
+
+                        // price parsing
+                        if (i == 5) {
+                            String subStrDec = tempArr[i];
+
+                            if (subStrDec.contains(".")) {
+                                subStrDec = tempArr[i].substring(tempArr[i].indexOf("."));
+
+                                if (subStrDec.length() < 3) {
+                                    if (subStrDec.length() == 2) {
+                                        tempArr[i] = "$" + tempArr[i] + "0";
+                                    }
+                                    else if (subStrDec.length() == 1) {
+                                        tempArr[i] = "$" + tempArr[i] + "00";
+                                    }
+                                }
+                                else {
+                                    tempArr[i] = "$" + String.format(tempArr[i], "%.2f");
+                                }
+
+                            }
+                            else {
+                                tempArr[i] = "$" + tempArr[i] + ".00";
+                            }
+                        }
+
+                        tsvFormat += (tempArr[i] + "\t");
+                    }
+
+                    try {
+                        productFileStream.write(tsvFormat.getBytes(StandardCharsets.UTF_8));
+                        ProgLogger.LOGGER.info("Market Post Successfully Created");
+                    }
+                    catch (IOException ioErr) {
+                        ioErr.printStackTrace();
+                    }
+
+                }
+                else {
+                    System.err.println("error, has empty fields");
                 }
 
 
