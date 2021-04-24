@@ -245,7 +245,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                                             tempArr[i] = "$" + newProduct.getPrice() + "0";
                                         }
                                     } else {
-                                        newProduct.setPrice(Double.parseDouble(String.format(tempArr[i], "%.2f")));
+                                        newProduct.setPrice(Double.parseDouble(String.format("%.2f", Double.parseDouble(tempArr[i]))));
                                         tempArr[i] = "$" + newProduct.getPrice();
                                     }
 
