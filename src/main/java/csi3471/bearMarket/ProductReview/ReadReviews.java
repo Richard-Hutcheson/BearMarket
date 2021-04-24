@@ -2,13 +2,19 @@ package csi3471.bearMarket.ProductReview;
 
 import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.ProductFiles.Product;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+/**
+ * Open reviews file and read them into Review objects
+ * @author Richard Hutcheson
+ */
 public class ReadReviews {
-
+    /**
+     * read in product reviews and create Review objects out of them, assign them to respective Products
+     * @param productMap map containing product and its unique id number
+     */
     public static void readInReviews(Map<Integer, Product> productMap){
         ProgLogger.LOGGER.info("Read Reviews Function Called");
         final String REVIEW_FILE = "src/main/java/csi3471/bearMarket/ProductReview/productReviews.txt";

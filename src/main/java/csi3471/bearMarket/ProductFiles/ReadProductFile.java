@@ -10,8 +10,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+/**Open the product file and read in products, creating Product items and pushing to list of products
+ * @author Richard Hutcheson
+ */
 public class ReadProductFile {
-
+    /**
+     * Open the product file and read in products, creating Product items and pushing to list of products
+     * @param file String containing the path for the product file
+     * @param productVector Vector<Product> that holds all of the products read in
+     * @param productMap Map<Integer, Product> holds Product and associates the id of the product with the product
+     */
     public static void readFile(String file, Vector<Product> productVector, Map<Integer, Product> productMap){
 
         ProgLogger.LOGGER.info("Product readFile function called");
