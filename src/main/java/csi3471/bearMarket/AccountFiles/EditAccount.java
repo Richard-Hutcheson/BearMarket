@@ -1,4 +1,7 @@
+//Created by Noah Lambaria
 package csi3471.bearMarket.AccountFiles;
+
+import csi3471.bearMarket.Logging.ProgLogger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +11,10 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
-
+/**
+ * This class implements the edit account window
+ * @author Noah Lambaria
+ */
 public class EditAccount implements ActionListener {
 
     //Initialize variables within CreateAccount Class
@@ -27,6 +33,10 @@ public class EditAccount implements ActionListener {
 
     static Account currentAccount = null;
 
+    /**
+     * Default constructor, which creates the frame of the edit account window
+     * @param account the account whose information will be updated based on user input
+     */
     public EditAccount(Account account){
 
         //initialize the current account
@@ -61,8 +71,10 @@ public class EditAccount implements ActionListener {
             userFileReader.close();
         } catch (FileNotFoundException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
+            ProgLogger.LOGGER.severe("The account file was not found");
         } catch (IOException ioException) {
             ioException.printStackTrace();
+            ProgLogger.LOGGER.severe("The account file was not read/written in properly");
         }
         //**************************************************************************
         //Create a new frame that will ask the user to input information
@@ -77,6 +89,7 @@ public class EditAccount implements ActionListener {
 
     //Creates the table
     public void createTable(){
+        ProgLogger.LOGGER.info("Creating table for user to enter personal information in");
         //Label to inform the user to enter the information
         JLabel inform = new JLabel("Update your personal information");
         inform.setHorizontalAlignment(JLabel.CENTER);
@@ -231,11 +244,15 @@ public class EditAccount implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == backButton) {
+            ProgLogger.LOGGER.info("Back button on <Edit Account> Pressed");
             createFrame.dispose();
         }else if(e.getSource() == saveButton){
             //Save information to an account, then update the
             //account information to the database.
             Boolean emptyString = false;
+
+            ProgLogger.LOGGER.info("Save button on <Edit Account> Pressed");
+
 
             Component[] components = allInformation.getComponents();
             for (Component component : components) {
@@ -334,6 +351,7 @@ public class EditAccount implements ActionListener {
             //If all information has been filled in, then update the file with the changes
             if(!emptyString) {
 
+                ProgLogger.LOGGER.info("Updating Account file with changes to account information");
                 //first argument in parameter is just the current username logged in
                 Account updatedAccount = new Account(currentAccount.username, (String) passwordField.getText(),
                         (String) firstNameField.getText(), (String) lastNameField.getText(), (String) shipAddressField.getText(),
@@ -369,6 +387,7 @@ public class EditAccount implements ActionListener {
                     lines = Files.readAllLines(actualFile.toPath());
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
+                    ProgLogger.LOGGER.severe("The account file was not read/written in properly");
                 }
 
                 //Format: username,password,firstName,lastName,address,state,zip,cardNumber,cvv,cardZip
@@ -393,6 +412,7 @@ public class EditAccount implements ActionListener {
                     Files.write(actualFile.toPath(), lines);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
+                    ProgLogger.LOGGER.severe("The account file was not read/written in properly");
                 }
 
                 String otherLine = currentAccount.getUsername() + comma + currentAccount.getPassword();
@@ -402,6 +422,7 @@ public class EditAccount implements ActionListener {
                     accountListInfo = Files.readAllLines(accountListFile.toPath());
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
+                    ProgLogger.LOGGER.severe("The account file was not read/written in properly");
                 }
 
 
@@ -421,6 +442,7 @@ public class EditAccount implements ActionListener {
                     Files.write(accountListFile.toPath(), accountListInfo);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
+                    ProgLogger.LOGGER.severe("The account file was not read/written in properly");
                 }
                 //lastly, close the frame and show a dialog that changes are saved
                 JOptionPane.showMessageDialog(null,"Changes Saved!");
@@ -433,6 +455,14 @@ public class EditAccount implements ActionListener {
 
     }
     //Used to print error that empty text filter
+    /**
+     * Function that prints errors if the information the
+     * user inputs is empty
+     * @param y the position that the error is currently placed
+     *          in the JPanel
+     * @param theLabel the JLabel that holds the specific error based
+     *                 on the row
+     */
     public void printEmptyError(int y, JLabel theLabel){
         createFrame.remove(allInformation);
 
@@ -452,7 +482,14 @@ public class EditAccount implements ActionListener {
         createFrame.revalidate();
         createFrame.repaint();
     }
-
+    /**
+     * Function that updates the frame to remove previously empty text fields
+     * that now satisfy conditions
+     * @param y the position that the error is currently placed
+     *          in the JPanel
+     * @param theLabel the JLabel that holds the specific error based
+     *                 on the row
+     */
     public void removeEmptyError(int y, JLabel theLabel){
         createFrame.remove(allInformation);
         allInformation.remove(theLabel);

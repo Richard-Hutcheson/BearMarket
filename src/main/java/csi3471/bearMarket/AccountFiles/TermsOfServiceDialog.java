@@ -1,3 +1,4 @@
+//Created by Noah Lambaria
 package csi3471.bearMarket.AccountFiles;
 
 import csi3471.bearMarket.Logging.ProgLogger;
@@ -10,9 +11,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+/**
+ * This class implements the Terms of Service window
+ * @author Noah Lambaria
+ */
 public class TermsOfServiceDialog {
 
+    /**
+     * This function creates the ToS dialog
+     */
     public void createDialog(){
         ProgLogger.LOGGER.info("Creating ToS Dialog");
         //CREATE DIALOG
@@ -62,6 +69,9 @@ public class TermsOfServiceDialog {
 
     }
 
+    /**
+     * This function returns the ToS Text from a text file
+     */
     private String getTOSText(){
 
 
