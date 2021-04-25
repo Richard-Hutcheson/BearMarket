@@ -3,6 +3,7 @@ package csi3471.bearMarket.UserMarketPosting;
 import csi3471.bearMarket.CurrentlySelling.CSTable;
 import csi3471.bearMarket.CurrentlySelling.CurrentlySellingWindow;
 import csi3471.bearMarket.Logging.ProgLogger;
+import csi3471.bearMarket.MainScreenFiles.MainScreen;
 import csi3471.bearMarket.MainScreenFiles.ProductTable;
 import csi3471.bearMarket.ProductFiles.Product;
 
@@ -19,12 +20,15 @@ public class DeletePostWindow extends JPanel implements ActionListener {
 
     private static JFrame frame;
     private int deleteNdxFromMainTable = 0;
+    private File userFile;
 
     public static void DeletePostWindow(Product p) {
         DeletePostWindow mainPanel = new DeletePostWindow(p);
     }
 
     public DeletePostWindow(Product p) {
+
+        userFile = new File("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
 
         // save the option result
         int dialogResult = JOptionPane.showConfirmDialog(frame, "Are you sure?", "Delete Market Post", JOptionPane.YES_NO_OPTION);
@@ -87,6 +91,38 @@ public class DeletePostWindow extends JPanel implements ActionListener {
 
             ProductTable.deleteItem(p, deleteNdxFromMainTable - 1);
 
+            in.close();
+            in = null;
+
+            try {
+                in = new Scanner(userFile);
+
+                while (in.hasNextLine()) {
+                    newFile.add(in.nextLine());
+                }
+
+                String[] parsed = newFile.get(1).split(",");
+
+                String temp = "";
+                for (int i = 0; i < parsed.length; i++) {
+                    if (Integer.parseInt(parsed[i]) != p.getID()) {
+                        temp += parsed[i] + ",";
+                    }
+                }
+
+                newFile.set(1, temp);
+
+                FileOutputStream userOutFile = new FileOutputStream(userFile);
+
+                for (int i = 0; i < newFile.size(); i++) {
+                    userOutFile.write(newFile.get(i).getBytes(StandardCharsets.UTF_8));
+                    userOutFile.write(new byte[]{'\n'});
+                }
+
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
             in.close();

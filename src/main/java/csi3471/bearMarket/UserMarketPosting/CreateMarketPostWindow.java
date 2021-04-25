@@ -9,11 +9,14 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.zip.CheckedOutputStream;
 
+import csi3471.bearMarket.CurrentlySelling.CSProduct;
+import csi3471.bearMarket.CurrentlySelling.CSTable;
 import csi3471.bearMarket.Logging.*;
 import csi3471.bearMarket.MainScreenFiles.*;
 import csi3471.bearMarket.ProductFiles.Product;
@@ -140,6 +143,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == confirmChanges) {
+            Product newProduct = null;
 
             Path path = Paths.get("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
             byte[] buffer = null;
@@ -155,9 +159,11 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
             try {
                 userFile = new File("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
                 writePostStream = new FileOutputStream(userFile, true);
+                Scanner in = new Scanner(userFile);
+                ArrayList<String> userFileData = new ArrayList<>();
 
-                if (buffer[buffer.length - 1] != ',' && buffer[buffer.length - 1] != '\n') {
-                    writePostStream.write(new byte[]{'\n'});
+                while (in.hasNextLine()) {
+                    userFileData.add(in.nextLine());
                 }
 
                 String userInputArray[] = getStringArray();
@@ -180,8 +186,6 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                     tempArr[4] = "5"; //no rating exists for it yet
                     tempArr[5] = userInputArray[4]; //price
                     tempArr[6] = String.valueOf(tempProduct.getID() + 1); //get greates id, and increment it
-
-                    Product newProduct;
 
                     c.gridx = 3;
                     try {
@@ -218,9 +222,24 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                     if (!hasNonIntFields) {
                         newProduct = new Product(tempArr);
                         System.out.println(newProduct.toString());
-                        writePostStream.write(Integer.toString(newProduct.getID()).getBytes());
-                        //writePostStream.write(ID.getBytes());
-                        writePostStream.write(new byte[]{','});
+
+                        // add product id to user file data
+                        if (userFileData.size() == 1) {
+                            userFileData.add(1, newProduct.getID() + ",");
+                        }
+                        else  {
+                            userFileData.set(1, userFileData.get(1) + newProduct.getID() + ",");
+                        }
+
+
+                        writePostStream.close();
+                        writePostStream = new FileOutputStream(userFile);
+
+                        // rewrite the user file
+                        for (int i = 0; i < userFileData.size(); i++) {
+                            writePostStream.write(userFileData.get(i).getBytes(StandardCharsets.UTF_8));
+                            writePostStream.write(new byte[]{'\n'});
+                        }
 
                         ProductTable.addItem(newProduct);
 
@@ -268,6 +287,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                     }
                 }
 
+                in.close();
                 writePostStream.close();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
@@ -280,6 +300,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                 showErrFields();
             }
             else if (!hasNonIntFields) {
+                CSTable.csProductVector.add(new CSProduct(newProduct.getID()));
                 ProgLogger.LOGGER.info("Market Post Successfully Created");
                 createMarketPostFrame.dispose();
             }

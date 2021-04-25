@@ -34,24 +34,34 @@ public class AccountInformation {
             br.readLine();
             String csS = br.readLine();
             String phS = br.readLine();
-            
+
+            if (csS == null && phS == null) {
+                throw new NullPointerException();
+            }
+
             String[] currentlySelling = csS.split(",");
             String[] purchaseHistory = phS.split(",");
-            
+
             for(String id : currentlySelling) {
                 CSProduct p = new CSProduct(Integer.parseInt(id));
                 currentlySellingVector.add(p);
             }
-            
+
             for(String id : purchaseHistory) {
                 PurchaseProduct p = new PurchaseProduct(Integer.parseInt(id));
                 purchaseHistoryVector.add(p);
             }
+
+
+
             
             ProgLogger.LOGGER.info("Successfully read in file");
         } catch(IOException e) {
             ProgLogger.LOGGER.info("Failed to read in file.");
             e.printStackTrace();
+        }
+        catch (NullPointerException e) {
+            ProgLogger.LOGGER.info("User does not have any currently selling/purchase history");
         }
     }
     
