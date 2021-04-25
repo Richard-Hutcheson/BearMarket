@@ -1,4 +1,4 @@
-package csi3471.bearMarket;
+package csi3471.bearMarket.CurrentlySelling;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,39 +9,23 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import csi3471.bearMarket.PurchaseHistory.PurchaseHistoryPanel;
+
 public class CurrentlySellingWindow extends JPanel implements ActionListener {
 
-    static JFrame frame;
-    JTable mainTable;
-    JScrollPane mainPane;
-    JButton purchaseHistory, mainMenu;
-    TableModel tableModel;
+    protected static JFrame frame;
+    protected static JTable table;
+    protected static JScrollPane mainPane;
+    private JButton purchaseHistory, mainMenu;
+    protected static TableModel tableModel;
     String[] colNames = {"Product", "Category", "Description", "Quantity", "Rating", "Price"};
-
+    
     public CurrentlySellingWindow() {
         //super(new GridBagLayout());
         super(new GridLayout(3,1));
 
-        //GridBagConstraints c = new GridBagConstraints();
-
-        //TODO: Link to account data
-        // temporary will fix when file reading is sorted out
-        Object[][] dataValues = {
-                {"testProduct1","testCategory1","testDescription1","testQuantity1","testRating1","testPrice1"},
-                {"testProduct2","testCategory2","testDescription2","testQuantity2","testRating2","testPrice2"},
-                {"testProduct3","testCategory3","testDescription3","testQuantity3","testRating3","testPrice3"},
-                {"testProduct4","testCategory4","testDescription4","testQuantity4","testRating4","testPrice4"}
-        };
-
         // create table and table model
-        //tableModel = new DefaultTableModel(dataValues, colNames);
-        mainTable = new JTable(dataValues, colNames);
-
-        /*
-        for (int i = 0; i < mainTable.getColumnCount(); i++) {
-            mainTable.getColumnModel().getColumn(i).setWidth(50);
-        }
-        */
+        CSTable.createTable();
 
         //Button Panel
         //Button to go back to purchase history
@@ -63,30 +47,19 @@ public class CurrentlySellingWindow extends JPanel implements ActionListener {
         // create the currently selling label
         JLabel currentlySellingLabel = new JLabel("Currently Selling Items");
         currentlySellingLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        /*
-        c.gridx = 0;
-        c.gridy = 0;
-        */
         add(currentlySellingLabel);
 
         // create the currently selling items table
-        mainTable.setPreferredScrollableViewportSize(new Dimension(600, 300));
-        mainTable.setFillsViewportHeight(true);
-        mainTable.setVisible(true);
-        mainTable.setEnabled(false);
-        mainTable.setRowSelectionAllowed(false);
-        mainTable.revalidate();
-        mainTable.repaint();
+        table.setPreferredScrollableViewportSize(new Dimension(600, 300));
+        table.setFillsViewportHeight(true);
+        table.setVisible(true);
+        table.setEnabled(false);
+        table.setRowSelectionAllowed(false);
+        table.revalidate();
+        table.repaint();
 
         // initialize scroll pane
-        mainPane = new JScrollPane(mainTable);
-        //mainPane.setPreferredSize(new Dimension(600, 300));
-        /*
-        c.gridx = 0;
-        c.gridy = 1;
-        */
-        //mainPane.add(mainTable);
-
+        mainPane = new JScrollPane(table);
         add(mainPane);
     }
 

@@ -155,7 +155,7 @@ public class Product implements ActionListener {
             dialog.setVisible(true);
         }
         if (e.getSource() == purchaseButton){
-            System.out.println("purchase item");
+            System.out.println("purchase item"); //TODO
         }
 
         //create Review Dialog

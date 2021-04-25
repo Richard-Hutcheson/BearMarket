@@ -98,7 +98,7 @@ public class ProductTable extends MainScreen{
         ProgLogger.LOGGER.info("Attempting to add user's product to table");
 
         productVector.add(add);
-        //productMap.put(add.hashCode(), add);
+        productMap.put(add.getID(), add);
         //tableModel.addRow(add.returnObjects());
     }
 }

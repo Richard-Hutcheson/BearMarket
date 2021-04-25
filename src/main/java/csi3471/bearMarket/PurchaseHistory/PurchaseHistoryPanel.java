@@ -1,4 +1,4 @@
-package csi3471.bearMarket;
+package csi3471.bearMarket.PurchaseHistory;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+
+import csi3471.bearMarket.CurrentlySelling.CurrentlySellingWindow;
 
 public class PurchaseHistoryPanel extends JPanel implements ActionListener {
     
