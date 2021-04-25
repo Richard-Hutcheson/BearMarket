@@ -7,6 +7,8 @@ import javax.swing.JButton;
 
 import csi3471.bearMarket.MainScreenFiles.ProductTable;
 import csi3471.bearMarket.ProductFiles.Product;
+import csi3471.bearMarket.UserMarketPosting.DeletePostWindow;
+import csi3471.bearMarket.UserMarketPosting.EditMarketPostWindow;
 
 public class CSProduct implements ActionListener {
     
@@ -32,12 +34,11 @@ public class CSProduct implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == editButton) {
-            //TODO Add edit form functionality
-            //Recommendation is to create a separate class for the panel
+            EditMarketPostWindow.createEditPostWindow(this);
         } 
         
         if(e.getSource() == deleteButton) {
-            //TODO Delete item from vector
+            DeletePostWindow.DeletePostWindow(getID());
         }
     }
     

@@ -25,6 +25,8 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
     protected JComboBox comboBox;
     protected JTextField tempTextField[];
     protected String[] productDescriptors = {"Product Name: ", "Category: ", "Description: ", "Quantity: ", "Price: "};
+    protected Object categories[] = {"Health", "Kitchen", "Tools", "Entertainment", "Sports",
+            "Home", "Clothing", "Electronics", "Education", "Music"};
     private boolean emptyErrFields[] = new boolean[]{false, false, false};
     protected JButton confirmChanges, cancelChanges;
     private File userFile;
@@ -66,8 +68,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
             add(tempLabel[i], c);
 
             if (i == 1) {
-                Object categories[] = {"Health", "Kitchen", "Tools", "Entertainment", "Sports",
-                        "Home", "Clothing", "Electronics", "Education", "Music"};
+
                 comboBox = new JComboBox(categories);
                 c.gridx = 1;
                 c.gridy = i;

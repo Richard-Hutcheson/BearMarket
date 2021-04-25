@@ -1,19 +1,20 @@
 package csi3471.bearMarket.UserMarketPosting;
 
-
-
-//import csi3471.bearMarket.Product;
+import csi3471.bearMarket.CurrentlySelling.CSProduct;
 import csi3471.bearMarket.ProductFiles.Product;
-
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class EditMarketPostWindow extends CreateMarketPostWindow {
 
-    private Product editProduct;
+    private CSProduct editProduct;
 
-    public static void createEditPostWindow(Product edit) {
+    public static void createEditPostWindow(CSProduct edit) {
         createMarketPostFrame = new JFrame();
         createMarketPostFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -27,17 +28,68 @@ public class EditMarketPostWindow extends CreateMarketPostWindow {
         createMarketPostFrame.setVisible(true);
     }
 
-    public EditMarketPostWindow(Product edit) {
+    public EditMarketPostWindow(CSProduct edit) {
         super();
         editProduct = edit;
 
-        // pre-fill all the text boxes
-        tempTextField[0].setText(editProduct.getProductName());
-        tempTextField[2].setText(editProduct.getDescription());
-        tempTextField[3].setText(Integer.toString(editProduct.getQuantity()));
-        tempTextField[4].setText(Double.toString(editProduct.getRating()));
-        tempTextField[5].setText("$" + String.format(Double.toString(editProduct.getPrice()), ".2f"));
+        File productFile = new File("./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv");
+        Scanner in = null;
+        int searchID = editProduct.getID();
+        int count = 0;
+
+        try {
+            in = new Scanner(productFile);
+
+            Product tempProduct = new Product();
+
+            while (in.hasNextLine()) {
+                String parsed[] = in.nextLine().split("\t");
+
+                if (count != 0) {
+
+                    if (Integer.parseInt(parsed[6]) == searchID) {
+                        tempProduct = new Product(parsed);
+                        break;
+                    }
+                }
+                count++;
+
+            }
+
+            // pre-fill all the text boxes
+            tempTextField[0].setText(tempProduct.getProductName());
+
+            for (int i = 0; i < categories.length; i++) {
+                if (categories[i].equals(tempProduct.getCategory())) {
+                    comboBox.setSelectedIndex(i);
+                    break;
+                }
+            }
+
+            tempTextField[1].setText(tempProduct.getDescription());
+            tempTextField[2].setText(Integer.toString(tempProduct.getQuantity()));
+            tempTextField[3].setText(String.format("%.2f", tempProduct.getPrice()));
+
+            confirmChanges.addActionListener(this);
+            cancelChanges.addActionListener(this);
+
+            in.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == confirmChanges) {
+
+        }
+
+        if (e.getSource() == cancelChanges) {
+
+        }
+    }
 }
