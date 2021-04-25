@@ -1,38 +1,36 @@
 package csi3471.bearMarket.PurchaseHistory;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.TableModel;
 
 import csi3471.bearMarket.CurrentlySelling.CurrentlySellingWindow;
 
 public class PurchaseHistoryPanel extends JPanel implements ActionListener {
     
     //Global variables
-    static JFrame purchaseHistoryFrame;
-    JTable purchaseHistoryTable;
-    JButton sellingItems, mainMenu;
-    String[] colNames = {"Product", "Category", "Description", "Quantity", "Rating", "Price"};
+    protected static JFrame purchaseHistoryFrame;
+    protected static JTable purchaseHistoryTable;
+    private JButton sellingItems, mainMenu;
+    protected static TableModel tableModel;
     
     //Populate content
     public PurchaseHistoryPanel(){
-        super(new GridLayout(2,1));
+        super(new BorderLayout());
         
-        //TODO: Link to account data
-        Object[][] dataValues = {
-                {"testProduct1","testCategory1","testDescription1","testQuantity1","testRating1","testPrice1"},
-                {"testProduct2","testCategory2","testDescription2","testQuantity2","testRating2","testPrice2"},
-                {"testProduct3","testCategory3","testDescription3","testQuantity3","testRating3","testPrice3"},
-                {"testProduct4","testCategory4","testDescription4","testQuantity4","testRating4","testPrice4"}
-        };
+        JPanel MenuPanel = new JPanel(new GridLayout(2,1));
         
         //TODO: Possibly make buttons into menu buttons
         //Button to take user to items currently selling
@@ -48,18 +46,24 @@ public class PurchaseHistoryPanel extends JPanel implements ActionListener {
         buttons.add(sellingItems);
         buttons.add(mainMenu);
         
-        add(buttons);
+        MenuPanel.add(buttons);
         
-        JTable historyTable = new JTable(dataValues, colNames);
-        historyTable.setPreferredScrollableViewportSize(new Dimension(600, 300));
-        historyTable.setFillsViewportHeight(true);
-        historyTable.setVisible(true);
-        historyTable.setEnabled(false);
-        historyTable.setRowSelectionAllowed(false);
+        JLabel currentlySellingLabel = new JLabel("Purchase History");
+        currentlySellingLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        MenuPanel.add(currentlySellingLabel);
         
-        JScrollPane historyScrollPane = new JScrollPane(historyTable);
+        add(MenuPanel, BorderLayout.NORTH);
         
-        add(historyScrollPane);
+        PTable.createTable();
+        purchaseHistoryTable.setPreferredScrollableViewportSize(new Dimension(600, 300));
+        purchaseHistoryTable.setFillsViewportHeight(true);
+        purchaseHistoryTable.setVisible(true);
+        purchaseHistoryTable.setEnabled(false);
+        purchaseHistoryTable.setRowSelectionAllowed(false);
+        
+        JScrollPane historyScrollPane = new JScrollPane(purchaseHistoryTable);
+        
+        add(historyScrollPane, BorderLayout.CENTER);
     }
 
     @Override
