@@ -62,13 +62,15 @@ public class Product implements ActionListener {
         String tempPrice;
         //dollar sign at front
         if (a[5].charAt(0) ==  '$'){
-            tempPrice= a[5].substring(1, a[5].length() - 1); //remove dollar sign
-            tempPrice = tempPrice.replace(".", ""); //remove '.'
+            tempPrice= a[5].substring(1); //remove dollar sign
+            //tempPrice = tempPrice.replace(".", ""); //remove '.'
             tempPrice = tempPrice.replace(",", ""); //remove ','
         }else{
             tempPrice = a[5];
         }
+        System.out.println(tempPrice);
         price = Double.parseDouble(tempPrice);
+        System.out.println(price);
         ID = Integer.parseInt(a[6]);
         descButton = new JButton("Description");
         descButton.addActionListener(this);

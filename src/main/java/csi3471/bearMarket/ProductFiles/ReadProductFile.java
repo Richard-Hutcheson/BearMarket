@@ -1,12 +1,8 @@
 package csi3471.bearMarket.ProductFiles;
 
-import com.sun.tools.javac.Main;
 import csi3471.bearMarket.Logging.ProgLogger;
-import csi3471.bearMarket.MainScreenFiles.MainScreen;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
