@@ -1,5 +1,4 @@
 package csi3471.bearMarket.MainScreenFiles;
-
 import csi3471.bearMarket.AccountFiles.Account;
 import csi3471.bearMarket.AccountFiles.EditAccount;
 import csi3471.bearMarket.CurrentlySellingWindow;
@@ -12,16 +11,17 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import javax.swing.table.DefaultTableModel;
-
 import javax.swing.table.TableRowSorter;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Class is the controller for the core actions of the program. It presents all of the market's items in a table
+ * and displays featured items. It allows users to access most parts and features of the program
+ * @auhor Richard Hutcheson
+ */
 public class MainScreen extends JPanel implements ActionListener{
     protected static JFrame frame;
     final private JMenu accountMenu, createPostingMenu, exit;
@@ -37,6 +37,10 @@ public class MainScreen extends JPanel implements ActionListener{
 
     public static Account currentAccount = null;
     FeaturedItemsDialog featuredItemsDialog;
+
+    /**
+     * MainScreen constructor holds the core code to initialize most MainScreen members
+     */
     MainScreen(){
         super(new BorderLayout());
         ProgLogger.LOGGER.info("Starting main screen dialog");
@@ -183,6 +187,10 @@ public class MainScreen extends JPanel implements ActionListener{
 
     }
 
+    /**
+     * Determines what to user with user input
+     * @param e ActionEvent variable that tells MainScreen what the user is attempting to click on
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -225,6 +233,11 @@ public class MainScreen extends JPanel implements ActionListener{
             }
         }
     }
+
+    /**
+     * Creates JFrame for main screen and sets it up
+     * @param account Account of the user who has logged in for this instance
+     */
     public static void createAndShowGUI(Account account){
         ProgLogger.LOGGER.info("Main Screen dialog called and Account obj passed through");
         //the account that's logged in currently

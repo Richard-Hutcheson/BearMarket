@@ -6,12 +6,14 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**Detects mouse actions in regards to the JTable, used for the JButtons in the table
+ * @author Richard Hutcheson
+ */
 class JTableButtonMouseListener extends MouseAdapter{
     private final JTable table;
     public JTableButtonMouseListener(JTable table) {
         this.table = table;
     }
-
     public void mouseClicked(MouseEvent e) {
         int column = table.getColumnModel().getColumnIndexAtX(e.getX());
         int row    = e.getY()/table.getRowHeight();
@@ -24,7 +26,9 @@ class JTableButtonMouseListener extends MouseAdapter{
         }
     }
 }
-
+/**Renders each cell in the table, implemented for the JButtons in the JTable
+ * @author Richard Hutcheson
+ */
 class JTableButtonRenderer implements TableCellRenderer {
     private TableCellRenderer defaultRenderer;
     public JTableButtonRenderer(TableCellRenderer renderer) {
