@@ -1,4 +1,4 @@
-package csi3471.bearMarket.CurrentlySelling;
+package csi3471.bearMarket.PurchaseHistory;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -9,38 +9,37 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
+import csi3471.bearMarket.CurrentlySelling.CSProduct;
 import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.MainScreenFiles.MainScreen;
 
-public class CSTable extends CurrentlySellingWindow {
-    public static Vector<CSProduct> csProductVector;
+public class PTable extends PurchaseHistoryPanel {
+    public static Vector<PurchaseProduct> pProductVector;
     
     private static TableCellRenderer tableRenderer;
     
     public static void createTable() {
-        ProgLogger.LOGGER.info("Creating Currently Selling Table");
+        ProgLogger.LOGGER.info("Creating Purchase History table");
         
-        csProductVector = new Vector<>();
+        pProductVector = new Vector<>();
         
         //Building table model
         tableModel = new DefaultTableModel() {
-            final private String[] columnNames = {"Product Name","Category","Price","Edit","Delete"};
+            final private String[] columnNames = {"Product Names","Category","Price"};
             
             @Override
             public Class<?> getColumnClass(int columnIndex){
                 return switch(columnIndex) {
                     case 2 -> Float.class;
-                    case 3, 4 -> JButton.class;
                     default -> String.class;
                 };
             }
             
             @Override
             public int getRowCount() {
-                return csProductVector.size();
+                return pProductVector.size();
             }
             
             @Override
@@ -56,11 +55,9 @@ public class CSTable extends CurrentlySellingWindow {
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 return switch(columnIndex) {
-                    case 0 -> csProductVector.get(rowIndex).getProductName();
-                    case 1 -> csProductVector.get(rowIndex).getCategory();
-                    case 2 -> csProductVector.get(rowIndex).getPrice();
-                    case 3 -> csProductVector.get(rowIndex).getEditButton();
-                    case 4 -> csProductVector.get(rowIndex).getDeleteButton();
+                    case 0 -> pProductVector.get(rowIndex).getProductName();
+                    case 1 -> pProductVector.get(rowIndex).getCategory();
+                    case 2 -> pProductVector.get(rowIndex).getPrice();
                     default -> null;
                 };
             }
@@ -72,35 +69,36 @@ public class CSTable extends CurrentlySellingWindow {
         };
         
         //Building table
-        table = new JTable(tableModel);
-        table.getTableHeader().setReorderingAllowed(false); //Prevents column reordering
-        table.setDefaultRenderer(JButton.class, new JTableButtonRenderer(tableRenderer));
-        table.addMouseListener(new JTableButtonMouseListener(table));
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        table.setAutoCreateRowSorter(true);
-        table.getColumnModel().getColumn(0).setPreferredWidth(200);
+        purchaseHistoryTable = new JTable(tableModel);
+        purchaseHistoryTable.getTableHeader().setReorderingAllowed(false); //Prevents column reordering
+        purchaseHistoryTable.setDefaultRenderer(JButton.class, new JTableButtonRenderer(tableRenderer));
+        purchaseHistoryTable.addMouseListener(new JTableButtonMouseListener(purchaseHistoryTable));
+        purchaseHistoryTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        purchaseHistoryTable.setAutoCreateRowSorter(true);
+        purchaseHistoryTable.getColumnModel().getColumn(0).setPreferredWidth(200);
         ProgLogger.LOGGER.info("Currently Selling table created");
         
         ProgLogger.LOGGER.info("Reading in account currently selling info.");
         //Read in account currently selling information
         final String file = "users/" + MainScreen.currentAccount.getUsername() + ".csv";
-        ReadFile.readFile(file, csProductVector);
+        ReadFile.readFile(file, pProductVector);
         ProgLogger.LOGGER.info("Read in file");
     }
 }
 
 class ReadFile{
-    public static void readFile(String file, Vector<CSProduct> pv) {
-        ProgLogger.LOGGER.info("Currently Selling file reader function called.");
+    public static void readFile(String file, Vector<PurchaseProduct> pv) {
+        ProgLogger.LOGGER.info("Purchase History file reader function called.");
         
         try {
             ProgLogger.LOGGER.info("Attempting to open file");
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
             br.readLine(); //Skip line with account information
+            br.readLine(); //Skip Currently Selling line
             String line = br.readLine();
             String[] split = line.split(",");
             for(String id : split) {
-                CSProduct p = new CSProduct(Integer.parseInt(id));
+                PurchaseProduct p = new PurchaseProduct(Integer.parseInt(id));
                 pv.add(p);
             }
             br.close();
