@@ -15,7 +15,7 @@ public class ProgLogger {
 
     static public void setup() throws IOException{
         LOGGER.setLevel(Level.ALL);
-        fileHandler = new FileHandler("src/main/java/csi3471/bearMarket/Logging/LoggerData.log");
+        fileHandler = new FileHandler("src/main/java/csi3471/bearMarket/Logging/LogData.log");
         txtFormatter = new SimpleFormatter();
         fileHandler.setFormatter(txtFormatter);
         LOGGER.addHandler(fileHandler);

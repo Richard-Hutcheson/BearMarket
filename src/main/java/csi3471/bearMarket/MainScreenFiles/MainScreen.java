@@ -2,9 +2,9 @@ package csi3471.bearMarket.MainScreenFiles;
 
 import csi3471.bearMarket.AccountFiles.Account;
 import csi3471.bearMarket.AccountFiles.EditAccount;
-import csi3471.bearMarket.CurrentlySellingWindow;
+import csi3471.bearMarket.CurrentlySelling.CurrentlySellingWindow;
 import csi3471.bearMarket.Logging.ProgLogger;
-import csi3471.bearMarket.PurchaseHistoryPanel;
+import csi3471.bearMarket.PurchaseHistory.PurchaseHistoryPanel;
 import csi3471.bearMarket.UserMarketPosting.CreateMarketPostWindow;
 import javax.swing.*;
 import javax.swing.border.Border;

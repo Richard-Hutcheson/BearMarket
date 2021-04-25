@@ -19,4 +19,4 @@ target/
 README.md
 
 # Log File
-LoggerData.log
+*.log
