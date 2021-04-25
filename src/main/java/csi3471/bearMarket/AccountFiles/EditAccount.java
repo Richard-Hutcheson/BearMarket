@@ -241,6 +241,10 @@ public class EditAccount implements ActionListener {
 
         createFrame.add(bottomSection,BorderLayout.SOUTH);
     }
+    /**
+     * Save/back buttons for account edit handling
+     * @param e the action event based on button pressed
+     */
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == backButton) {
