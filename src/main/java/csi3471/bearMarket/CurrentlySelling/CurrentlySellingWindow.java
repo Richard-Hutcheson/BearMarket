@@ -22,7 +22,9 @@ public class CurrentlySellingWindow extends JPanel implements ActionListener {
     
     public CurrentlySellingWindow() {
         //super(new GridBagLayout());
-        super(new GridLayout(3,1));
+        super(new BorderLayout());
+        
+        JPanel MenuPanel = new JPanel(new GridLayout(2,1));
 
         // create table and table model
         CSTable.createTable();
@@ -42,12 +44,14 @@ public class CurrentlySellingWindow extends JPanel implements ActionListener {
         buttons.add(purchaseHistory);
         buttons.add(mainMenu);
         
-        add(buttons);
+        MenuPanel.add(buttons);
 
         // create the currently selling label
         JLabel currentlySellingLabel = new JLabel("Currently Selling Items");
         currentlySellingLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        add(currentlySellingLabel);
+        MenuPanel.add(currentlySellingLabel);
+        
+        add(MenuPanel, BorderLayout.NORTH);
 
         // create the currently selling items table
         table.setPreferredScrollableViewportSize(new Dimension(600, 300));
@@ -60,7 +64,7 @@ public class CurrentlySellingWindow extends JPanel implements ActionListener {
 
         // initialize scroll pane
         mainPane = new JScrollPane(table);
-        add(mainPane);
+        add(mainPane, BorderLayout.CENTER);
     }
 
     @Override
