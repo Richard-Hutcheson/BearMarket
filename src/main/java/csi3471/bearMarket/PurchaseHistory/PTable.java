@@ -78,34 +78,12 @@ public class PTable extends PurchaseHistoryPanel {
         purchaseHistoryTable.getColumnModel().getColumn(0).setPreferredWidth(200);
         ProgLogger.LOGGER.info("Currently Selling table created");
         
-        ProgLogger.LOGGER.info("Reading in account currently selling info.");
-        //Read in account currently selling information
-        final String file = "users/" + MainScreen.currentAccount.getUsername() + ".csv";
-        ReadFile.readFile(file, pProductVector);
-        ProgLogger.LOGGER.info("Read in file");
-    }
-}
-
-class ReadFile{
-    public static void readFile(String file, Vector<PurchaseProduct> pv) {
-        ProgLogger.LOGGER.info("Purchase History file reader function called.");
+        pProductVector = MainScreen.ai.getPurchaseHistoryVector();
         
-        try {
-            ProgLogger.LOGGER.info("Attempting to open file");
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-            br.readLine(); //Skip line with account information
-            br.readLine(); //Skip Currently Selling line
-            String line = br.readLine();
-            String[] split = line.split(",");
-            for(String id : split) {
-                PurchaseProduct p = new PurchaseProduct(Integer.parseInt(id));
-                pv.add(p);
-            }
-            br.close();
-            ProgLogger.LOGGER.info("Successfully read in file");
-        } catch(IOException e) {
-            ProgLogger.LOGGER.info("Failed to read in file.");
-            e.printStackTrace();
-        }
+        //ProgLogger.LOGGER.info("Reading in account currently selling info.");
+        //Read in account currently selling information
+        //final String file = "users/" + MainScreen.currentAccount.getUsername() + ".csv";
+        //PReadFile.readFile(file, pProductVector);
+        //ProgLogger.LOGGER.info("Read in file");
     }
 }

@@ -1,7 +1,9 @@
 package csi3471.bearMarket.MainScreenFiles;
 
+import csi3471.bearMarket.AccountInformation;
 import csi3471.bearMarket.AccountFiles.Account;
 import csi3471.bearMarket.AccountFiles.EditAccount;
+import csi3471.bearMarket.CurrentlySelling.CSReadFile;
 import csi3471.bearMarket.CurrentlySelling.CurrentlySellingWindow;
 import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.PurchaseHistory.PurchaseHistoryPanel;
@@ -29,13 +31,14 @@ public class MainScreen extends JPanel implements ActionListener{
     private JLabel filterLabel;
     private JTextField filterTF;
     final private Color LIGHT_ORANGE = new Color(255, 219, 77);
-    protected static JTable table;
-    protected static DefaultTableModel tableModel;
+    public static JTable table;
+    public static DefaultTableModel tableModel;
     protected static JScrollPane scrollPane;
     private TableRowSorter sorter;
     private JButton fItem1, fItem2, fItem3;
-
+    
     public static Account currentAccount = null;
+    public static AccountInformation ai;
     FeaturedItemsDialog featuredItemsDialog;
     MainScreen(){
         super(new BorderLayout());
@@ -181,6 +184,9 @@ public class MainScreen extends JPanel implements ActionListener{
         setBorder(border);
         ProgLogger.LOGGER.info("Main Screen Dialog Completed");
 
+        //Create Account Information
+        ai = new AccountInformation(currentAccount);
+        ai.readFile();
     }
 
     @Override
@@ -223,6 +229,7 @@ public class MainScreen extends JPanel implements ActionListener{
                 ProgLogger.LOGGER.info("User Confirmed Exit Action");
                 frame.dispose();
             }
+            //TODO: Save vector to file
         }
     }
     public static void createAndShowGUI(Account account){
@@ -230,7 +237,7 @@ public class MainScreen extends JPanel implements ActionListener{
         //the account that's logged in currently
         currentAccount = account;
         frame = new JFrame("BearMarket: Main Screen");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(1280, 720));
         frame.add(new MainScreen()); //Add content to the window.
         //Display the window.

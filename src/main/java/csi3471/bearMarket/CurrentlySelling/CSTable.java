@@ -81,33 +81,12 @@ public class CSTable extends CurrentlySellingWindow {
         table.getColumnModel().getColumn(0).setPreferredWidth(200);
         ProgLogger.LOGGER.info("Currently Selling table created");
         
-        ProgLogger.LOGGER.info("Reading in account currently selling info.");
-        //Read in account currently selling information
-        final String file = "users/" + MainScreen.currentAccount.getUsername() + ".csv";
-        ReadFile.readFile(file, csProductVector);
-        ProgLogger.LOGGER.info("Read in file");
-    }
-}
-
-class ReadFile{
-    public static void readFile(String file, Vector<CSProduct> pv) {
-        ProgLogger.LOGGER.info("Currently Selling file reader function called.");
+        csProductVector = MainScreen.ai.getCurrentlySellingVector();
         
-        try {
-            ProgLogger.LOGGER.info("Attempting to open file");
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-            br.readLine(); //Skip line with account information
-            String line = br.readLine();
-            String[] split = line.split(",");
-            for(String id : split) {
-                CSProduct p = new CSProduct(Integer.parseInt(id));
-                pv.add(p);
-            }
-            br.close();
-            ProgLogger.LOGGER.info("Successfully read in file");
-        } catch(IOException e) {
-            ProgLogger.LOGGER.info("Failed to read in file.");
-            e.printStackTrace();
-        }
+        //ProgLogger.LOGGER.info("Reading in account currently selling info.");
+        //Read in account currently selling information
+        //final String file = "users/" + MainScreen.currentAccount.getUsername() + ".csv";
+        //CSReadFile.readFile(file, csProductVector);
+        //ProgLogger.LOGGER.info("Read in file");
     }
 }

@@ -3,9 +3,12 @@ package csi3471.bearMarket.ProductFiles;
 
 import com.sun.source.tree.CompilationUnitTree;
 import csi3471.bearMarket.Logging.ProgLogger;
+import csi3471.bearMarket.MainScreenFiles.MainScreen;
+import csi3471.bearMarket.MainScreenFiles.ProductTable;
 import csi3471.bearMarket.ProductReview.Review;
 import csi3471.bearMarket.ProductReview.ReviewDialog;
-
+import csi3471.bearMarket.PurchaseHistory.PTable;
+import csi3471.bearMarket.PurchaseHistory.PurchaseProduct;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -17,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import java.util.Objects;
+import java.util.Vector;
 
 public class Product implements ActionListener {
 
@@ -155,7 +159,15 @@ public class Product implements ActionListener {
             dialog.setVisible(true);
         }
         if (e.getSource() == purchaseButton){
-            System.out.println("purchase item"); //TODO
+            JOptionPane.showMessageDialog(null, "You have purchased the item");
+            quantity--;
+            if(quantity <= 0) {
+                ProductTable.productVector.remove(this);
+            }
+            MainScreen.tableModel.fireTableDataChanged();
+            Vector<PurchaseProduct> temp = MainScreen.ai.getPurchaseHistoryVector();
+            temp.add(new PurchaseProduct(this.ID));
+            MainScreen.ai.setPurchaseHistoryVector(temp);
         }
 
         //create Review Dialog

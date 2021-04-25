@@ -1,6 +1,9 @@
 package csi3471.bearMarket.AccountFiles;
 
 import javax.swing.*;
+
+import csi3471.bearMarket.MainScreenFiles.MainScreen;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -339,6 +342,8 @@ public class EditAccount implements ActionListener {
                         (String) firstNameField.getText(), (String) lastNameField.getText(), (String) shipAddressField.getText(),
                         (String) stateField.getText(), (String) zipField.getText(), (String) cardNumberField.getText(),
                         (String) cvvField.getText(), (String) cardZipField.getText());
+                
+                MainScreen.ai.setAccount(updatedAccount);
 
                 //Output testing to ensure the updatedAccount is working
                 //System.out.println("****************");
