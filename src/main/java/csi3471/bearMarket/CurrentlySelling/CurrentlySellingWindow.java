@@ -17,7 +17,7 @@ public class CurrentlySellingWindow extends JPanel implements ActionListener {
     protected static JTable table;
     protected static JScrollPane mainPane;
     private JButton purchaseHistory, mainMenu;
-    protected static TableModel tableModel;
+    public static DefaultTableModel tableModel;
     String[] colNames = {"Product", "Category", "Description", "Quantity", "Rating", "Price"};
     
     public CurrentlySellingWindow() {

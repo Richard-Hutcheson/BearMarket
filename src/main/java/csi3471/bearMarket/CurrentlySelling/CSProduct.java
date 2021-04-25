@@ -17,9 +17,11 @@ public class CSProduct implements ActionListener {
     
     private double price;
     private JButton editButton, deleteButton;
+    private Product originalProduct;
     
     public CSProduct(int ID) {
         Product p = ProductTable.productMap.get(ID);
+        originalProduct = p;
         
         productName = p.getProductName();
         category = p.getCategory();
@@ -33,12 +35,12 @@ public class CSProduct implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == editButton) {
+        if (e.getSource() == editButton) {
             EditMarketPostWindow.createEditPostWindow(this);
         } 
         
-        if(e.getSource() == deleteButton) {
-            DeletePostWindow.DeletePostWindow(getID());
+        if (e.getSource() == deleteButton) {
+            DeletePostWindow.DeletePostWindow(this.getOriginalProduct());
         }
     }
     
@@ -92,6 +94,25 @@ public class CSProduct implements ActionListener {
 
     public void setDeleteButton(JButton deleteButton) {
         this.deleteButton = deleteButton;
+    }
+
+    public void setDescription(String desc) {
+        this.originalProduct.setDescription(desc);
+    }
+
+    public String getDescription() { return this.originalProduct.getDescription(); }
+
+    public void setQuantity(int q) {
+        this.originalProduct.setQuantity(q);
+    }
+
+    public int getQuantity() { return this.originalProduct.getQuantity(); }
+
+    public Product getOriginalProduct() {
+        originalProduct.setProductName(this.productName);
+        originalProduct.setCategory(this.category);
+        originalProduct.setPrice(this.price);
+        return this.originalProduct;
     }
 
     @Override

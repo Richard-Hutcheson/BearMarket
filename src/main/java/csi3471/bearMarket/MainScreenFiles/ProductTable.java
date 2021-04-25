@@ -101,5 +101,13 @@ public class ProductTable extends MainScreen{
         productMap.put(add.getID(), add);
         //tableModel.addRow(add.returnObjects());
     }
-}
 
+    public static void editItem(Product edit, int removeNdx) {
+        productVector.remove(removeNdx);
+        productVector.insertElementAt(edit, removeNdx);
+    }
+
+    public static void deleteItem(Product del, int removeNdx) {
+        productVector.remove(removeNdx);
+    }
+}

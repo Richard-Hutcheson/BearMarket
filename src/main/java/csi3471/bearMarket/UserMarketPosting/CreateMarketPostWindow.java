@@ -31,7 +31,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
     protected JButton confirmChanges, cancelChanges;
     private File userFile;
     private FileOutputStream writePostStream;
-    private GridBagConstraints c;
+    protected GridBagConstraints c;
     private JLabel[] nonIntErrMsg = new JLabel[2];
 
     public static void createMarketPost() {
