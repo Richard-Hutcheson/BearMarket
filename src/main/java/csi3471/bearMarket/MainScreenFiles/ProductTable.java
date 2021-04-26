@@ -125,6 +125,9 @@ public class ProductTable extends MainScreen{
         productVector.remove(removeNdx);
     }
     
+    /**
+     * Function that saves the product vector to the file.
+     */
     public static void saveToFile() {
         ProgLogger.LOGGER.info("Saving product table to file");
         

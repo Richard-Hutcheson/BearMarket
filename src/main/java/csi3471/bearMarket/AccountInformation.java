@@ -19,6 +19,11 @@ import csi3471.bearMarket.MainScreenFiles.ProductTable;
 import csi3471.bearMarket.ProductFiles.Product;
 import csi3471.bearMarket.PurchaseHistory.PurchaseProduct;
 
+/**
+ * Data Object class that holds all pertinent information regarding the current user
+ * @author Josh McKone
+ *
+ */
 public class AccountInformation {
     private Account account;
     public Vector<CSProduct> currentlySellingVector;
@@ -27,6 +32,10 @@ public class AccountInformation {
     public Vector<Product> purchaseHistoryProductVector;
     private String file;
     
+    /**
+     * Creator function
+     * @param ac Reads in current account
+     */
     public AccountInformation(Account ac) {
         account = ac;
         currentlySellingVector = new Vector<>();
@@ -36,11 +45,19 @@ public class AccountInformation {
         file = "users/" + ac.getUsername() + ".csv";
     }
     
+    /**
+     * Updates Account information if usre edits account
+     * @param ac
+     */
     public void updateFileName(Account ac) {
         account = ac;
         file = "users/" + ac.getUsername() + ".csv";
     }
     
+    /**
+     * Reads in the user's information from the file and fills in the account, currently selling
+     * and purchase history.
+     */
     public void readFile() {
         ProgLogger.LOGGER.info("Reading in currently selling and purchase history for account.");
         
@@ -107,6 +124,9 @@ public class AccountInformation {
         }
     }
     
+    /**
+     * Saves the users account information to the file
+     */
     public void saveFile() {
         ProgLogger.LOGGER.info("Writing Account Information to file.");
         

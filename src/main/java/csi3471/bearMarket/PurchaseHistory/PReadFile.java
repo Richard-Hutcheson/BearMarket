@@ -8,6 +8,12 @@ import java.util.Vector;
 
 import csi3471.bearMarket.Logging.ProgLogger;
 
+/**
+ * Helper class to read in a file for the product table.
+ * Note: This is outdated and no longer used.
+ * @author Josh McKone
+ *
+ */
 public class PReadFile {
     public static void readFile(String file, Vector<PurchaseProduct> pv) {
         ProgLogger.LOGGER.info("Purchase History file reader function called.");

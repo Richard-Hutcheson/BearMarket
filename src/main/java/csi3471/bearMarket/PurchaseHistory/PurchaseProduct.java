@@ -6,12 +6,21 @@ import java.awt.event.ActionListener;
 import csi3471.bearMarket.MainScreenFiles.ProductTable;
 import csi3471.bearMarket.ProductFiles.Product;
 
+/**
+ * Special Product class used for the purchase history table.
+ * @author Josh McKone
+ *
+ */
 public class PurchaseProduct {
     private String productName, category;
     private int ID;
     
     private double price;
     
+    /**
+     * Constructor that finds the information from the map
+     * @param ID ID to look up in the product map to get pertinent information
+     */
     public PurchaseProduct(int ID) {
         Product p = ProductTable.productMap.get(ID);
         
