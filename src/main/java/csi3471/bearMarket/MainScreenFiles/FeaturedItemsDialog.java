@@ -127,11 +127,10 @@ public class FeaturedItemsDialog{
                 ProgLogger.LOGGER.info("Purchase Item Button Clicked");
                 ProgLogger.LOGGER.info("Purchased featured item");
                 JOptionPane.showMessageDialog(null, "You have purchased the item");
-                prod.setQuantity(prod.getQuantity() - 1);
-                if(prod.getQuantity() <= 0) {
-                    ProductTable.productVector.remove(prod);
-                    //TODO: Possible area to disable items
-                }
+                //prod.setQuantity(prod.getQuantity() - 1);
+                //if(prod.getQuantity() <= 0) {
+                //    ProductTable.productVector.remove(prod);
+                //}
                 MainScreen.tableModel.fireTableDataChanged();
                 MainScreen.ai.purchaseHistoryVector.add(new PurchaseProduct(prod.getID()));
                 MainScreen.ai.purchaseHistoryProductVector.add(prod);
