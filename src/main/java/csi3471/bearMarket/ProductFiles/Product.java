@@ -185,6 +185,7 @@ public class Product implements ActionListener {
             MainScreen.tableModel.fireTableDataChanged();
             Vector<PurchaseProduct> temp = MainScreen.ai.getPurchaseHistoryVector();
             temp.add(new PurchaseProduct(this.ID));
+            MainScreen.ai.purchaseHistoryProductVector.add(this);
             MainScreen.ai.setPurchaseHistoryVector(temp);
         }
 
