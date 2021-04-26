@@ -10,6 +10,11 @@ import csi3471.bearMarket.ProductFiles.Product;
 import csi3471.bearMarket.UserMarketPosting.DeletePostWindow;
 import csi3471.bearMarket.UserMarketPosting.EditMarketPostWindow;
 
+/**
+ * Special Product class for the currently selling items.
+ * @author Josh McKone
+ *
+ */
 public class CSProduct implements ActionListener {
     
     private String productName, category;
@@ -19,6 +24,10 @@ public class CSProduct implements ActionListener {
     private JButton editButton, deleteButton;
     private Product originalProduct;
     
+    /**
+     * Constructor that builds the item using the other item's information
+     * @param ID The ID to look up in the product map to get product information.
+     */
     public CSProduct(int ID) {
         Product p = ProductTable.productMap.get(ID);
         originalProduct = p;
@@ -40,7 +49,7 @@ public class CSProduct implements ActionListener {
         } 
         
         if (e.getSource() == deleteButton) {
-            DeletePostWindow.DeletePostWindow(this.getOriginalProduct());
+            DeletePostWindow.DeletePostWindow(this.getOriginalProduct(), this);
         }
     }
     

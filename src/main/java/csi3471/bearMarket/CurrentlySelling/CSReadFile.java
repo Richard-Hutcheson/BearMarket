@@ -8,6 +8,12 @@ import java.util.Vector;
 
 import csi3471.bearMarket.Logging.ProgLogger;
 
+/**
+ * Helper function to read in the user's currently selling information from the file.
+ * Note: Antiquated function that is no longer used.
+ * @author Josh McKone
+ *
+ */
 public class CSReadFile {
     public static void readFile(String file, Vector<CSProduct> pv) {
         ProgLogger.LOGGER.info("Currently Selling file reader function called.");

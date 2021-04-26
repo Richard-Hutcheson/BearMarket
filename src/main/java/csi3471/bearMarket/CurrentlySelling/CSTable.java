@@ -15,11 +15,19 @@ import javax.swing.table.TableCellRenderer;
 import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.MainScreenFiles.MainScreen;
 
+/**
+ * Table that holds the information of the Currently Selling account information
+ * @author Josh Mckone
+ *
+ */
 public class CSTable extends CurrentlySellingWindow {
     public static Vector<CSProduct> csProductVector;
     
     private static TableCellRenderer tableRenderer;
     
+    /**
+     * Function that the window calls to get the information for the table itself.
+     */
     public static void createTable() {
         ProgLogger.LOGGER.info("Creating Currently Selling Table");
         

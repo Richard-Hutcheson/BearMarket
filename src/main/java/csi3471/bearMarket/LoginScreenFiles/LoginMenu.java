@@ -1,10 +1,10 @@
 //Created by Noah Lambaria
-
 package csi3471.bearMarket.LoginScreenFiles;
 
 import csi3471.bearMarket.AccountFiles.Account;
 import csi3471.bearMarket.AccountFiles.CreateAccount;
 import csi3471.bearMarket.AccountFiles.EditAccount;
+import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.MainScreenFiles.MainScreen;
 import csi3471.bearMarket.ProductFiles.ReadProductFile;
 
@@ -13,7 +13,10 @@ import java.awt.event.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.*;
-
+/**
+ * This class implements the entire login screen
+ * @author Noah Lambaria
+ */
 public class LoginMenu extends JPanel implements ActionListener{
     
     //Global variables here
@@ -29,6 +32,9 @@ public class LoginMenu extends JPanel implements ActionListener{
 
 
 	//Builds the login form
+	/**
+	 * Default constructor for the LoginMenu, which builds the login form
+	 */
 	public LoginMenu() {
 		super(new BorderLayout());
 
@@ -85,7 +91,6 @@ public class LoginMenu extends JPanel implements ActionListener{
 		JPanel bodyPanel = new JPanel(new GridLayout(2,1));
 		bodyPanel.add(upPanel);
 
-
 		bodyPanel.setBorder(BorderFactory.createEmptyBorder(100, 200, 20, 200));
 		JPanel clePanel = new JPanel();
 		BoxLayout boxLayout = new BoxLayout(clePanel, BoxLayout.Y_AXIS);
@@ -141,12 +146,15 @@ public class LoginMenu extends JPanel implements ActionListener{
 		}
 	}
 
-	//Login and register button handling
+	/**
+	 * Login and register button handling
+	 * @param e the action event based on button pressed
+	 */
 	public void actionPerformed(ActionEvent e) {
 
 	    if(e.getSource() == loginButton) {
 
-
+			ProgLogger.LOGGER.info("Login button was pressed");
 			AtomicBoolean checker = new AtomicBoolean(false);
 	    	//Have an if condition that says if the account is valid
 			//then MainScreen.createAndShowGUI, else do nothing OR notify
@@ -160,13 +168,14 @@ public class LoginMenu extends JPanel implements ActionListener{
 
 			//if login is valid, then create the main page and dispose of the login screen
 	        if(checker.get()) {
+				ProgLogger.LOGGER.info("Login valid! Creating the main marketplace page");
 				String thePassword = new String(passwordField.getPassword());
 	        	Account theAccount = new Account(usernameField.getText(),thePassword);
 				MainScreen.createAndShowGUI(theAccount);
 				loginScreen.dispose();
 			}else{
 				//display an error invalid login message
-
+				ProgLogger.LOGGER.info("Invalid login, notifying user with invalid login message");
 
 				Boolean hasWarning = false;
 
@@ -197,15 +206,19 @@ public class LoginMenu extends JPanel implements ActionListener{
 			}
 	    }else if(e.getSource() == exitButton){
 			loginScreen.dispose();
+			ProgLogger.LOGGER.info("Exit button pressed.");
+			System.exit(0);
 		}else if(e.getSource() == createButton){
+			ProgLogger.LOGGER.info("Create Account button has been pressed.");
 	    	CreateAccount create = new CreateAccount();
 		}
 	}
 
-	//Builds the GUI for the frame
+
+	/**
+	 * Creates the GUI for the frame
+	 */
 	public static void createAndShowLogin(){
-
-
 
 		loginScreen = new JFrame("Bear Market Login");
         loginScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -4,10 +4,18 @@ import csi3471.bearMarket.Logging.ProgLogger;
 
 import java.util.Objects;
 
+/**Review is an object that holds review information for each Product
+ * @author Richard Hutcheson
+ */
 public class Review {
 
     private String username, description, rating;
 
+    /**
+     * @param username name of user who made review
+     * @param rating rating the user gave
+     * @param desc the review for the product
+     */
     public Review(String username, String rating, String desc){
         ProgLogger.LOGGER.info("Review constructor called and assigning parsed data into attributes");
         this.username = username;

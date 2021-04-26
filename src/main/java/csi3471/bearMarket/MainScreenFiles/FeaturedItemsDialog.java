@@ -3,7 +3,6 @@ package csi3471.bearMarket.MainScreenFiles;
 import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.ProductFiles.Product;
 import csi3471.bearMarket.ProductReview.ReviewDialog;
-
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -13,10 +12,17 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.Random;
 
+/**
+ * Create Dialog for Featured items from Product table and handle user interaction with given featured item
+ * @author Richard Hutcheson
+ */
 public class FeaturedItemsDialog{
     private Product item1 = null, item2 = null, item3 = null;
     private Product prod;
 
+    /**
+     * Constructor for dialog randomly selects items from product vector to be
+     */
     FeaturedItemsDialog(){
         ProgLogger.LOGGER.info("FeaturedItems constructor called, selecting ");
         try{
@@ -31,6 +37,11 @@ public class FeaturedItemsDialog{
                     "possibly that the product table vector ");
         }
      }
+
+    /**
+     * create a JDialog for the selected featured item and handle user input for the featured item
+     * @param itemVal integer variable that tells the dialog which featured item had been selected by the user
+     */
     public void createFIDialog(int itemVal){
         ProgLogger.LOGGER.info("Creating Featured Item Dialog");
         final int WIDTH = 400, HEIGHT = 400;

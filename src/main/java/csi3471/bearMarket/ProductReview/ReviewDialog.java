@@ -1,15 +1,20 @@
 package csi3471.bearMarket.ProductReview;
 
 import csi3471.bearMarket.ProductFiles.Product;
-
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/** Creates the review JDialog for a Product object
+ * @author Richard Hutcheson
+ */
 public class ReviewDialog {
+    /**
+     * creates the review JDialog for a Product
+     * @param product Product item the JDialog grabs information from and handles user input for
+     */
     public void createDialog(Product product){
         final int WIDTH = 400, HEIGHT = 400;
         //JDIALOG

@@ -15,11 +15,19 @@ import csi3471.bearMarket.CurrentlySelling.CSProduct;
 import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.MainScreenFiles.MainScreen;
 
+/**
+ * Table that holds the information and display render for the Purchase History table.
+ * @author Josh McKone
+ *
+ */
 public class PTable extends PurchaseHistoryPanel {
     public static Vector<PurchaseProduct> pProductVector;
     
     private static TableCellRenderer tableRenderer;
     
+    /**
+     * Function that's called by Purchase product window to populate the table for the window.
+     */
     public static void createTable() {
         ProgLogger.LOGGER.info("Creating Purchase History table");
         

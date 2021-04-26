@@ -17,7 +17,13 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.TableModel;
 
 import csi3471.bearMarket.CurrentlySelling.CurrentlySellingWindow;
+import csi3471.bearMarket.Logging.ProgLogger;
 
+/**
+ * Purchase history panel holds the information for displaying the user's purchase history.
+ * @author Josh McKone
+ *
+ */
 public class PurchaseHistoryPanel extends JPanel implements ActionListener {
     
     //Global variables
@@ -26,9 +32,12 @@ public class PurchaseHistoryPanel extends JPanel implements ActionListener {
     private JButton sellingItems, mainMenu;
     protected static TableModel tableModel;
     
-    //Populate content
+    /**
+     * Builds the table and populates the information in the panel.
+     */
     public PurchaseHistoryPanel(){
         super(new BorderLayout());
+        ProgLogger.LOGGER.info("Building Purchase History window.");
         
         JPanel MenuPanel = new JPanel(new GridLayout(2,1));
         
@@ -66,20 +75,27 @@ public class PurchaseHistoryPanel extends JPanel implements ActionListener {
         add(historyScrollPane, BorderLayout.CENTER);
     }
 
+    /**
+     * Determines action user performs.
+     * @param e ActionEvent variable that holds what performed the action and what button user clicked.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == sellingItems) {
+            ProgLogger.LOGGER.info("Switching to Currently Selling.");
             CurrentlySellingWindow.createAndShowCurrentlySelling();
             purchaseHistoryFrame.dispose();
         }
         
         if(e.getSource() == mainMenu) {
-            //TODO: Add transition back to main menu
+            ProgLogger.LOGGER.info("Closing Purchase history window.");
             purchaseHistoryFrame.dispose();
         }
     }
     
-    //Generate frame and GUI
+    /**
+     * Function called by other functions to build the frame.
+     */
     public static void createAndShowPurchaseHistory() {
         purchaseHistoryFrame = new JFrame();
         purchaseHistoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -90,6 +106,7 @@ public class PurchaseHistoryPanel extends JPanel implements ActionListener {
         purchaseHistoryFrame.setContentPane(historyPanel);
         
         purchaseHistoryFrame.pack();
+        purchaseHistoryFrame.setLocationRelativeTo(null);
         purchaseHistoryFrame.setVisible(true);
     }
 }

@@ -14,16 +14,19 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import javax.swing.table.DefaultTableModel;
-
 import javax.swing.table.TableRowSorter;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+/**
+ * Class is the controller for the core actions of the program. It presents all of the market's items in a table
+ * and displays featured items. It allows users to access most parts and features of the program
+ * @auhor Richard Hutcheson
+ */
 public class MainScreen extends JPanel implements ActionListener{
     protected static JFrame frame;
     final private JMenu accountMenu, createPostingMenu, exit;
@@ -40,6 +43,10 @@ public class MainScreen extends JPanel implements ActionListener{
     public static Account currentAccount = null;
     public static AccountInformation ai;
     FeaturedItemsDialog featuredItemsDialog;
+
+    /**
+     * MainScreen constructor holds the core code to initialize most MainScreen members
+     */
     MainScreen(){
         super(new BorderLayout());
         ProgLogger.LOGGER.info("Starting main screen dialog");
@@ -183,12 +190,12 @@ public class MainScreen extends JPanel implements ActionListener{
         Border border = new LineBorder(LIGHT_ORANGE, 3, true);
         setBorder(border);
         ProgLogger.LOGGER.info("Main Screen Dialog Completed");
-
-        //Create Account Information
-        ai = new AccountInformation(currentAccount);
-        ai.readFile();
     }
 
+    /**
+     * Determines what to user with user input
+     * @param e ActionEvent variable that tells MainScreen what the user is attempting to click on
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -227,17 +234,30 @@ public class MainScreen extends JPanel implements ActionListener{
             //user selects 'yes' option to exit application
             if (dialogResult == JOptionPane.YES_OPTION){
                 ProgLogger.LOGGER.info("User Confirmed Exit Action");
+                
+                ProductTable.saveToFile();
+                ai.saveFile();
+                
                 frame.dispose();
+                System.exit(0);
             }
-            //TODO: Save vector to file
         }
     }
+
+    /**
+     * Creates JFrame for main screen and sets it up
+     * @param account Account of the user who has logged in for this instance
+     */
     public static void createAndShowGUI(Account account){
         ProgLogger.LOGGER.info("Main Screen dialog called and Account obj passed through");
         //the account that's logged in currently
         currentAccount = account;
+        //Create Account Information
+        ai = new AccountInformation(currentAccount);
+        ai.readFile();
         frame = new JFrame("BearMarket: Main Screen");
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //Re-add Exit without saving?
         frame.setPreferredSize(new Dimension(1280, 720));
         frame.add(new MainScreen()); //Add content to the window.
         //Display the window.

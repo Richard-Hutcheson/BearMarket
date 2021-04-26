@@ -1,5 +1,6 @@
 package csi3471.bearMarket.UserMarketPosting;
 
+import csi3471.bearMarket.CurrentlySelling.CSProduct;
 import csi3471.bearMarket.CurrentlySelling.CSTable;
 import csi3471.bearMarket.CurrentlySelling.CurrentlySellingWindow;
 import csi3471.bearMarket.Logging.ProgLogger;
@@ -17,11 +18,11 @@ public class DeletePostWindow extends JPanel {
     private int deleteNdxFromMainTable = 0;
     private File userFile;
 
-    public static void DeletePostWindow(Product p) {
-        DeletePostWindow mainPanel = new DeletePostWindow(p);
+    public static void DeletePostWindow(Product p, CSProduct cp) {
+        DeletePostWindow mainPanel = new DeletePostWindow(p, cp);
     }
 
-    public DeletePostWindow(Product p) {
+    public DeletePostWindow(Product p, CSProduct cp) {
 
         userFile = new File("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
 
@@ -36,6 +37,14 @@ public class DeletePostWindow extends JPanel {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            
+            //Delete from table and update table
+            int ndx = CSTable.csProductVector.indexOf(cp);
+            Product pT = MainScreen.ai.currentlySellingProductVector.get(ndx);
+            CSTable.csProductVector.remove(cp);
+            MainScreen.ai.setCurrentlySellingVector(CSTable.csProductVector);
+            MainScreen.ai.currentlySellingProductVector.remove(ndx);
+            CurrentlySellingWindow.tableModel.fireTableDataChanged();
 
             for (int i = 0; i < ProductTable.productVector.size(); i++) {
                 if (p.getID() == ProductTable.productVector.get(i).getID()) {
