@@ -253,8 +253,6 @@ public class MainScreen extends JPanel implements ActionListener{
         //the account that's logged in currently
         currentAccount = account;
         //Create Account Information
-        ai = new AccountInformation(currentAccount);
-        ai.readFile();
         frame = new JFrame("BearMarket: Main Screen");
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //Re-add Exit without saving?
