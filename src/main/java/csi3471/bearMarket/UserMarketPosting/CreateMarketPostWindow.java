@@ -300,7 +300,9 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                 showErrFields();
             }
             else if (!hasNonIntFields) {
-                CSTable.csProductVector.add(new CSProduct(newProduct.getID()));
+                //CSTable.csProductVector.add(new CSProduct(newProduct.getID()));
+                MainScreen.ai.currentlySellingVector.add(new CSProduct(newProduct.getID()));
+                MainScreen.ai.currentlySellingProductVector.add(newProduct);
                 ProgLogger.LOGGER.info("Market Post Successfully Created");
                 createMarketPostFrame.dispose();
             }

@@ -21,9 +21,9 @@ import csi3471.bearMarket.PurchaseHistory.PurchaseProduct;
 
 public class AccountInformation {
     private Account account;
-    private Vector<CSProduct> currentlySellingVector;
+    public Vector<CSProduct> currentlySellingVector;
     public Vector<Product> currentlySellingProductVector;
-    private Vector<PurchaseProduct> purchaseHistoryVector;
+    public Vector<PurchaseProduct> purchaseHistoryVector;
     public Vector<Product> purchaseHistoryProductVector;
     private String file;
     
