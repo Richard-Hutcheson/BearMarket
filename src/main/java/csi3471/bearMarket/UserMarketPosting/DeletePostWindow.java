@@ -30,13 +30,13 @@ public class DeletePostWindow extends JPanel {
         int dialogResult = JOptionPane.showConfirmDialog(frame, "Are you sure?", "Delete Market Post", JOptionPane.YES_NO_OPTION);
 
         if (dialogResult == JOptionPane.YES_OPTION) {
-            File productFile = new File("./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv");
-            Scanner in = null;
-            try {
-                in = new Scanner(productFile);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+//            File productFile = new File("./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv");
+//            Scanner in = null;
+//            try {
+//                in = new Scanner(productFile);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
             
             //Delete from table and update table
             int ndx = CSTable.csProductVector.indexOf(cp);
@@ -54,7 +54,7 @@ public class DeletePostWindow extends JPanel {
             }
 
 
-            in.close();
+//            in.close();
         }
     }
 

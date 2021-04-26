@@ -107,6 +107,7 @@ public class ProductTable extends MainScreen{
     /**
      * adds Product item to JTable via product vector
      * @param add Product item to be added to product vector, which then gets put into JTable
+     * @author Austin Blanchard
      */
     public static void addItem(Product add) {
         ProgLogger.LOGGER.info("Attempting to add user's product to table");
@@ -116,12 +117,23 @@ public class ProductTable extends MainScreen{
         //tableModel.addRow(add.returnObjects());
     }
 
+    /**
+     * edits a currently listed product on the market place main screen
+     * @param edit Product that has been edited and to be add to the table
+     * @param removeNdx the index to remove the item from the productVector and remove from table
+     * @author Austin Blanchard
+     */
     public static void editItem(Product edit, int removeNdx) {
         productVector.remove(removeNdx);
         productVector.insertElementAt(edit, removeNdx);
         productMap.put(edit.getID(), edit);
     }
 
+    /**
+     * deletes currently listed item from the main table
+     * @param del
+     * @param removeNdx
+     */
     public static void deleteItem(Product del, int removeNdx) {
         productVector.remove(removeNdx);
         productMap.remove(del.getID(), del);
