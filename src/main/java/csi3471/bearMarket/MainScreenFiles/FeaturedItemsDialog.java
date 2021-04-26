@@ -130,6 +130,7 @@ public class FeaturedItemsDialog{
                 prod.setQuantity(prod.getQuantity() - 1);
                 if(prod.getQuantity() <= 0) {
                     ProductTable.productVector.remove(prod);
+                    //TODO: Possible area to disable items
                 }
                 MainScreen.tableModel.fireTableDataChanged();
                 MainScreen.ai.purchaseHistoryVector.add(new PurchaseProduct(prod.getID()));
