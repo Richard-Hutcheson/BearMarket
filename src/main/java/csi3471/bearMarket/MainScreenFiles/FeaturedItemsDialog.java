@@ -3,6 +3,8 @@ package csi3471.bearMarket.MainScreenFiles;
 import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.ProductFiles.Product;
 import csi3471.bearMarket.ProductReview.ReviewDialog;
+import csi3471.bearMarket.PurchaseHistory.PurchaseProduct;
+
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -11,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.Random;
+import java.util.Vector;
 
 /**
  * Create Dialog for Featured items from Product table and handle user interaction with given featured item
@@ -118,14 +121,19 @@ public class FeaturedItemsDialog{
         ProgLogger.LOGGER.info("Creating Featured Item Purchase Button");
         //PURCHASE BUTTON
         JButton purchase = new JButton("PURCHASE");
-        reviewButton.addActionListener(new ActionListener() {
+        purchase.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ProgLogger.LOGGER.info("Purchase Item Button Clicked");
-                /*
-                TO-DO:
-                JOSH, HANDLE PURCHASING ITEM FOR SALE PRICE HERE PWETTY PWEASE ;)
-                */
+                ProgLogger.LOGGER.info("Purchased featured item");
+                JOptionPane.showMessageDialog(null, "You have purchased the item");
+                //prod.setQuantity(prod.getQuantity() - 1);
+                //if(prod.getQuantity() <= 0) {
+                //    ProductTable.productVector.remove(prod);
+                //}
+                MainScreen.tableModel.fireTableDataChanged();
+                MainScreen.ai.purchaseHistoryVector.add(new PurchaseProduct(prod.getID()));
+                MainScreen.ai.purchaseHistoryProductVector.add(prod);
             }
         });
         panel.add(scrollPane);
