@@ -5,15 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Scanner;
-import java.util.zip.CheckedOutputStream;
 
 import csi3471.bearMarket.CurrentlySelling.CSProduct;
 import csi3471.bearMarket.CurrentlySelling.CSTable;
@@ -145,36 +136,11 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
         if (e.getSource() == confirmChanges) {
             Product newProduct = null;
 
-            Path path = Paths.get("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
-            byte[] buffer = null;
             boolean hasEmptyFields = false;
             boolean hasNonIntFields = false;
 
-            try {
-                buffer = (Files.readAllBytes(path));
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-
-            try {
-                userFile = new File("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
-                writePostStream = new FileOutputStream(userFile, true);
-                Scanner in = new Scanner(userFile);
-                ArrayList<String> userFileData = new ArrayList<>();
-
-                while (in.hasNextLine()) {
-                    userFileData.add(in.nextLine());
-                }
 
                 String userInputArray[] = getStringArray();
-
-                for (int i = 0; i < emptyErrFields.length; i++) {
-                    if (userInputArray[i].isEmpty()) {
-                        emptyErrFields[i] = true;
-                        hasEmptyFields = true;
-                    }
-
-                }
 
                 if (!hasEmptyFields || !hasNonIntFields) {
                     Product tempProduct = ProductTable.productVector.get(ProductTable.productVector.size() - 1);
@@ -223,29 +189,7 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                         newProduct = new Product(tempArr);
                         System.out.println(newProduct.toString());
 
-                        // add product id to user file data
-                        if (userFileData.size() == 1) {
-                            userFileData.add(1, newProduct.getID() + ",");
-                        }
-                        else  {
-                            userFileData.set(1, userFileData.get(1) + newProduct.getID() + ",");
-                        }
-
-
-                        writePostStream.close();
-                        writePostStream = new FileOutputStream(userFile);
-
-                        // rewrite the user file
-                        for (int i = 0; i < userFileData.size(); i++) {
-                            writePostStream.write(userFileData.get(i).getBytes(StandardCharsets.UTF_8));
-                            writePostStream.write(new byte[]{'\n'});
-                        }
-
-                        ProductTable.addItem(newProduct);
-
-                        File productFile = new File("./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv");
-                        FileOutputStream productFileStream = new FileOutputStream(productFile, true);
-
+                        // price parsing to round to two decimal places
                         String tsvFormat = "\n";
                         for (int i = 0; i < tempArr.length; i++) {
 
@@ -278,22 +222,9 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                             tsvFormat += (tempArr[i] + "\t");
                         }
 
-                        try {
-                            productFileStream.write(tsvFormat.getBytes(StandardCharsets.UTF_8));
-                        } catch (IOException ioErr) {
-                            ioErr.printStackTrace();
-                        }
-                        productFileStream.close();
                     }
                 }
 
-                in.close();
-                writePostStream.close();
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
 
             if (hasEmptyFields) {
                 ProgLogger.LOGGER.info("User inputted invalid field");
@@ -301,6 +232,10 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
             }
             else if (!hasNonIntFields) {
                 CSTable.csProductVector.add(new CSProduct(newProduct.getID()));
+                // add product id to user file data
+                ProductTable.addItem(newProduct);
+                MainScreen.ai.currentlySellingVector.add(new CSProduct(newProduct.getID()));
+                MainScreen.ai.currentlySellingProductVector.add(newProduct);
                 ProgLogger.LOGGER.info("Market Post Successfully Created");
                 createMarketPostFrame.dispose();
             }

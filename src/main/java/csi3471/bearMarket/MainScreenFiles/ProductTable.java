@@ -105,9 +105,11 @@ public class ProductTable extends MainScreen{
     public static void editItem(Product edit, int removeNdx) {
         productVector.remove(removeNdx);
         productVector.insertElementAt(edit, removeNdx);
+        productMap.put(edit.getID(), edit);
     }
 
     public static void deleteItem(Product del, int removeNdx) {
         productVector.remove(removeNdx);
+        productMap.remove(del.getID(), del);
     }
 }
