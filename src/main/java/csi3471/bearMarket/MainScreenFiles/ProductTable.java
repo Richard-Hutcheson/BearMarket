@@ -14,6 +14,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -115,5 +121,34 @@ public class ProductTable extends MainScreen{
         ProgLogger.LOGGER.info("Saving product table to file");
         
         String filePath = "./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv";
+        
+        File productFile = new File(filePath);
+        
+        try {
+            DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(productFile)));
+            out.close();
+            out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(productFile)));
+            out.write("Product\tCategory\tDescription\tQuantity (Stock)\tRating (x/10)\tPrice\tID\n".getBytes(StandardCharsets.UTF_8));
+            for(Product p : productVector) {
+                out.write(p.getProductName().getBytes(StandardCharsets.UTF_8));
+                out.write("\t".getBytes(StandardCharsets.UTF_8));
+                out.write(p.getCategory().getBytes(StandardCharsets.UTF_8));
+                out.write("\t".getBytes(StandardCharsets.UTF_8));
+                out.write(p.getDescription().getBytes(StandardCharsets.UTF_8));
+                out.write("\t".getBytes(StandardCharsets.UTF_8));
+                String temp = String.valueOf(p.getQuantity()) + "\t";
+                out.write(temp.getBytes(StandardCharsets.UTF_8));
+                temp = String.valueOf(p.getRating()) + "\t";
+                out.write(temp.getBytes(StandardCharsets.UTF_8));
+                temp = "$" + String.valueOf(p.getPrice()) + "\t";
+                out.write(temp.getBytes(StandardCharsets.UTF_8));
+                temp = String.valueOf(p.getID()) + "\n";
+                out.write(temp.getBytes(StandardCharsets.UTF_8));
+            }
+            
+            out.close();
+        } catch(IOException e) {
+            
+        }
     }
 }
