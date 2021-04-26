@@ -58,12 +58,6 @@ public class DeletePostWindow extends JPanel {
             }
             */
 
-
-<<<<<<< HEAD
-//            in.close();
-=======
-            //in.close();
->>>>>>> ef8688ba03c011e3e53dd0a779f0935da6ed9b54
         }
     }
 
