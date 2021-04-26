@@ -90,6 +90,7 @@ public class PurchaseHistoryPanel extends JPanel implements ActionListener {
         purchaseHistoryFrame.setContentPane(historyPanel);
         
         purchaseHistoryFrame.pack();
+        purchaseHistoryFrame.setLocationRelativeTo(null);
         purchaseHistoryFrame.setVisible(true);
     }
 }

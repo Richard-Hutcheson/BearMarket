@@ -90,6 +90,7 @@ public class CurrentlySellingWindow extends JPanel implements ActionListener {
         frame.setContentPane(sellingPanel);
         
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 }
