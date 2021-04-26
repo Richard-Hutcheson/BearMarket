@@ -197,6 +197,7 @@ public class LoginMenu extends JPanel implements ActionListener{
 			}
 	    }else if(e.getSource() == exitButton){
 			loginScreen.dispose();
+			System.exit(0);
 		}else if(e.getSource() == createButton){
 	    	CreateAccount create = new CreateAccount();
 		}

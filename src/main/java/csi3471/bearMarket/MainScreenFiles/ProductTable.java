@@ -110,4 +110,10 @@ public class ProductTable extends MainScreen{
     public static void deleteItem(Product del, int removeNdx) {
         productVector.remove(removeNdx);
     }
+    
+    public static void saveToFile() {
+        ProgLogger.LOGGER.info("Saving product table to file");
+        
+        String filePath = "./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv";
+    }
 }

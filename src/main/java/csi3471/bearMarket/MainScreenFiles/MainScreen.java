@@ -185,10 +185,6 @@ public class MainScreen extends JPanel implements ActionListener{
         Border border = new LineBorder(LIGHT_ORANGE, 3, true);
         setBorder(border);
         ProgLogger.LOGGER.info("Main Screen Dialog Completed");
-
-        //Create Account Information
-        ai = new AccountInformation(currentAccount);
-        ai.readFile();
     }
 
     @Override
@@ -230,10 +226,11 @@ public class MainScreen extends JPanel implements ActionListener{
             if (dialogResult == JOptionPane.YES_OPTION){
                 ProgLogger.LOGGER.info("User Confirmed Exit Action");
                 
-                //TODO: Save Product List
-                //TODO: Save account information
+                ProductTable.saveToFile();
+                ai.saveFile();
                 
                 frame.dispose();
+                System.exit(0);
             }
         }
     }
@@ -241,6 +238,9 @@ public class MainScreen extends JPanel implements ActionListener{
         ProgLogger.LOGGER.info("Main Screen dialog called and Account obj passed through");
         //the account that's logged in currently
         currentAccount = account;
+        //Create Account Information
+        ai = new AccountInformation(currentAccount);
+        ai.readFile();
         frame = new JFrame("BearMarket: Main Screen");
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //Re-add Exit without saving?

@@ -1,9 +1,14 @@
 package csi3471.bearMarket;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
 import csi3471.bearMarket.AccountFiles.Account;
@@ -42,9 +47,22 @@ public class AccountInformation {
         try {
             ProgLogger.LOGGER.info("Attempting to open file");
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-            br.readLine();
+            String acS = br.readLine();
             String csS = br.readLine();
             String phS = br.readLine();
+            
+            String[] acc = acS.split(",");
+            
+            account.setUsername(acc[0]);
+            account.setPassword(acc[1]);
+            account.setFirstName(acc[2]);
+            account.setLastName(acc[3]);
+            account.setShippingAddress(acc[4]);
+            account.setState(acc[5]);
+            account.setZip(acc[6]);
+            account.setCardNumber(acc[7]);
+            account.setCvv(acc[8]);
+            account.setCardZip(acc[9]);
 
             try {
                 if(csS == null) {
@@ -90,8 +108,55 @@ public class AccountInformation {
     }
     
     public void saveFile() {
-        //TODO: Add save functionality
+        ProgLogger.LOGGER.info("Writing Account Information to file.");
+        
+        File accountFile = new File(file);
+        
+        try {
+            //Open up file and clear it
+            DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(accountFile)));
+            out.close();
+            out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(accountFile)));
+            out.write(account.getUsername().getBytes(StandardCharsets.UTF_8));
+            out.write(",".getBytes(StandardCharsets.UTF_8));
+            out.write(account.getPassword().getBytes(StandardCharsets.UTF_8));
+            out.write(",".getBytes(StandardCharsets.UTF_8));
+            out.write(account.getFirstName().getBytes(StandardCharsets.UTF_8));
+            out.write(",".getBytes(StandardCharsets.UTF_8));
+            out.write(account.getLastName().getBytes(StandardCharsets.UTF_8));
+            out.write(",".getBytes(StandardCharsets.UTF_8));
+            out.write(account.getShippingAddress().getBytes(StandardCharsets.UTF_8));
+            out.write(",".getBytes(StandardCharsets.UTF_8));
+            out.write(account.getState().getBytes(StandardCharsets.UTF_8));
+            out.write(",".getBytes(StandardCharsets.UTF_8));
+            out.write(account.getZip().getBytes(StandardCharsets.UTF_8));
+            out.write(",".getBytes(StandardCharsets.UTF_8));
+            out.write(account.getCardNumber().getBytes(StandardCharsets.UTF_8));
+            out.write(",".getBytes(StandardCharsets.UTF_8));
+            out.write(account.getCvv().getBytes(StandardCharsets.UTF_8));
+            out.write(",".getBytes(StandardCharsets.UTF_8));
+            out.write(account.getCardZip().getBytes(StandardCharsets.UTF_8));
+            out.write("\n".getBytes(StandardCharsets.UTF_8));
+            
+            for(CSProduct p : currentlySellingVector) {
+                out.write(String.valueOf(p.getID()).getBytes(StandardCharsets.UTF_8));
+                out.write(",".getBytes(StandardCharsets.UTF_8));
+            }
+            
+            out.write("\n".getBytes(StandardCharsets.UTF_8));
+            
+            for(PurchaseProduct p : purchaseHistoryVector) {
+                out.write(String.valueOf(p.getID()).getBytes(StandardCharsets.UTF_8));
+                out.write(",".getBytes(StandardCharsets.UTF_8));
+            }
+            
+            out.close();
+            
+        } catch(IOException e) {
+            
+        }
     }
+
     
     public Account getAccount() {
         return account;

@@ -45,6 +45,7 @@ public class DeletePostWindow extends JPanel implements ActionListener {
             
             //Delete from table and update table
             int ndx = CSTable.csProductVector.indexOf(cp);
+            Product pT = MainScreen.ai.currentlySellingProductVector.get(ndx);
             CSTable.csProductVector.remove(cp);
             MainScreen.ai.setCurrentlySellingVector(CSTable.csProductVector);
             MainScreen.ai.currentlySellingProductVector.remove(ndx);

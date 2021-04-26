@@ -159,6 +159,7 @@ public class Product implements ActionListener {
             dialog.setVisible(true);
         }
         if (e.getSource() == purchaseButton){
+            ProgLogger.LOGGER.info("Purchased item");
             JOptionPane.showMessageDialog(null, "You have purchased the item");
             quantity--;
             if(quantity <= 0) {
