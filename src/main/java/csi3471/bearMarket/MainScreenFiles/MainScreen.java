@@ -262,6 +262,7 @@ public class MainScreen extends JPanel implements ActionListener{
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        //Create Account Information
         ai = new AccountInformation(currentAccount);
         ai.readFile();
         ProgLogger.LOGGER.info("Main Screen GUI Displayed");

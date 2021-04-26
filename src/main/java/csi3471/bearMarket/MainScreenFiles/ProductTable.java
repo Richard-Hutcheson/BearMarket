@@ -112,6 +112,7 @@ public class ProductTable extends MainScreen{
         ProgLogger.LOGGER.info("Attempting to add user's product to table");
         productVector.add(add);
         productMap.put(add.getID(), add);
+        tableModel.fireTableDataChanged();
         //productMap.put(add.hashCode(), add);
         //tableModel.addRow(add.returnObjects());
     }
@@ -119,10 +120,12 @@ public class ProductTable extends MainScreen{
     public static void editItem(Product edit, int removeNdx) {
         productVector.remove(removeNdx);
         productVector.insertElementAt(edit, removeNdx);
+        productMap.put(edit.getID(), edit);
     }
 
     public static void deleteItem(Product del, int removeNdx) {
         productVector.remove(removeNdx);
+        productMap.remove(del.getID(), del);
     }
     
     /**
