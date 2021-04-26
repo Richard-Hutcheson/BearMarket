@@ -113,6 +113,7 @@ public class ProductTable extends MainScreen{
         ProgLogger.LOGGER.info("Attempting to add user's product to table");
         productVector.add(add);
         productMap.put(add.getID(), add);
+        tableModel.fireTableDataChanged();
         //productMap.put(add.hashCode(), add);
         //tableModel.addRow(add.returnObjects());
     }

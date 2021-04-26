@@ -24,12 +24,13 @@ public class DeletePostWindow extends JPanel {
 
     public DeletePostWindow(Product p, CSProduct cp) {
 
-        userFile = new File("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
+        //userFile = new File("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
 
         // save the option result
         int dialogResult = JOptionPane.showConfirmDialog(frame, "Are you sure?", "Delete Market Post", JOptionPane.YES_NO_OPTION);
 
         if (dialogResult == JOptionPane.YES_OPTION) {
+
 //            File productFile = new File("./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv");
 //            Scanner in = null;
 //            try {
@@ -45,16 +46,24 @@ public class DeletePostWindow extends JPanel {
             MainScreen.ai.setCurrentlySellingVector(CSTable.csProductVector);
             MainScreen.ai.currentlySellingProductVector.remove(ndx);
             CurrentlySellingWindow.tableModel.fireTableDataChanged();
+            ProductTable.productVector.remove(pT);
+            MainScreen.tableModel.fireTableDataChanged();
 
+            /*
             for (int i = 0; i < ProductTable.productVector.size(); i++) {
                 if (p.getID() == ProductTable.productVector.get(i).getID()) {
                     ProductTable.deleteItem(p, i);
                     break;
                 }
             }
+            */
 
 
+<<<<<<< HEAD
 //            in.close();
+=======
+            //in.close();
+>>>>>>> ef8688ba03c011e3e53dd0a779f0935da6ed9b54
         }
     }
 
