@@ -343,7 +343,7 @@ public class EditAccount implements ActionListener {
                         (String) stateField.getText(), (String) zipField.getText(), (String) cardNumberField.getText(),
                         (String) cvvField.getText(), (String) cardZipField.getText());
                 
-                MainScreen.ai.setAccount(updatedAccount);
+                MainScreen.ai.updateFileName(updatedAccount);
 
                 //Output testing to ensure the updatedAccount is working
                 //System.out.println("****************");

@@ -40,7 +40,7 @@ public class CSProduct implements ActionListener {
         } 
         
         if (e.getSource() == deleteButton) {
-            DeletePostWindow.DeletePostWindow(this.getOriginalProduct());
+            DeletePostWindow.DeletePostWindow(this.getOriginalProduct(), this);
         }
     }
     

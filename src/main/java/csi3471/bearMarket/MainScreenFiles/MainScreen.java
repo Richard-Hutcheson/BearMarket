@@ -23,6 +23,8 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MainScreen extends JPanel implements ActionListener{
     protected static JFrame frame;
@@ -227,9 +229,12 @@ public class MainScreen extends JPanel implements ActionListener{
             //user selects 'yes' option to exit application
             if (dialogResult == JOptionPane.YES_OPTION){
                 ProgLogger.LOGGER.info("User Confirmed Exit Action");
+                
+                //TODO: Save Product List
+                //TODO: Save account information
+                
                 frame.dispose();
             }
-            //TODO: Save vector to file
         }
     }
     public static void createAndShowGUI(Account account){
@@ -238,6 +243,7 @@ public class MainScreen extends JPanel implements ActionListener{
         currentAccount = account;
         frame = new JFrame("BearMarket: Main Screen");
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //Re-add Exit without saving?
         frame.setPreferredSize(new Dimension(1280, 720));
         frame.add(new MainScreen()); //Add content to the window.
         //Display the window.
