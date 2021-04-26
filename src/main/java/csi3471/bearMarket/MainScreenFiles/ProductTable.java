@@ -1,18 +1,12 @@
 package csi3471.bearMarket.MainScreenFiles;
 
-import com.sun.tools.javac.Main;
 import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.ProductFiles.Product;
 import csi3471.bearMarket.ProductFiles.ReadProductFile;
-
 import csi3471.bearMarket.ProductReview.ReadReviews;
-
-
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
@@ -24,11 +18,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+/**
+ * Class handles creation of the JTableModel and JTable and handles all table setup such as
+ * reading in the product file and reading in reviews from file
+ * @author Richard Hutcheson
+ */
 public class ProductTable extends MainScreen{
 
     public static Map<Integer, Product> productMap = new HashMap<>();
     public static Vector<Product> productVector = new Vector<>();
     private static TableCellRenderer tableRenderer;
+
+    /**
+     * handles creation of the JTableModel and JTable and handles all table setup such as
+     * reading in the product file and reading in reviews from file
+     */
     public static void createTable(){
         ProgLogger.LOGGER.info("Creating Product Table Function Called");
 
@@ -100,11 +104,15 @@ public class ProductTable extends MainScreen{
         scrollPane.setPreferredSize(new Dimension(900, 400));
     }
 
+    /**
+     * adds Product item to JTable via product vector
+     * @param add Product item to be added to product vector, which then gets put into JTable
+     */
     public static void addItem(Product add) {
         ProgLogger.LOGGER.info("Attempting to add user's product to table");
-
         productVector.add(add);
         productMap.put(add.getID(), add);
+        //productMap.put(add.hashCode(), add);
         //tableModel.addRow(add.returnObjects());
     }
 

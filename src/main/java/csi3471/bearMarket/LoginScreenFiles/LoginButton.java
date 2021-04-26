@@ -1,19 +1,32 @@
+//Created by Noah Lambaria
 package csi3471.bearMarket.LoginScreenFiles;
-
 import csi3471.bearMarket.AccountFiles.Account;
+import csi3471.bearMarket.Logging.ProgLogger;
 
 import java.io.*;
 import java.util.concurrent.atomic.AtomicBoolean;
-
+/**
+ * This class acts as a util for the logging in process of BearMarket
+ * @author Noah Lambaria
+ */
 public class LoginButton {
 
-
+    /**
+     * This is the default constructor for the LoginButton, which validates
+     * user input and decides if the user can log in based on the information
+     * typed in.
+     *
+     * @param checker boolean to determine whether or not the account is valid
+     * @param username the username inputted
+     * @param password the password inputted
+     *
+     */
     public LoginButton(AtomicBoolean checker, String username, char[] password) {
         //this will contain the code needed to check if the user
         //can log in, with the boolean being the condition to be modified
         //by referenced based on if the user can login or not.
 
-
+        ProgLogger.LOGGER.info("Login button pressed");
         String thePassword = new String(password);
 
         try {
@@ -59,8 +72,10 @@ public class LoginButton {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            ProgLogger.LOGGER.severe("The file was not found when clicking the login button");
         } catch (IOException e) {
             e.printStackTrace();
+            ProgLogger.LOGGER.severe("The account file was not read/written in properly");
         }
     }
 }

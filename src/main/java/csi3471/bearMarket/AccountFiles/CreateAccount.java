@@ -2,6 +2,8 @@
 
 package csi3471.bearMarket.AccountFiles;
 
+import csi3471.bearMarket.Logging.ProgLogger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +16,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Objects;
-
+/**
+ * This class implements the create account window
+ * @author Noah Lambaria
+ */
 public class CreateAccount implements ActionListener {
     //Initialize variables within CreateAccount Class
     static JFrame createFrame;
@@ -34,8 +39,9 @@ public class CreateAccount implements ActionListener {
     JLabel informationEmptyError2,informationEmptyError3,informationEmptyError4,informationEmptyError5,informationEmptyError6;
     JLabel informationEmptyError7,informationEmptyError8,informationEmptyError9,informationEmptyError10,informationEmptyError1;
 
-
-
+    /**
+     * Default constructor, which creates the frame of the window
+     */
     public CreateAccount(){
         //Create a new frame that will ask the user to input information
         createFrame = new JFrame();
@@ -47,8 +53,11 @@ public class CreateAccount implements ActionListener {
         createFrame.setLocationRelativeTo(null); //centers screen, must be after .pack
     }
 
-    //Creates the table
+    /**
+     * Creates the table for the user to type in their information for account creation
+     */
     public void createTable(){
+        ProgLogger.LOGGER.info("Creating table for user to enter personal information in");
         //Label to inform the user to enter the information
         JLabel inform = new JLabel("Please Enter your information below...");
         inform.setFont(new Font("Serif", Font.BOLD, 20));
@@ -201,6 +210,7 @@ public class CreateAccount implements ActionListener {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
+                    ProgLogger.LOGGER.info("ToS check pressed");
                     TermsOfServiceDialog x = new TermsOfServiceDialog();
                     x.createDialog();
                     saveButton.setEnabled(true);
@@ -213,12 +223,6 @@ public class CreateAccount implements ActionListener {
         gbc.gridx = 1;
         gbc.gridy = 10;
         allInformation.add(tos,gbc);
-
-
-
-
-
-
 
         //Finally, add all of the information above to the frame.
         createFrame.add(allInformation);
@@ -240,11 +244,15 @@ public class CreateAccount implements ActionListener {
 
         createFrame.add(bottomSection,BorderLayout.SOUTH);
     }
+    /**
+     * Save/cancel buttons for account creation handling
+     * @param e the action event based on button pressed
+     */
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == backButton) { createFrame.dispose(); }
         else if(e.getSource() == saveButton){
-
+            ProgLogger.LOGGER.info("Save button in account creation pressed");
 
             userNameTakenError = new JLabel("  Username taken, try another username");
             userNameTakenError.setVisible(false);
@@ -404,8 +412,9 @@ public class CreateAccount implements ActionListener {
 
 
 
-                //If the user name has been taken, infrom the user of it
+                //If the user name has been taken, inform the user of it
                 if (userNameTaken) {
+                    ProgLogger.LOGGER.info("Username was taken during account creation, account not created");
                     createFrame.remove(allInformation);
                     userNameTakenError.setOpaque(true);
                     userNameTakenError.setVisible(true);
@@ -422,7 +431,7 @@ public class CreateAccount implements ActionListener {
                     createFrame.repaint();
 
                 }else if(!emptyString && !userNameTaken){
-
+                    ProgLogger.LOGGER.info("No empty fields & Username Not Taken, Creating account...");
                     //If no empty string, and username hasn't been taken,
                     //Now create the account
 
@@ -467,6 +476,7 @@ public class CreateAccount implements ActionListener {
                         Files.write(Paths.get("src/main/java/csi3471/bearMarket/AccountFiles/accountList.csv"), newLine.getBytes(), StandardOpenOption.APPEND);
                     }catch (IOException ex) {
                         ex.printStackTrace();
+                        ProgLogger.LOGGER.severe("The account file was not read/written in properly");
                     }
 
                     //Close the files and dispose of the frame.
@@ -477,11 +487,21 @@ public class CreateAccount implements ActionListener {
 
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
+                ProgLogger.LOGGER.severe("The account file was not found");
             } catch (IOException ioException) {
                 ioException.printStackTrace();
+                ProgLogger.LOGGER.severe("The account file was not read/written in properly");
             }
         }
     }
+    /**
+     * Function that prints errors if the information the
+     * user inputs is empty
+     * @param y the position that the error is currently placed
+     *          in the JPanel
+     * @param theLabel the JLabel that holds the specific error based
+     *                 on the row
+     */
     //Used to print error that empty text filter
     public void printEmptyError(int y, JLabel theLabel){
         createFrame.remove(allInformation);
@@ -503,6 +523,14 @@ public class CreateAccount implements ActionListener {
         createFrame.repaint();
     }
 
+    /**
+     * Function that updates the frame to remove previously empty text fields
+     * that now satisfy conditions
+     * @param y the position that the error is currently placed
+     *          in the JPanel
+     * @param theLabel the JLabel that holds the specific error based
+     *                 on the row
+     */
     public void removeEmptyError(int y, JLabel theLabel){
         createFrame.remove(allInformation);
         //theLabel.setVisible(false);
