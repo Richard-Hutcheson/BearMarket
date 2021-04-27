@@ -29,27 +29,26 @@ Looking for software to order products straight to your door? Or perhaps you're 
    </table>
 </div>
 
-<iframe width="560" height="315" src="https://youtube.com/embed/9ZPbbPSTpOg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 
 ### The Bear Market Team
 
-- Richard Hutcheson (Time Invested: *50* hours):
+- Richard Hutcheson (Time Invested: *94* hours):
   - Website
   - Product Table
   - Featured Items
   - Menus
-- Noah Lambaria (Time Invested: *48* hours):
+  <iframe width="360" height="115" src="https://youtu.be/embed/PQyHEO7CphY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+- Noah Lambaria (Time Invested: *90* hours):
   - Create Account
   - Login
   - Edit Account
   - Browse Reviews
-- Austin Blanchard (Time Invested: *42* hours):
+- Austin Blanchard (Time Invested: *85* hours):
   - Create Market Posting
   - Delete Market Posting
   - Edit Market Posting
   - Review Generation
-- Joshua McKone (Time Invested: *42* hours):
+- Joshua McKone (Time Invested: *85* hours):
   - Purchase History
   - Item Selling
   - Purchase ITem
