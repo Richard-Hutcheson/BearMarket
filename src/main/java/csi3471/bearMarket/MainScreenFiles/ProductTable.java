@@ -132,8 +132,10 @@ public class ProductTable extends MainScreen{
 
     /**
      * deletes currently listed item from the main table
-     * @param del
-     * @param removeNdx
+     * @param del product to delete from the main table
+     * @param removeNdx the index of the vector to remove the item from
+     *        the table
+     * @author Austin Blanchard
      */
     public static void deleteItem(Product del, int removeNdx) {
         productVector.remove(removeNdx);

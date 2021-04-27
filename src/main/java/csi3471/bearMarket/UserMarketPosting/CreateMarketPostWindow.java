@@ -12,6 +12,17 @@ import csi3471.bearMarket.Logging.*;
 import csi3471.bearMarket.MainScreenFiles.*;
 import csi3471.bearMarket.ProductFiles.Product;
 
+/**
+ * CreateMarketPostWindow
+ *
+ * - This class is responsible for the functionality and design of the
+ * Create Market Post Window.
+ *
+ * - This class will display a window to take in necessary information to
+ * Create a Market posting for the user to list on the main marketplace
+ *
+ * @author Austin Blanchard
+ */
 public class CreateMarketPostWindow extends JPanel implements ActionListener {
 
     protected static JFrame createMarketPostFrame;
@@ -42,6 +53,12 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
         createMarketPostFrame.setVisible(true);
     }
 
+    /**
+     * getStringArray
+     *
+     * @return an array of Strings getting the user inputted data
+     *         from the text field in the window
+     */
     private String[] getStringArray() {
         return new String[]{tempTextField[0].getText(), (String)comboBox.getSelectedItem(),
                 tempTextField[1].getText(), tempTextField[2].getText(), tempTextField[3].getText()};
@@ -49,6 +66,8 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
 
     public CreateMarketPostWindow() {
         setLayout(new GridBagLayout());
+
+        ProgLogger.LOGGER.info("Create Market Post Window Created");
 
         c = new GridBagConstraints();
         tempLabel = new JLabel[productDescriptors.length];
@@ -107,11 +126,19 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * showErrFields
+     *
+     * - This function displays the empty error fields within the
+     * Create User Market post window
+     *
+     * @author Austin Blanchard
+     */
     public void showErrFields() {
         c.gridx = 3;
         JLabel errMsg[] = new JLabel[emptyErrFields.length];
         for (int j = 0; j < emptyErrFields.length; j++) {
-            if (errMsg[j] != null) {
+            if (errMsg[j] != null && !emptyErrFields[j]) {
                 remove(errMsg[j]);
             }
 
@@ -129,7 +156,12 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
         createMarketPostFrame.repaint();
     }
 
-
+    /**
+     * - This function updates the main product table and currently selling window
+     * with the newly added item
+     *
+     * @author Austin Blanchard
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -182,6 +214,13 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
                         ProgLogger.LOGGER.info("User inputted invalid price field");
                     }
 
+                    emptyErrFields[0] = userInputArray[0].isEmpty();
+                    emptyErrFields[2] = userInputArray[2].isEmpty();
+
+                    if (emptyErrFields[0] || emptyErrFields[2]) {
+                        hasEmptyFields = true;
+                    }
+
                     createMarketPostFrame.revalidate();
                     createMarketPostFrame.repaint();
 
@@ -229,10 +268,12 @@ public class CreateMarketPostWindow extends JPanel implements ActionListener {
             if (hasEmptyFields) {
                 ProgLogger.LOGGER.info("User inputted invalid field");
                 showErrFields();
+                hasEmptyFields = false;
+                for (int i = 0; i < emptyErrFields.length; i++) {
+                    emptyErrFields[i] = false;
+                }
             }
             else if (!hasNonIntFields) {
-
-//                CSTable.csProductVector.add(new CSProduct(newProduct.getID()));
                 // add product id to user file data
                 ProductTable.addItem(newProduct);
                 MainScreen.ai.currentlySellingVector.add(new CSProduct(newProduct.getID()));

@@ -10,8 +10,15 @@ import csi3471.bearMarket.ProductFiles.Product;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.Scanner;
 
+/**
+ * DeletePostWindow
+ *
+ * - This class is responsible for the prompting of deleting a user
+ * market posting from the currently selling window
+ *
+ * @author Austin Blanchard
+ */
 public class DeletePostWindow extends JPanel {
 
     private static JFrame frame;
@@ -24,20 +31,12 @@ public class DeletePostWindow extends JPanel {
 
     public DeletePostWindow(Product p, CSProduct cp) {
 
-        //userFile = new File("./users/" + MainScreen.currentAccount.getUsername() + ".csv");
-
         // save the option result
         int dialogResult = JOptionPane.showConfirmDialog(frame, "Are you sure?", "Delete Market Post", JOptionPane.YES_NO_OPTION);
 
-        if (dialogResult == JOptionPane.YES_OPTION) {
+        ProgLogger.LOGGER.info("Delete Market Post Prompt has been called");
 
-//            File productFile = new File("./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv");
-//            Scanner in = null;
-//            try {
-//                in = new Scanner(productFile);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
+        if (dialogResult == JOptionPane.YES_OPTION) {
             
             //Delete from table and update table
             int ndx = CSTable.csProductVector.indexOf(cp);
@@ -48,16 +47,10 @@ public class DeletePostWindow extends JPanel {
             CurrentlySellingWindow.tableModel.fireTableDataChanged();
             ProductTable.productVector.remove(pT);
             MainScreen.tableModel.fireTableDataChanged();
-
-            /*
-            for (int i = 0; i < ProductTable.productVector.size(); i++) {
-                if (p.getID() == ProductTable.productVector.get(i).getID()) {
-                    ProductTable.deleteItem(p, i);
-                    break;
-                }
-            }
-            */
-
+            ProgLogger.LOGGER.info("User market posting was successfully deleted");
+        }
+        else if (dialogResult == JOptionPane.NO_OPTION) {
+            ProgLogger.LOGGER.info("User market posting was not deleted");
         }
     }
 

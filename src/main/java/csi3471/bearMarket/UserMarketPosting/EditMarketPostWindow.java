@@ -3,6 +3,7 @@ package csi3471.bearMarket.UserMarketPosting;
 import csi3471.bearMarket.CurrentlySelling.CSProduct;
 import csi3471.bearMarket.CurrentlySelling.CSTable;
 import csi3471.bearMarket.CurrentlySelling.CurrentlySellingWindow;
+import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.MainScreenFiles.MainScreen;
 import csi3471.bearMarket.MainScreenFiles.ProductTable;
 import csi3471.bearMarket.ProductFiles.Product;
@@ -12,6 +13,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+/**
+ * EditMarketPostWindow
+ *
+ * - This class is responsible for editing a market posting that is currently
+ * selling to the user
+ *
+ * - It will prompt the user to change the attributes of their product
+ * and will update the currently selling menu and the main table accordingly
+ *
+ * @author Austin Blanchard
+ */
 public class EditMarketPostWindow extends CreateMarketPostWindow implements ActionListener {
 
     private CSProduct editProduct;
@@ -19,7 +32,7 @@ public class EditMarketPostWindow extends CreateMarketPostWindow implements Acti
     private int editNdx = 0;
 
     public static void createEditPostWindow(CSProduct edit) {
-        createMarketPostFrame = new JFrame();
+        createMarketPostFrame = new JFrame("Edit Market Posting");
         createMarketPostFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         EditMarketPostWindow mainPanel = new EditMarketPostWindow(edit);
@@ -32,8 +45,23 @@ public class EditMarketPostWindow extends CreateMarketPostWindow implements Acti
         createMarketPostFrame.setVisible(true);
     }
 
+    /**
+     * EditMarketPostWindow
+     *
+     * - This constructor will display the window for the user to edit their
+     * market posting.
+     *
+     * - It will automatically prefill the text using the data from the
+     * parameter.
+     *
+     * @param edit this is the product that will be edited by the user
+     * @author Austin Blanchard
+     */
     public EditMarketPostWindow(CSProduct edit) {
         super();
+
+        ProgLogger.LOGGER.info("Edit Market Post Window has been created");
+
         editProduct = edit;
         tempProduct = new Product();
 
@@ -81,7 +109,12 @@ public class EditMarketPostWindow extends CreateMarketPostWindow implements Acti
 
     }
 
-
+    /**
+     * - This function will update the main market table and the currently
+     * selling table with the edited information on the user market post.
+     *
+     * @author Austin Blanchard
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == confirmChanges) {
@@ -115,10 +148,12 @@ public class EditMarketPostWindow extends CreateMarketPostWindow implements Acti
             }
             MainScreen.ai.currentlySellingProductVector.set(currentlySellingEditNdx, editProduct.getOriginalProduct());
 
+            ProgLogger.LOGGER.info("User Market Post has been edited");
             createMarketPostFrame.dispose();
         }
 
         if (e.getSource() == cancelChanges) {
+            ProgLogger.LOGGER.info("User Market Post editing changes were canceled");
             createMarketPostFrame.dispose();
         }
     }
