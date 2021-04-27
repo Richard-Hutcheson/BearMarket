@@ -42,7 +42,7 @@ public class AccountInformation {
         currentlySellingProductVector = new Vector<>();
         purchaseHistoryVector = new Vector<>();
         purchaseHistoryProductVector = new Vector<>();
-        file = "users/" + ac.getUsername() + ".csv";
+        file = "src/main/resources/users/" + ac.getUsername() + ".csv";
     }
     
     /**

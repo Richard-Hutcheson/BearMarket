@@ -7,7 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,12 +77,22 @@ public class TermsOfServiceDialog {
      * This function returns the ToS Text from a text file
      */
     private String getTOSText(){
-
-
         try {
             ProgLogger.LOGGER.info("Reading ToS txt file");
-            return new String(Files.readAllBytes(Path.of("src/main/java/csi3471/bearMarket/AccountFiles/TermsAndConditions.txt")));
+            InputStream in = getClass().getResourceAsStream("/TermsAndConditions.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String s = "";
+            String line;
+            while ((line = reader.readLine()) != null) {
+                s += line + "\n";
+            }
+            return s;
+            //return new String(Files.readAllBytes(Path.of("src/main/resources/TermsAndConditions.txt")));
         } catch (IOException e) {
+            e.printStackTrace();
+            ProgLogger.LOGGER.severe("ToS file was not able to be read properly!");
+            return "";
+        }catch(NullPointerException e){
             e.printStackTrace();
             ProgLogger.LOGGER.severe("ToS file was not able to be read properly!");
             return "";

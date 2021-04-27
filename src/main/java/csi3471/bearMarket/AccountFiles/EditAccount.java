@@ -48,7 +48,7 @@ public class EditAccount implements ActionListener {
 
         //get the information associated with the account
         String fileName = currentAccount.username + ".csv";
-        File directory = new File("users");
+        File directory = new File("src/main/resources/users");
         File actualFile = new File(directory, fileName);
 
         try {

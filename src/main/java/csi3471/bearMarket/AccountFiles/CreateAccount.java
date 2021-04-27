@@ -263,7 +263,7 @@ public class CreateAccount implements ActionListener {
             try {
 
                 //reads the account list information to verify the username has not been taken
-                BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/java/csi3471/bearMarket/AccountFiles/accountList.csv")));
+                BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/resources/accountList.csv")));
                 String line = null;
                 Account a = null;
                 Boolean userNameTaken = false, emptyString = false;

@@ -17,7 +17,7 @@ public class ReadReviews {
      */
     public static void readInReviews(Map<Integer, Product> productMap){
         ProgLogger.LOGGER.info("Read Reviews Function Called");
-        final String REVIEW_FILE = "src/main/java/csi3471/bearMarket/ProductReview/productReviews.txt";
+        final String REVIEW_FILE = "src/main/resources/productReviews.txt";
         try {
             ProgLogger.LOGGER.info("Trying to read in file");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(REVIEW_FILE), StandardCharsets.UTF_8));

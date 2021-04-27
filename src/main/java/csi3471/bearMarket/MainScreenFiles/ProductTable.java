@@ -95,7 +95,7 @@ public class ProductTable extends MainScreen{
 
         ProgLogger.LOGGER.info("Reading in Product file");
         //read in product file
-        final String file = "src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv";
+        final String file = "src/main/resources/product_list.tsv";
         ReadProductFile.readFile(file, productVector, productMap);
         ProgLogger.LOGGER.info("Reading in Product Review File");
         ReadReviews.readInReviews(productMap);
@@ -134,7 +134,7 @@ public class ProductTable extends MainScreen{
     public static void saveToFile() {
         ProgLogger.LOGGER.info("Saving product table to file");
         
-        String filePath = "./src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv";
+        String filePath = "src/main/java/resources/product_list.tsv";
         
         File productFile = new File(filePath);
         
