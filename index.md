@@ -34,27 +34,27 @@ Looking for software to order products straight to your door? Or perhaps you're 
 
 - Richard Hutcheson (Time Invested: *94* hours):
   - Website
-  - Product Table
+  - Product Sorting and Filtering
   - Featured Items
-  - Menus
+  - Descriptions
+  - Reviews
   <iframe width="360" height="215" src="https://youtube.com/embed/5_D3jhomFpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 - Noah Lambaria (Time Invested: *90* hours):
   - Create Account
   - Login
   - Edit Account
-  - Browse Reviews
   <iframe width="360" height="215" src="https://youtube.com/embed/PQyHEO7CphY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 - Austin Blanchard (Time Invested: *85* hours):
   - Create Market Posting
   - Delete Market Posting
   - Edit Market Posting
-  - Review Generation
   <iframe width="360" height="215" src="https://youtube.com/embed/Dw3uobh7zng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 - Joshua McKone (Time Invested: *85* hours):
   - Purchase History
   - Item Selling
-  - Purchase ITem
+  - Purchase Item
   <iframe width="360" height="215" src="https://youtube.com/embed/8pa7-W3c1_g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 ### Contact us
 
 Have a question? Shoot us an email at ***themarketplace.csi@gmail.com*** and we’ll get back to you as soon as possible!
