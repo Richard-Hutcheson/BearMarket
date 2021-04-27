@@ -37,7 +37,7 @@ Looking for software to order products straight to your door? Or perhaps you're 
   - Product Table
   - Featured Items
   - Menus
-  <iframe width="360" height="115" src="https://youtu.be/embed/PQyHEO7CphY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe width="360" height="115" src="https://youtube.com/embed/PQyHEO7CphY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 - Noah Lambaria (Time Invested: *90* hours):
   - Create Account
   - Login
