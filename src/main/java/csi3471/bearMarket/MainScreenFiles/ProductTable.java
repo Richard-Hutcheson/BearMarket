@@ -148,7 +148,7 @@ public class ProductTable extends MainScreen{
     public static void saveToFile() {
         ProgLogger.LOGGER.info("Saving product table to file");
         
-        String filePath = "src/main/java/resources/product_list.tsv";
+        String filePath = "src/main/resources/product_list.tsv";
         
         File productFile = new File(filePath);
         

@@ -51,7 +51,7 @@ public class AccountInformation {
      */
     public void updateFileName(Account ac) {
         account = ac;
-        file = "users/" + ac.getUsername() + ".csv";
+        file = "src/main/resources/users/" + ac.getUsername() + ".csv";
     }
     
     /**
