@@ -44,12 +44,16 @@ public class ReadReviews {
                         case 3:
                             tempDesc = parsedLine[i];
                             Review review = new Review(tempUsername, tempRating, tempDesc);
-                            productMap.get(tempID).getReviews().add(review);
-                            t = 1;
+                            try{
+                                productMap.get(tempID).getReviews().add(review);
+                                t = 1;
+                            }catch(NullPointerException e){
+                                ProgLogger.LOGGER.warning("product was deleted so ignore this review and do not add to map");
+                                break;
+                            }
                             break;
                         default:
                             ProgLogger.LOGGER.warning("switch value in ReadReviews on wrong value. this can result in improper parsing of reviews");
-                            System.out.println("Error: switch value in ReadReviews ");
                     }
                 }
             }
