@@ -2,16 +2,16 @@ package csi3471.bearMarket.JUnitTests;
 
 import csi3471.bearMarket.AccountInformation;
 import csi3471.bearMarket.AccountFiles.Account;
+import csi3471.bearMarket.CurrentlySelling.CSProduct;
+import csi3471.bearMarket.CurrentlySelling.CSReadFile;
 import csi3471.bearMarket.Logging.ProgLogger;
+import csi3471.bearMarket.MainScreenFiles.ProductTable;
 import csi3471.bearMarket.ProductFiles.Product;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
@@ -44,7 +44,7 @@ public class LogicTests {
     @Test
     void testReadProducts(){
         try{
-            final String file = "src/main/java/csi3471/bearMarket/ProductFiles/product_list.tsv";
+            final String file = "src/main/resources/product_list.tsv";
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
             bufferedReader.readLine(); //waste first line of csv
             String line = "";
@@ -63,7 +63,7 @@ public class LogicTests {
     @Test
     void testReadReviews(){
         try{
-            final String file = "src/main/java/csi3471/bearMarket/ProductReview/productReviews.txt";
+            final String file = "src/main/resources/product_list.tsv";
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
             bufferedReader.readLine(); //waste first line of csv
             String line = "";
@@ -85,5 +85,18 @@ public class LogicTests {
         AccountInformation testAccountInformation = new AccountInformation(testAccount);
         testAccountInformation.readFile();
         Assertions.assertEquals("csTest", testAccountInformation.getAccount().getUsername());
+    }
+
+    @Test
+    void currentlySellingReadFile() {
+        String userFile = new String("src/main/resources/users/csTest.csv");
+        Vector<CSProduct> testVec = new Vector<>();
+        ProductTable.productMap.put(1, new Product());
+        ProductTable.productMap.put(2, new Product());
+        ProductTable.productMap.put(3, new Product());
+        ProductTable.productMap.put(4, new Product());
+        CSReadFile.readFile(userFile, testVec);
+
+        Assertions.assertTrue(testVec.size() == 4);
     }
 }
