@@ -126,7 +126,21 @@ public class FeaturedItemsDialog{
             public void actionPerformed(ActionEvent e) {
                 ProgLogger.LOGGER.info("Purchase Item Button Clicked");
                 ProgLogger.LOGGER.info("Purchased featured item");
-                JOptionPane.showMessageDialog(null, "You have purchased the item");
+                ImageIcon icon = new ImageIcon("src/main/resources/bear.gif");
+                JLabel iconLabel = new JLabel(icon);
+                //JLabel label = new JLabel("You have purchased the item.");
+                JLabel label = new JLabel("ITEM PURCHASED");
+                label.setFont(new Font("Century Gothic", Font.BOLD, 30));
+                label.setHorizontalAlignment(JLabel.CENTER);
+                label.setVerticalAlignment(JLabel.CENTER);
+                JPanel imagePanel = new JPanel(new BorderLayout());
+                imagePanel.add(iconLabel, BorderLayout.CENTER);
+                imagePanel.add(label, BorderLayout.SOUTH);
+                imagePanel.setPreferredSize(new Dimension(400,400));
+                
+                //JOptionPane.showMessageDialog(null, label, "Confirmed", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(null, imagePanel, "Confirmed", JOptionPane.INFORMATION_MESSAGE, null);
+                
                 //prod.setQuantity(prod.getQuantity() - 1);
                 //if(prod.getQuantity() <= 0) {
                 //    ProductTable.productVector.remove(prod);

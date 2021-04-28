@@ -263,7 +263,7 @@ public class CreateAccount implements ActionListener {
             try {
 
                 //reads the account list information to verify the username has not been taken
-                BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/java/csi3471/bearMarket/AccountFiles/accountList.csv")));
+                BufferedReader reader = new BufferedReader(new FileReader(new File("src/main/resources/accountList.csv")));
                 String line = null;
                 Account a = null;
                 Boolean userNameTaken = false, emptyString = false;
@@ -445,7 +445,7 @@ public class CreateAccount implements ActionListener {
                     //Format: username,password,firstName,lastName,address,state,zip,cardNumber,cvv,cardZip
                     //Create file and directory where the account info will be written to
                     String fileName = createdAccount.username+".csv";
-                    File directory = new File("users");
+                    File directory = new File("src/main/resources/users");
                     File actualFile = new File(directory, fileName);
 
                     //Write information to accounts own file
@@ -473,7 +473,7 @@ public class CreateAccount implements ActionListener {
                     try {
                         //This writes to the accountList.csv file, updating the "master" username database
                         String newLine = "\n" + createdAccount.getUsername() + "," + createdAccount.getPassword();
-                        Files.write(Paths.get("src/main/java/csi3471/bearMarket/AccountFiles/accountList.csv"), newLine.getBytes(), StandardOpenOption.APPEND);
+                        Files.write(Paths.get("src/main/resources/accountList.csv"), newLine.getBytes(), StandardOpenOption.APPEND);
                     }catch (IOException ex) {
                         ex.printStackTrace();
                         ProgLogger.LOGGER.severe("The account file was not read/written in properly");

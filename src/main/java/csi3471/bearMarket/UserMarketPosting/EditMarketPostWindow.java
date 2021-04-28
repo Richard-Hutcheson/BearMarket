@@ -147,6 +147,8 @@ public class EditMarketPostWindow extends CreateMarketPostWindow implements Acti
                 }
             }
             MainScreen.ai.currentlySellingProductVector.set(currentlySellingEditNdx, editProduct.getOriginalProduct());
+            
+            CSTable.tableModel.fireTableDataChanged();
 
             ProgLogger.LOGGER.info("User Market Post has been edited");
             createMarketPostFrame.dispose();

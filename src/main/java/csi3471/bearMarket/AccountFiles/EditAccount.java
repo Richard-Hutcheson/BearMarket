@@ -48,7 +48,7 @@ public class EditAccount implements ActionListener {
 
         //get the information associated with the account
         String fileName = currentAccount.username + ".csv";
-        File directory = new File("users");
+        File directory = new File("src/main/resources/users");
         File actualFile = new File(directory, fileName);
 
         try {
@@ -387,7 +387,7 @@ public class EditAccount implements ActionListener {
                 //Format: username,password,firstName,lastName,address,state,zip,cardNumber,cvv,cardZip
                 //Create file and directory where the account info will be written to
                 String fileName = updatedAccount.username+".csv";
-                File directory = new File("users");
+                File directory = new File("src/main/resources/users");
                 File actualFile = new File(directory, fileName);
 
 
@@ -425,7 +425,7 @@ public class EditAccount implements ActionListener {
                 }
 
                 String otherLine = currentAccount.getUsername() + comma + currentAccount.getPassword();
-                File accountListFile = new File("src/main/java/csi3471/bearMarket/AccountFiles/accountList.csv");
+                File accountListFile = new File("src/main/resources/accountList.csv");
                 List<String> accountListInfo = null;
                 try {
                     accountListInfo = Files.readAllLines(accountListFile.toPath());

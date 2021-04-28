@@ -175,9 +175,24 @@ public class Product implements ActionListener {
             dialog.setLocationRelativeTo(null);
             dialog.setVisible(true);
         }
+        //Purchase Button
         if (e.getSource() == purchaseButton){
             ProgLogger.LOGGER.info("Purchased item");
-            JOptionPane.showMessageDialog(null, "You have purchased the item");
+            ImageIcon icon = new ImageIcon("src/main/resources/bear.gif");
+            JLabel iconLabel = new JLabel(icon);
+            //JLabel label = new JLabel("You have purchased the item.");
+            JLabel label = new JLabel("ITEM PURCHASED");
+            label.setFont(new Font("Century Gothic", Font.BOLD, 30));
+            label.setHorizontalAlignment(JLabel.CENTER);
+            label.setVerticalAlignment(JLabel.CENTER);
+            JPanel imagePanel = new JPanel(new BorderLayout());
+            imagePanel.add(iconLabel, BorderLayout.CENTER);
+            imagePanel.add(label, BorderLayout.SOUTH);
+            imagePanel.setPreferredSize(new Dimension(400,400));
+            
+            //JOptionPane.showMessageDialog(null, label, "Confirmed", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, imagePanel, "Confirmed", JOptionPane.INFORMATION_MESSAGE, null);
+            
             quantity--;
             if(quantity <= 0) {
                 ProductTable.productVector.remove(this);
