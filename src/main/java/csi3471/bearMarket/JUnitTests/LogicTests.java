@@ -1,5 +1,7 @@
 package csi3471.bearMarket.JUnitTests;
 
+import csi3471.bearMarket.AccountInformation;
+import csi3471.bearMarket.AccountFiles.Account;
 import csi3471.bearMarket.Logging.ProgLogger;
 import csi3471.bearMarket.ProductFiles.Product;
 import org.junit.jupiter.api.Assertions;
@@ -76,5 +78,12 @@ public class LogicTests {
         }catch(IOException e){
             Assertions.fail("Failed to read in reviews");
         }
+    }
+    @Test
+    void testReadAccountFile() {
+        Account testAccount = new Account("csTest","123","firstName","lastName","shippingAddress","state","zip","cardNumber","cvv","cardZip");
+        AccountInformation testAccountInformation = new AccountInformation(testAccount);
+        testAccountInformation.readFile();
+        Assertions.assertEquals("csTest", testAccountInformation.getAccount().getUsername());
     }
 }
