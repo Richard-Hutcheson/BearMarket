@@ -25,7 +25,6 @@ Looking for software to order products straight to your door? Or perhaps you're 
          </th>
          <th><a href="https://richard-hutch.github.io/BearMarket/Iteration Two.pdf" download="Iteration Two PDF"> <button type="button">Project Iteration 2 PDF</button> </a>
          </th>
-          </th>
          <th><a href="https://drive.google.com/file/d/1X6lVq-OyjBN9peN84v4ZPB9DUeGBRUj5/view?usp=sharing" download="Iteration Three Zip"> <button type="button">Iteration Three Zip</button> </a>
          </th>
       </tr>
