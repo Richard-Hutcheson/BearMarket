@@ -17,10 +17,8 @@ Looking for software to order products straight to your door? Or perhaps you're 
          </th>
          <th><a href="https://github.com/Richard-Hutch/BearMarket/pulse" download="analytics page"> <button type="button">Project Analytics</button> </a>
          </th>
-         <!--<th><a href="https://github.com/Richard-Hutch/BearMarket/issues">Issue Tracking Link</a>
-         </th>-->
-         <!--<th><a href="https://github.com/Richard-Hutch/BearMarket/pulse">Repo Analytics Link</a>
-         </th>-->
+      </tr>
+      <tr>
          <th><a href="https://richard-hutch.github.io/BearMarket/Iteration One.pdf" download="Iteration One PDF"> <button type="button">Project Iteration 1 PDF</button> </a>
          </th>
          <th><a href="https://richard-hutch.github.io/BearMarket/Iteration Two.pdf" download="Iteration Two PDF"> <button type="button">Project Iteration 2 PDF</button> </a>
