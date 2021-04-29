@@ -99,4 +99,23 @@ public class LogicTests {
 
         Assertions.assertTrue(testVec.size() == 4);
     }
+    @Test
+    void readAccountListCSV(){
+        try{
+            final String file = "src/main/resources/accountList.csv";
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+            bufferedReader.readLine();
+            String line = "";
+            Vector<String> s = new Vector<>();
+            while ((line = bufferedReader.readLine()) != null){
+                s.add(line);
+            }
+            if (s.isEmpty()){
+                Assertions.fail("Did not read in any <username,passwords> in accountList.csv");
+            }
+            bufferedReader.close();
+        }catch(IOException e){
+            Assertions.fail("Failed to read in accountList.csv");
+        }
+    }
 }
