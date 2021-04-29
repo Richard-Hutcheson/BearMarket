@@ -33,43 +33,57 @@ Looking for software to order products straight to your door? Or perhaps you're 
 ### The Bear Market Team
 <table>
    <tr>
-      <th>
-         - Richard Hutcheson (Time Invested: *94* hours):
-           - Website
-           - Product Sorting and Filtering
-           - Featured Items
-           - Descriptions
-           - Reviews
-      </th>
-      <th>
-         - Joshua McKone (Time Invested: *85* hours):
-           - Purchase History
-           - Item Selling
-           - Purchase Item
-      </th>
-      <th>
-         - Austin Blanchard (Time Invested: *85* hours):
-           - Create Market Posting
-           - Delete Market Posting
-           - Edit Market Posting
-      </th>
-      <th>
-         - Noah Lambaria (Time Invested: *90 hours):
-           - Create Account
-           - Login
-           - Edit Account
-      </th>
+      <td>
+         <p><b>Richard Hutcheson (Time Invested: <i>94</i> hours):</b></p>
+         <ul>
+          <li>Website</li>
+          <li>Product Sorting and Filtering</li>
+          <li>Featured Items</li>
+          <li>Descriptions</li>
+          <li>Reviews</li>
+         </ul>
+      </td>
+      <td>
+         <p><b>Joshua McKone (Time Invested: <i>85</i> hours):</b></p>
+         <ul>
+            <li>Purchase History</li>
+            <li>Item Selling</li>
+            <li>Purchase Item</li>
+         </ul>
+      </td>
    </tr>
    <tr>
       <td>
            <iframe width="360" height="215" src="https://youtube.com/embed/5_D3jhomFpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </td>
-           <iframe width="360" height="215" src="https://youtube.com/embed/PQyHEO7CphY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <td>
+           <iframe width="360" height="215" src="https://youtube.com/8pa7-W3c1_g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <td>
+   </tr>
+   <tr>
+      <th>
+         <ul>
+            <p><b>Austin Blanchard (Time Invested: <i>85</i> hours):</b></p>
+             <li>Create Market Posting</li>
+             <li>Delete Market Posting</li>
+             <li>Edit Market Posting</li>
+         </ul>
+      </th>
+      <th>
+         <p><b>Noah Lambaria (Time Invested: <i>90</i> hours):</b></p>
+         <ul>
+           <li>Create Account</li>
+           <li>Login</li>
+           <li>Edit Account</li>
+         </ul>
+      </th>
+   </tr>
+   <tr>
       <td>
            <iframe width="360" height="215" src="https://youtube.com/embed/Dw3uobh7zng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </td>
+      </td> 
       <td>
-          <iframe width="360" height="215" src="https://youtube.com/embed/8pa7-W3c1_g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe width="360" height="215" src="https://youtube.com/embed/PQyHEO7CphY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </td>
    </tr>
 </table>
