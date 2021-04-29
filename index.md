@@ -29,8 +29,8 @@ Looking for software to order products straight to your door? Or perhaps you're 
    </table>
 </div>
 
-
 ### The Bear Market Team
+
 <table>
    <tr>
       <td>
@@ -57,7 +57,7 @@ Looking for software to order products straight to your door? Or perhaps you're 
            <iframe width="360" height="215" src="https://youtube.com/embed/5_D3jhomFpc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </td>
       <td>
-           <iframe width="360" height="215" src="https://youtube.com/8pa7-W3c1_g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+           <iframe width="360" height="215" src="https://youtube.com/embed/8pa7-W3c1_g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       <td>
    </tr>
    <tr>
@@ -90,5 +90,4 @@ Looking for software to order products straight to your door? Or perhaps you're 
 
 
 ### Contact us
-
 Have a question? Shoot us an email at ***themarketplace.csi@gmail.com*** and we’ll get back to you as soon as possible!
