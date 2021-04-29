@@ -58,7 +58,7 @@ Looking for software to order products straight to your door? Or perhaps you're 
       </td>
       <td>
            <iframe width="360" height="215" src="https://youtube.com/embed/8pa7-W3c1_g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      <td>
+      </td>
    </tr>
    <tr>
       <th>
