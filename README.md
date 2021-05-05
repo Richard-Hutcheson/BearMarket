@@ -1,6 +1,6 @@
 ## Bear Market
 
-*project is a work in progress for CSI 3471, Software Engineering I*
+*project for CSI 3471, Software Engineering I*
 
 *for iteration details, check the Project Details branch*
 
